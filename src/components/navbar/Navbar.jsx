@@ -1,7 +1,6 @@
 import ScrambleText from '../../utilis/gsap/scrambleText/ScrambleText';
-import ParticlesBackground from '../../utilis/particles/particlesBackground/ParticlesBackground';
 
-const Navbar = ({ navbarText, particlesBackground }) => {
+const Navbar = ({ navbarText }) => {
   const texts = [
     "Designing with sunlight energy — fresh & clean.",
     "Ideas strike while airbrushing or wandering.",

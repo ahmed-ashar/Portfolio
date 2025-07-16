@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from './components/navbar/Navbar'
-import ParticlesBackground from './utilis/particles/particlesBackground/ParticlesBackground'
 import DotGrid from './utilis/dotGrid/DotGrid'
 
 const App = () => {
