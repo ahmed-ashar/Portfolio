@@ -6,11 +6,11 @@ import DotGrid from './utilis/dotGrid/DotGrid'
 const App = () => {
   return (
     <div>
-      <div style={{ position: 'relative', backgroundColor: '#060010' }}>
+      <div style={{ position: 'relative', backgroundColor: '#131313' }}>
         <DotGrid
           dotSize={2}
           gap={10}
-          baseColor="#0F0F0F"
+          baseColor="#131313"
           activeColor="#FDA612"
           proximity={240}
           shockRadius={500}
