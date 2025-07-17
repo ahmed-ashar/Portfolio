@@ -1,25 +1,33 @@
-import ScrambleText from '../../utilis/gsap/scrambleText/ScrambleText';
+import ScrambleText from "../../utilis/gsap/scrambleText/ScrambleText";
+import React, { useEffect, useState } from "react";
+import Magnet from "../../utilis/magnet/Magnet";
 
-const Navbar = ({ navbarText }) => {
-  const texts = [
-    "Designing with sunlight energy — fresh & clean.",
-    "Ideas strike while airbrushing or wandering.",
-    "Indie games? My digital comfort zone.",
-    "iPad notes = doodles + random poems.",
-    "Pull-ups? Still in peaceful protest.",
-    "Learn. Create. Share. Repeat.",
-    "Got ideas? Let’s talk over email."
-  ];
-
+const Navbar = () => {
+  
+  const now = new Date();
+  const formattedTime = now.toLocaleTimeString("en-US");
 
   return (
-    <div style={{ position: 'absolute', top: 0, left: 0, color: 'white' }}>
-      <h1>Hi</h1>
-      <div style={{ width: '300px', border: '1px', marginLeft: "3rem" }}>
-        <ScrambleText navbarText={navbarText} texts={texts} />
+    <div
+      className={`flex justify-between items-center text-white sticky top-0 right-0 w-full  p-3 rounded-md shadow-md transition-all duration-300 z-11 `}
+    >
+      <Magnet padding={20} disabled={false} magnetStrength={5}>
+        <h1 className="text-5xl z-11">Ahmed</h1>
+      </Magnet>
+      <div>
+        <Magnet padding={20} disabled={false} magnetStrength={5}>
+          <h2 className=" z-11">{formattedTime}</h2>
+        </Magnet>
       </div>
+      <div>
+        <Magnet padding={20} disabled={false} magnetStrength={5}>
+          <p className=" z-11">Location</p>
+          <p className=" z-11">Karachi, Pakistan</p>
+        </Magnet>
+      </div>
+      
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

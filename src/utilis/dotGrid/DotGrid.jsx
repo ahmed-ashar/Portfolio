@@ -1,9 +1,7 @@
 'use client';
-import { useRef, useEffect, useCallback, useMemo } from "react";
+import React,{ useRef, useEffect, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
-
-import "./DotGrid.css";
 
 gsap.registerPlugin(InertiaPlugin);
 
@@ -63,7 +61,7 @@ const DotGrid = ({
   const circlePath = useMemo(() => {
     if (typeof window === "undefined" || !window.Path2D) return null;
 
-    const p = new window.Path2D();
+    const p = new Path2D();
     p.arc(0, 0, dotSize / 2, 0, Math.PI * 2);
     return p;
   }, [dotSize]);
@@ -265,9 +263,15 @@ const DotGrid = ({
   ]);
 
   return (
-    <section className={`dot-grid ${className}`} style={style}>
-      <div ref={wrapperRef} className="dot-grid__wrap">
-        <canvas ref={canvasRef} className="dot-grid__canvas" />
+    <section
+      className={`p-4 flex items-center justify-center h-[100vh] w-full relative ${className}`}
+      style={style}
+    >
+      <div ref={wrapperRef} className="w-full h-full relative">
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full pointer-events-none"
+        />
       </div>
     </section>
   );
