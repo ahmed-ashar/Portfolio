@@ -7,6 +7,7 @@ import React from "react";
 import ScrambleText from "./utilis/gsap/scrambleText/ScrambleText";
 import Icons from "./components/icons/Icons";
 import ChatBot from "./components/chatbot/ChatBot";
+import DockComp from "./components/dock/DockComp";
 
 const App = () => {
   return (
@@ -53,7 +54,15 @@ const App = () => {
         <Hero />
         <Icons />
         <ChatBot />
+        <DockComp />
+        
       </div>
+      <h1>daw</h1>
+      <h1>daw</h1>
+      <h1>daw</h1>
+      <h1>daw</h1>
+      <h1>daw</h1>
+
     </div>
   );
 };
