@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 
 gsap.registerPlugin(ScrambleTextPlugin);
 
-const ScrambleText = ({ navbarText, texts }) => {
+const ScrambleText = ({ navbarText, texts ,color,font}) => {
   const textRef = useRef(null);
 
   useEffect(() => {
@@ -23,14 +23,14 @@ const ScrambleText = ({ navbarText, texts }) => {
           text: line,
           chars: texts
         },
-        duration: 2,
-        delay: index === 0 ? 0 : 3
+        duration: 3,
+        delay: index === 0 ? 0 : 5
       });
     });
   }, [texts]);
 
   return (
-    <div ref={textRef}>{navbarText}</div>
+    <div ref={textRef} className={`${color} ${font} redHatMono`}>{navbarText}</div>
   );
 }
 

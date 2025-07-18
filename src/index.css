@@ -1,12 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
 @import "tailwindcss";
-/* *{
-    margin: 0;
-    padding: 0;
-} */
+@theme {
+  --font-pacifico: "Lobster", cursive; 
+  --font-avant: Avant Garde, sans-serif; 
+  --font-redHatMono: Red Hat Mono, sans-serif; 
+
+}
 
 *{
-    font-family: Avant Garde, sans-serif;
+    font-family: var(--font-avant);
     cursor: none;
+}
+
+.pacifico{
+  font-family: var(--font-pacifico);
+}
+.redHatMono{
+  font-family: var(--font-redHatMono);
+}
+
+.nav{
+      background-image: linear-gradient(to bottom, #2c2c2c, #282828d6 80%, #1c1c1c66 95%, transparent);
+    backdrop-filter: blur(16px);
 }
 
 /* Custom Scrollbar Styles */
@@ -33,8 +49,8 @@
 
 
 /* For Internet Explorer */
-body {
+/* body {
   -ms-overflow-style: scrollbar;
-}
+} */
 
 /* Custom CSS */

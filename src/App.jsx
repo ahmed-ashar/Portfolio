@@ -4,6 +4,9 @@ import RandomText from "./components/randomText/RandomText";
 import BlobCursor from "./utilis/blobCursor/BlobCursor";
 import DotGrid from "./utilis/dotGrid/DotGrid";
 import React from "react";
+import ScrambleText from "./utilis/gsap/scrambleText/ScrambleText";
+import Icons from "./components/icons/Icons";
+import ChatBot from "./components/chatbot/ChatBot";
 
 const App = () => {
   return (
@@ -20,14 +23,14 @@ const App = () => {
           dotSize={5}
           gap={10}
           baseColor="#131313"
-          activeColor="#FDA612"
+          activeColor="#fd8b09"
           proximity={200}
           shockRadius={100}
           shockStrength={200}
           resistance={100}
           returnDuration={3}
         />
-        <RandomText />
+        {/* <ScrambleText /> */}
 
         <BlobCursor
           blobType="square"
@@ -48,6 +51,8 @@ const App = () => {
           zIndex={5}
         />
         <Hero />
+        <Icons />
+        <ChatBot />
       </div>
     </div>
   );
