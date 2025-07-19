@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
 @import "tailwindcss";
-@theme {
+:root {
   --font-pacifico: "Lobster", cursive; 
   --font-avant: Avant Garde, sans-serif; 
   --font-redHatMono: Red Hat Mono, sans-serif; 
@@ -10,7 +10,7 @@
 
 *{
     font-family: var(--font-avant);
-    cursor: none;
+    /* cursor: none; */
 }
 
 .pacifico{
@@ -19,7 +19,9 @@
 .redHatMono{
   font-family: var(--font-redHatMono);
 }
-
+.cursor{
+  filter: invert(1);
+}
 .nav{
       background-image: linear-gradient(to bottom, #2c2c2c, #282828d6 80%, #1c1c1c66 95%, transparent);
     backdrop-filter: blur(16px);

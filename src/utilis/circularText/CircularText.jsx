@@ -85,7 +85,7 @@ const CircularText = ({
 
   return (
     <motion.div
-      className={`m-0 mx-auto rounded-full w-[100px] h-[100px] relative text-[#b7ab98] font-black text-center cursor-pointer origin-center ${className}`}
+      className={`m-0 mx-auto rounded-full w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] relative text-[#b7ab98] font-black text-center cursor-pointer origin-center ${className}`}
       style={{ rotate: rotation }}
       initial={{ rotate: 0 }}
       animate={controls}
@@ -102,7 +102,7 @@ const CircularText = ({
         return (
           <span
             key={i}
-            className="absolute inline-block inset-0 text-xs transition-all duration-500 ease-[cubic-bezier(0,0,0,1)]"
+            className="absolute inline-block inset-0 text-[0.5rem] sm:text-[0.8rem] transition-all duration-500 ease-[cubic-bezier(0,0,0,1)]"
             style={{ transform, WebkitTransform: transform }}
           >
             {letter}

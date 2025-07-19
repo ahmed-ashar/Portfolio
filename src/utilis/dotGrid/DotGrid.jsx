@@ -264,7 +264,7 @@ const DotGrid = ({
 
   return (
     <section
-      className={`p-4 flex items-center justify-center h-[100vh] w-full relative ${className}`}
+      className={`p-4  flex items-center justify-center h-[85vh] w-full relative ${className}`}
       style={style}
     >
       <div ref={wrapperRef} className="w-full h-full relative">
