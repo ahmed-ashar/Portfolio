@@ -9,22 +9,22 @@ import Magnet from "../../utilis/magnet/Magnet";
 const Icons = () => {
   return (
     <div
-      className=" fixed  bottom-30 sm:bottom:25 left-9 sm:left-15 text-[#b7ab98] flex items-center justify-between flex-column gap-5 sm:gap-10 z-999 text-xl sm:text-2xl "
+      className="hidden sm:fixed sm:bottom-30 sm:left-20 left-9 text-[#b7ab98] sm:flex sm:flex-row sm:items-center sm:justify-between  sm:gap-5 z-[999] text-xl sm:text-2xl"
       style={{ writingMode: "vertical-lr" }}
     >
       <Magnet padding={15} disabled={false} magnetStrength={1}>
-        <FontAwesomeIcon icon={faFacebook} />
+        <FontAwesomeIcon icon={faFacebook} className="bg-[#131313] p-3 rounded-full" />
       </Magnet>
 
       <Magnet padding={15} disabled={false} magnetStrength={1}>
-        <FontAwesomeIcon icon={faInstagram} />
+        <FontAwesomeIcon icon={faInstagram} className="bg-[#131313] p-3 rounded-full" />
       </Magnet>
       <Magnet padding={15} disabled={false} magnetStrength={1}>
-        <FontAwesomeIcon icon={faGithub} />
+        <FontAwesomeIcon icon={faGithub} className="bg-[#131313] p-3 rounded-full" />
       </Magnet>
 
       <Magnet padding={15} disabled={false} magnetStrength={1}>
-        <FontAwesomeIcon icon={faLinkedin} />
+        <FontAwesomeIcon icon={faLinkedin} className="bg-[#131313] p-3 rounded-full" />
       </Magnet>
     </div>
   );

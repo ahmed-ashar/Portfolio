@@ -38,14 +38,14 @@ const App = () => {
 
           <BlobCursor
             blobType="square"
-            fillColor="#FDA612"
-            trailCount={100}
-            sizes={[77, 100, 1]}
-            innerSizes={[20, 35, 25]}
-            innerColor="rgba(255,255,255,0.8)"
+            fillColor="#fd8b09"
+            trailCount={3}
+            sizes={[60, 30, 0]}
+            innerSizes={[0,0,0]}
+            innerColor="#b7ab98"
             opacities={[0.6, 0.6, 0.6]}
             shadowColor="rgba(0,0,0,0.75)"
-            shadowBlur={5}
+            shadowBlur={10}
             shadowOffsetX={10}
             shadowOffsetY={10}
             filterStdDeviation={30}

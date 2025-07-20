@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
 
 export default function BlobCursor({
-  blobType = "circle",
+  blobType = "square",
   fillColor = "#5227FF",
   trailCount = 3,
   sizes = [60, 125, 75],
