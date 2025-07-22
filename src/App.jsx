@@ -10,6 +10,7 @@ import ChatBot from "./components/chatbot/ChatBot";
 import DockComp from "./components/dock/DockComp";
 import ScrollVelocitySlide from "./components/scrollVelocity/ScrollVelocitySlide";
 import AboutSection from "./components/aboutSection/AboutSection";
+import ProjectSection from "./components/projectSection/ProjectSection";
 
 const App = () => {
   
@@ -35,24 +36,24 @@ const App = () => {
             resistance={100}
             returnDuration={3}
           />
-          {/* <ScrambleText /> */}
+    
 
      <BlobCursor
   blobType="circle"
   fillColor="#fd8b09"
-  trailCount={2}                      // Fewer trails for better performance
-  sizes={[50, 30]}                   // Slightly smaller for smoother feel
-  innerSizes={[8, 8]}                // Match inner size with outer
+  trailCount={2}                   
+  sizes={[50, 30]}               
+  innerSizes={[8, 8]}            
   innerColor="#b7ab98"
-  opacities={[0.6, 0.4]}             // Fades out softly
-  shadowColor="rgba(0,0,0,0.4)"      // Softer shadow
-  shadowBlur={8}                     // Slightly soft
+  opacities={[0.6, 0.4]}             
+  shadowColor="rgba(0,0,0,0.4)"    
+  shadowBlur={8}                   
   shadowOffsetX={5}
   shadowOffsetY={5}
-  filterStdDeviation={8}            // Lower blur = smoother rendering
+  filterStdDeviation={8}       
   useFilter={false}
-  fastDuration={0.1}                // Quick snap for fast motion
-  slowDuration={0.15}               // Smooth but not sluggish
+  fastDuration={0.1}  
+  slowDuration={0.15}     
   zIndex={5}
 />
 
@@ -62,7 +63,11 @@ const App = () => {
           <DockComp />
         <ScrollVelocitySlide />
         <AboutSection />
+        <ProjectSection />
+        <AboutSection />
+
         </div>
+        <AboutSection  />
    
       
     </div>
