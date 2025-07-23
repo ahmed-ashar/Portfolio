@@ -5,12 +5,12 @@ import Magnet from "../../utilis/magnet/Magnet";
 
 const AboutSection = () => {
   return (
-    <div className="h-auto relative py-40 w-full flex justify-center items-center text-[#b7ab98]">
+    <div className="h-auto relative py-40 sm:pb-60 w-full flex justify-center items-center text-[#b7ab98]">
       <div className="w-full flex flex-col justify-center items-center relative px-4">
         {/* Background Text with responsive font size */}
         {/* Background Text */}
-<div className="absolute -top-5 sm:-top-10 left-0 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
-  <h1 className="text-[20vw]">ABOUT ME</h1>
+<div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
+  <h1 className="text-[18vw]">ABOUT ME</h1>
 </div>
 
 

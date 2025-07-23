@@ -11,6 +11,7 @@ import DockComp from "./components/dock/DockComp";
 import ScrollVelocitySlide from "./components/scrollVelocity/ScrollVelocitySlide";
 import AboutSection from "./components/aboutSection/AboutSection";
 import ProjectSection from "./components/projectSection/ProjectSection";
+import QuoteSection from "./components/quoteSection/QuoteSection";
 
 const App = () => {
   
@@ -54,7 +55,7 @@ const App = () => {
         <ScrollVelocitySlide />
         <AboutSection />
         <ProjectSection />
-        <AboutSection />
+        <QuoteSection />
 
         </div>
         <AboutSection  />
