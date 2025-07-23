@@ -5,23 +5,31 @@ import Magnet from "../../utilis/magnet/Magnet";
 
 const AboutSection = () => {
   return (
-    <div className="h-[100vh] w-full flex justify-between items-center text-[#b7ab98]">
-      <div className="w-[80vw]  mx-auto flex flex-row justify-center items-end gap-3">
-        <div className="  h-[55%] mx-auto border-l-4 pl-3 text-5xl text-right  font-extrabold text-[#fd8b09] opacity-10" style={{ writingMode: "vertical-lr",transform: "rotate(180deg)" }}>
-          <h1 className="pacifico ">About Me</h1>
-        </div>
-        <div className="">
+    <div className="h-auto relative py-40 w-full flex justify-center items-center text-[#b7ab98]">
+      <div className="w-full flex flex-col justify-center items-center relative px-4">
+        {/* Background Text with responsive font size */}
+        {/* Background Text */}
+<div className="absolute -top-5 sm:-top-10 left-0 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
+  <h1 className="text-[20vw]">ABOUT ME</h1>
+</div>
+
+
+        {/* Foreground Text */}
+        <div className="w-full md:w-[70%] p-4 text-center z-10">
           <Magnet padding={5} disabled={false} magnetStrength={90}>
             <ScrollReveal
               baseOpacity={0}
               enableBlur={true}
-              baseRotation={5}
+              baseRotation={0}
               blurStrength={10}
             >
-               Hello, my name is Muhammad Ahmed Ashar, and I am a passionate MERN Stack developer from Pakistan. For as long as I can remember, I've been drawn to creating — whether it was sketching ideas, solving problems, or building something meaningful with code.
+              Hello, my name is Muhammad Ahmed Ashar, and I am a passionate MERN Stack developer from Pakistan. For as long as I can remember, I've been drawn to creating — whether it was sketching ideas, solving problems, or building something meaningful with code.
             </ScrollReveal>
           </Magnet>
         </div>
+      <div className="text-center mt-10">
+        <h1>Button</h1>
+      </div>
       </div>
     </div>
   );

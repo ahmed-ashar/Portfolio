@@ -14,7 +14,7 @@ const ScrollReveal = ({
   containerClassName = "",
   textClassName = "",
   rotationEnd = "bottom bottom",
-  wordAnimationEnd = "bottom bottom"
+  wordAnimationEnd = "center center",
 }) => {
   const containerRef = useRef(null);
 
@@ -50,7 +50,7 @@ const ScrollReveal = ({
           scroller,
           start: 'top bottom',
           end: rotationEnd,
-          scrub: true,
+          scrub: true,markers: true,
         },
       }
     );

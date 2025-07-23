@@ -6,7 +6,7 @@ const ScrollVelocitySlide = () => {
     <div className='bg-[#b7ab98]'>
         
 <ScrollVelocity
-  texts={['Scroll UP', 'Scroll Down']} 
+  texts={['Html Css JavaScript React', 'Scroll Down']} 
   velocity={190} 
   className="custom-scroll-text"
 />
