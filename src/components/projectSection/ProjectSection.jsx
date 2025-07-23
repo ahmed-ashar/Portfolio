@@ -24,33 +24,41 @@ const ProjectSection = () => {
   ];
 
   useEffect(() => {
-    gsap.utils.toArray(".card").forEach((card) => {
-      gsap.to(card, {
-          scale: 0.8,
-          opacity: 0,
-          duration: 5,
+  gsap.utils.toArray(".card").forEach((card) => {
+    gsap.fromTo(
+      card,
+      {
+        scale: 1.1,
+        opacity: 1,
+      },
+      {
+        scale: 1,
+        opacity: 1,
         scrollTrigger: {
           trigger: card,
-          start: "top 15%",
-          end: "bottom 15%",
-          markers: true,
+          start: "top 70%",
+          end: "top 30%", // end point of animation
           scrub: true,
+          markers: true,
         },
-      });
-    });
+      }
+    );
   });
+}, []);
+
 
   return (
-    <div className="w-full  flex flex-col items-center gap-5 py-[15vh] text-white ">
+    <div className="w-full  flex flex-col items-center gap-100 py-[15vh] text-white ">
       {data.map((item, index) => {
           console.log(item.top)
         return (
             <div
             id={index}
-            className={`card sticky top-[15vh] w-[80%] h-[70vh] flex flex-col items-center gap-5 px-[30px] py-[10vh] rounded-lg bg-[#2C2C2C]`}
+            className={`card sticky top-[15vh] w-[80%] h-[70vh] flex flex-col items-center gap-5 rounded-lg bg-[#2C2C2C]`}
           >
             
-            <img src="" alt="" className="w-[150px]" />
+            <img  src="https://abusaid.netlify.app/_next/image?url=https%3A%2F%2Fmedia2.dev.to%2Fdynamic%2Fimage%2Fwidth%3D1000%2Cheight%3D420%2Cfit%3Dcover%2Cgravity%3Dauto%2Cformat%3Dauto%2Fhttps%253A%252F%252Fdev-to-uploads.s3.amazonaws.com%252Fuploads%252Farticles%252Fuoofmd0bd6xtyv41w9l5.jpg&w=1920&q=75" alt="" className="rounded-lg object-cover w-full h-full" />
+            {/* <h1>{index}</h1> */}
           </div>
         );
       })}

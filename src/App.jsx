@@ -25,17 +25,7 @@ const App = () => {
       >
         
           <Navbar />
-          <DotGrid
-            dotSize={5}
-            gap={10}
-            baseColor="#131313"
-            activeColor="#fd8b09"
-            proximity={200}
-            shockRadius={100}
-            shockStrength={200}
-            resistance={100}
-            returnDuration={3}
-          />
+          
     
 
      <BlobCursor

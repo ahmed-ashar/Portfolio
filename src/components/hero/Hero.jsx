@@ -1,8 +1,21 @@
 import React from "react";
 import Magnet from "../../utilis/magnet/Magnet";
+import DotGrid from "../../utilis/dotGrid/DotGrid";
 
 const Hero = () => {
   return (
+    <div className="">
+      <DotGrid
+                  dotSize={5}
+                  gap={10}
+                  baseColor="#131313"
+                  activeColor="#fd8b09"
+                  proximity={200}
+                  shockRadius={100}
+                  shockStrength={200}
+                  resistance={100}
+                  returnDuration={3}
+                />
     <div className="absolute bottom-[50%] right-[50%] transform translate-[50%] text-center z-10">
       <Magnet padding={5} disabled={false} magnetStrength={90}>
         <h1 className=" text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[9rem] text-[#b7ab98] font-extrabold leading-10 sm:leading-12 md:leading-14 lg:leading-18 xl:leading-24 2xl:leading-30 tracking-tighter z-50 ">
@@ -15,6 +28,7 @@ const Hero = () => {
           <span className="text-[#fd8b09]">MERN</span> WAY.
         </h1>
       </Magnet>
+    </div>
     </div>
   );
 };
