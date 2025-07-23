@@ -1,91 +1,118 @@
 import React, { useEffect } from "react";
-import ScrollStack, {
-  ScrollStackItem,
-} from "../../utilis/scrollStack/ScrollStack";
-import img1 from "../../assets/1.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { image, tr } from "framer-motion/client";
 import TiltedCard from "../../utilis/tiltedCard/TiltedCard";
+import { caption, link, title } from "framer-motion/client";
+import pic1 from "../../assets/1.png";
+import Magnet from "../../utilis/magnet/Magnet";
+import Button from "../button/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectSection = () => {
   const data = [
     {
-      top: 15,
-      image: "../../assets/1.png",
+      title: "Project 1",
+      image: "https://www.emanuelepapale.com/assets/projects/featured_invest.webp",
+      link: "https://example.com/project1",
+      skills: ["React", "JavaScript", "CSS", "HTML"],
+      caption: "work1",
     },
     {
-      top: 20,
-      image: "../../assets/2.png",
+      title: "Project 2",
+      image: "https://www.emanuelepapale.com/assets/projects/featured_invest.webp",
+      link: "https://example.com/project2",
+      skills: ["React", "JavaScript", "CSS", "HTML"],
+      caption: "work2",
     },
-    { top: 25, image: "../../assets/3.png" },
-    { top: 30, image: "../../assets/4.png" },
+    {
+      title: "Project 3",
+      image: pic1,
+      link: "https://example.com/project3",
+      skills: ["React", "JavaScript", "CSS", "HTML"],
+      caption: "work3",
+    },
+    {
+      title: "Project 4",
+      image: pic1,
+      link: "https://example.com/project4",
+      skills: ["React", "JavaScript", "CSS", "HTML"],
+      caption: "work4",
+    },
   ];
 
   useEffect(() => {
-  gsap.utils.toArray(".card").forEach((card) => {
-    gsap.to(
-      card,
-      {
+    gsap.utils.toArray(".card").forEach((card) => {
+      gsap.to(card, {
         scale: 0.8,
         opacity: 0,
         scrollTrigger: {
           trigger: card,
           start: "top -30%",
-          end: "bottom -20%", // end point of animation
+          end: "bottom -20%",
           scrub: true,
-          // markers: true,
         },
-      },
-      
-    );
-  });
-}, []);
-
+      });
+    });
+  }, []);
 
   return (
-    <div className="relative text-white ">
+    <div className="relative text-white">
       <div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
-  <h1 className="text-[17vw] sm:text-[18vw]">PROJECTS</h1>
-</div>
-        <div className="w-full py-10 flex flex-col items-center gap-50  ">
-
-      {data.map((item, index) => {
-        // console.log(item.top)
-        return (
-          <div
-          id={index}
-          className={`card  sticky top-[17vh] sm:top-[18vh] w-[85%] sm:w-[70%] h-[65vh] flex flex-col items-center gap-5 rounded-lg `}
-          >
-            <TiltedCard
-  imageSrc="https://abusaid.netlify.app/_next/image?url=https%3A%2F%2Fmedia2.dev.to%2Fdynamic%2Fimage%2Fwidth%3D1000%2Cheight%3D420%2Cfit%3Dcover%2Cgravity%3Dauto%2Cformat%3Dauto%2Fhttps%253A%252F%252Fdev-to-uploads.s3.amazonaws.com%252Fuploads%252Farticles%252Fuoofmd0bd6xtyv41w9l5.jpg&w=1920&q=75"
-  altText="Kendrick Lamar - GNX Album Cover"
-  captionText="Kendrick Lamar - GNX"
-  containerHeight="100%"
-  containerWidth="100%"
-  imageHeight="100%"
-  imageWidth="100%"
-  rotateAmplitude={3}
-  scaleOnHover={1}
-  showMobileWarning={false}
-  showTooltip={true}
-  displayOverlayContent={true}
-  overlayContent={
-    <p className="tilted-card-demo-text">
-      heading
-    </p>
-  }
-/>
-            {/* <img  src="https://abusaid.netlify.app/_next/image?url=https%3A%2F%2Fmedia2.dev.to%2Fdynamic%2Fimage%2Fwidth%3D1000%2Cheight%3D420%2Cfit%3Dcover%2Cgravity%3Dauto%2Cformat%3Dauto%2Fhttps%253A%252F%252Fdev-to-uploads.s3.amazonaws.com%252Fuploads%252Farticles%252Fuoofmd0bd6xtyv41w9l5.jpg&w=1920&q=75" alt="" className="rounded-lg object-cover w-full h-full" /> */}
-            {/* <h1>{index}</h1> */}
-          </div>
-        );
-      })}
+        <h1 className="text-[17vw] sm:text-[18vw]">PROJECTS</h1>
       </div>
+
+      <div className="w-full py-10 flex flex-col items-center gap-70">
+        {data.map((item, index) => (
+          <div
+  key={index}
+  id={index}
+  className="card group sticky top-[17vh] sm:top-[18vh] w-[85%] sm:w-[70%] h-[65vh] flex flex-col items-center gap-5 rounded-lg"
+>
+  <a
+    href={item.link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-full h-full"
+  >
+    <TiltedCard
+      imageSrc={item.image}
+      altText="Kendrick Lamar - GNX Album Cover"
+      captionText={item.caption}
+      containerHeight="100%"
+      containerWidth="100%"
+      imageHeight="100%"
+      imageWidth="100%"
+      rotateAmplitude={2}
+      scaleOnHover={1}
+      showMobileWarning={false}
+      showTooltip={true}
+      displayOverlayContent={true}
+      overlayContent={
+        <div className="flex flex-col sm:flex-row mx-5 gap-5 sm:mx-20 items-start sm:items-end sm:justify-between group-hover:mx-28 transition-all duration-500 ease-in-out">
+          <Magnet padding={20} disabled={false} magnetStrength={5}>
+          <p className="tilted-card-demo-text aladin uppercase">{item.title}</p>
+          </Magnet>
+          <div className="w-[100%] sm:w-[70%] flex flex-wrap-reverse justify-end sm:justify-end items-end gap-2">
+            {item.skills.map((skill, skillIndex) => (
+              <Magnet key={skillIndex} padding={20} disabled={false} magnetStrength={5}>
+                <span className="bg-[#2C2C2C] hover:bg-[#fd8b09] text-[#fd8b09] hover:text-[#2C2C2C] transition-all duration-500 ease-in-out px-3 py-1 rounded-full text-sm">
+                  {skill}
+                </span>
+              </Magnet>
+            ))}
+          </div>
+        </div>
+      }
+    />
+  </a>
+</div>
+
+        ))}
+      </div>
+
       <div className="text-center mt-10">
-        <h1>Button</h1>
+         <Button text={'More Projects'} />
       </div>
     </div>
   );

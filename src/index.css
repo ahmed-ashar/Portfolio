@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aladin&display=swap');
 @import "tailwindcss";
 :root {
   --font-pacifico: "Lobster", cursive; 
   --font-avant: Avant Garde, sans-serif; 
   --font-redHatMono: Red Hat Mono, sans-serif; 
-
+--font-aladin: "aladin", sans-serif;
 }
 
 *{
@@ -15,6 +16,9 @@
 
 .pacifico{
   font-family: var(--font-pacifico);
+}
+.aladin{
+  font-family: var(--font-aladin);
 }
 .redHatMono{
   font-family: var(--font-redHatMono);

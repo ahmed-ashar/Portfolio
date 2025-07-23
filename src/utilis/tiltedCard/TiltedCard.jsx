@@ -99,19 +99,30 @@ export default function TiltedCard({
           scale,
         }}
       >
-        <motion.img
-          src={imageSrc}
-          alt={altText}
-          className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
-          style={{
-            width: imageWidth,
-            height: imageHeight,
-          }}
-        />
+   <div
+  className="relative group rounded-[15px]"
+  style={{ width: imageWidth, height: imageHeight }}
+>
+  <motion.img
+    src={imageSrc}
+    alt={altText}
+    className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
+  />
+
+  {/* Solid Black Overlay: Visible normally, hidden on hover */}
+  <div
+    className="absolute top-0 left-0 w-full h-full
+      bg-[#2C2C2C] opacity-30 group-hover:opacity-0
+      transition-opacity duration-500
+      rounded-[15px]"
+  />
+</div>
+
+
 
         {displayOverlayContent && overlayContent && (
           <motion.div
-            className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]"
+            className="absolute bottom-10 sm:bottom-20   text-4xl w-[100%] z-[2] will-change-transform [transform:translateZ(30px)]"
           >
             {overlayContent}
           </motion.div>

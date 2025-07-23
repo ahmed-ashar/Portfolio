@@ -2,6 +2,7 @@ import React from "react";
 import ScrollReveal from "../../utilis/scrollReveal/ScrollReveal";
 import ScrambleText from "../../utilis/gsap/scrambleText/ScrambleText";
 import Magnet from "../../utilis/magnet/Magnet";
+import Button from "../button/Button";
 
 const AboutSection = () => {
   return (
@@ -18,7 +19,7 @@ const AboutSection = () => {
         <div className="w-full md:w-[70%] p-4 text-center z-10">
           <Magnet padding={5} disabled={false} magnetStrength={90}>
             <ScrollReveal
-              baseOpacity={0}
+              baseOpacity={1}
               enableBlur={true}
               baseRotation={0}
               blurStrength={10}
@@ -28,7 +29,7 @@ const AboutSection = () => {
           </Magnet>
         </div>
       <div className="text-center mt-10">
-        <h1>Button</h1>
+        <Button text={'More About Me'} />
       </div>
       </div>
     </div>
