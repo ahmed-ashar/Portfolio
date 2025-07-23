@@ -14,6 +14,14 @@ const QuoteSection = () => {
     
     
             {/* Foreground Text */}
+
+
+            <div className="text-center text-9xl   z-10">
+                <h1><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="text-6xl md:text-9xl text-primary" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+{/* <path fill="none" d="M0 0h24v24H0z"></path> */}
+<path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
+</svg></h1>
+            </div>
             <div className="w-full md:w-[70%] p-4 text-center z-10 ">
               <Magnet padding={5} disabled={false} magnetStrength={90}>
                 <ScrollReveal
@@ -22,7 +30,7 @@ const QuoteSection = () => {
                   baseRotation={0}
                   blurStrength={10}
                 >
-                  "Scared AI might take my job. Also scared it won’t finish my code in time."
+                  Scared AI might take my job. Also scared it won’t finish my code in time.
                 </ScrollReveal>
               </Magnet>
             </div>
