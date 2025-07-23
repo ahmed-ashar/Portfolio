@@ -4,7 +4,7 @@ import ScrollReveal from '../../utilis/scrollReveal/ScrollReveal'
 
 const QuoteSection = () => {
   return (
-     <div className="h-auto relative pt-40 sm:pt-60 pb-20 w-full flex justify-center items-center text-[#b7ab98]">
+     <div className="h-auto relative pt-40 sm:pt-60 pb-40 w-full flex justify-center items-center text-[#b7ab98]">
           <div className="w-full flex flex-col justify-center items-center relative px-4">
             {/* Background Text with responsive font size */}
             {/* Background Text */}
