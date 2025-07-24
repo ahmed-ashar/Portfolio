@@ -99,14 +99,16 @@ export default function TiltedCard({
           scale,
         }}
       >
-   <div
-  className="relative group rounded-[15px]"
+<div
+  className="relative group rounded-[15px] overflow-hidden"
   style={{ width: imageWidth, height: imageHeight }}
 >
   <motion.img
     src={imageSrc}
     alt={altText}
-    className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
+    className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px]
+      transition-transform duration-500 ease-in-out
+      group-hover:scale-110"
   />
 
   {/* Solid Black Overlay: Visible normally, hidden on hover */}
@@ -117,6 +119,8 @@ export default function TiltedCard({
       rounded-[15px]"
   />
 </div>
+
+
 
 
 
@@ -131,7 +135,7 @@ export default function TiltedCard({
 
       {showTooltip && (
         <motion.figcaption
-          className="pointer-events-none absolute left-0 top-0 rounded-[4px] bg-white px-[10px] py-[4px] text-[10px] text-[#2d2d2d] opacity-0 z-[3] hidden sm:block"
+          className="pointer-events-none absolute left-5 top-0 rounded-[4px] bg-[#2C2C2C] px-[10px] py-[4px] text-[10px] text-[#b7ab98] opacity-0 z-[3] hidden sm:block"
           style={{
             x,
             y,
