@@ -7,25 +7,27 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import Magnet from "../../utilis/magnet/Magnet";
 
 const Icons = () => {
+  const icon = [
+    { icon: faInstagram, link: "https://www.instagram.com/ahm3d_ashar/" },
+    { icon: faFacebook, link: "https://www.facebook.com/ahmed.ashar.58" },
+    { icon: faLinkedin, link: "https://www.linkedin.com/in/ahmed-ashar/" },
+    { icon: faGithub, link: "https://github.com/ahmed-ashar" },
+  ];
   return (
     <div
       className="hidden sm:fixed sm:bottom-10 sm:left-15 left-9 text-[#b7ab98] sm:flex sm:flex-row sm:items-center sm:justify-between  sm:gap-5 z-[999] text-xl sm:text-2xl"
       style={{ writingMode: "vertical-lr" }}
     >
-      <Magnet padding={15} disabled={false} magnetStrength={1}>
-        <FontAwesomeIcon icon={faFacebook} className="bg-[#131313] p-3 rounded-full" />
-      </Magnet>
-
-      <Magnet padding={15} disabled={false} magnetStrength={1}>
-        <FontAwesomeIcon icon={faInstagram} className="bg-[#131313] p-3 rounded-full" />
-      </Magnet>
-      <Magnet padding={15} disabled={false} magnetStrength={1}>
-        <FontAwesomeIcon icon={faGithub} className="bg-[#131313] p-3 rounded-full" />
-      </Magnet>
-
-      <Magnet padding={15} disabled={false} magnetStrength={1}>
-        <FontAwesomeIcon icon={faLinkedin} className="bg-[#131313] p-3 rounded-full" />
-      </Magnet>
+      {icon.map((item, index) => (
+        <Magnet key={index} padding={15} disabled={false} magnetStrength={1}>
+          <a href={item.link} target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon
+              icon={item.icon}
+              className="bg-[#131313] p-3 rounded-full"
+            />
+          </a>
+        </Magnet>
+      ))}
     </div>
   );
 };
