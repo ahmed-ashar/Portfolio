@@ -1,33 +1,41 @@
 import React from "react";
 import Dock from "../../utilis/dock/Dock";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import {
+  faHouseChimneyCrack,
+  faUser,
+  faCode,
+  faGear,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { useNavigate } from "react-router-dom";
+
 const DockComp = () => {
+  const navigate = useNavigate();
+
   const items = [
     {
-      icon: <FontAwesomeIcon icon={faFacebook} size={18} />,
+      icon: <FontAwesomeIcon icon={faHouseChimneyCrack} size="sm" />,
       label: "Home",
-      onClick: () => alert("Home!"),
+      onClick: () => navigate("/"),
     },
     {
-      icon: <FontAwesomeIcon icon={faGithub} size={18} />,
-      label: "Archive",
-      onClick: () => alert("Archive!"),
+      icon: <FontAwesomeIcon icon={faUser} size="sm" />,
+      label: "About",
+      onClick: () => navigate("/about"),
     },
     {
-      icon: <FontAwesomeIcon icon={faInstagram} size={18} />,
-      label: "Profile",
-      onClick: () => alert("Profile!"),
+      icon: <FontAwesomeIcon icon={faCode} size="sm" />,
+      label: "Projects",
+      onClick: () => navigate("/projects"),
     },
     {
-      icon: <FontAwesomeIcon icon={faLinkedin} size={18} />,
-      label: "Settings",
-      onClick: () => alert("Settings!"),
+      icon: <FontAwesomeIcon icon={faGear} size="md" />,
+      label: "Theme",
+      onClick: () => alert("Theme!"),
     },
   ];
+
   return (
     <div className="fixed  bottom-5 left-[49.5%] text-[#b7ab98] z-999  text-2xl">
       <Dock
