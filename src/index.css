@@ -31,32 +31,9 @@
     backdrop-filter: blur(16px);
 }
 
-/* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 11.484px;
+  
+  display: none;
   
 }
 
-::-webkit-scrollbar-track {
-  background: #8b5cf620;
-  /* border-radius: 5.2025px; */
-}
-
-::-webkit-scrollbar-thumb {
-  background: #131313;
-  /* border-radius: 15px; */
-  transition: background-color 0.2s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #131313;
-}
-
-
-/* For Internet Explorer */
-/* body {
-  -ms-overflow-style: scrollbar;
-} */
-
-/* Custom CSS */

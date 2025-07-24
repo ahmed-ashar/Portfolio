@@ -13,6 +13,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@gsap/react": "^2.1.2",
     "@tailwindcss/vite": "^4.1.11",
     "framer-motion": "^12.23.6",
     "gsap": "^3.13.0",

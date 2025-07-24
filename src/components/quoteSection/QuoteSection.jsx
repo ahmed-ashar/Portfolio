@@ -1,6 +1,7 @@
 import React from 'react'
 import Magnet from '../../utilis/magnet/Magnet'
 import ScrollReveal from '../../utilis/scrollReveal/ScrollReveal'
+import TextReveal from '../../utilis/textReveal/TextReveal'
 
 const QuoteSection = () => {
   return (
@@ -9,7 +10,10 @@ const QuoteSection = () => {
             {/* Background Text with responsive font size */}
             {/* Background Text */}
    <div className="sticky top-50 sm:top-30 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
+                <TextReveal delay={1}>
+    
   <h1 className="text-[20vw] sm:text-[22vw]">QUOTES</h1>
+  </TextReveal>
 </div>
     
     

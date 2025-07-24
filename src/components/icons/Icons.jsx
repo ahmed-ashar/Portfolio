@@ -9,7 +9,7 @@ import Magnet from "../../utilis/magnet/Magnet";
 const Icons = () => {
   return (
     <div
-      className="hidden sm:fixed sm:bottom-20 sm:left-15 left-9 text-[#b7ab98] sm:flex sm:flex-row sm:items-center sm:justify-between  sm:gap-5 z-[999] text-xl sm:text-2xl"
+      className="hidden sm:fixed sm:bottom-10 sm:left-15 left-9 text-[#b7ab98] sm:flex sm:flex-row sm:items-center sm:justify-between  sm:gap-5 z-[999] text-xl sm:text-2xl"
       style={{ writingMode: "vertical-lr" }}
     >
       <Magnet padding={15} disabled={false} magnetStrength={1}>

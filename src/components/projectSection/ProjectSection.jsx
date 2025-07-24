@@ -6,6 +6,7 @@ import { caption, link, title } from "framer-motion/client";
 import pic1 from "../../assets/1.png";
 import Magnet from "../../utilis/magnet/Magnet";
 import Button from "../button/Button";
+import TextReveal from "../../utilis/textReveal/TextReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,7 +60,9 @@ const ProjectSection = () => {
   return (
     <div className="relative text-white">
       <div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
+        <TextReveal delay={1}>
         <h1 className="text-[17vw] sm:text-[18vw]">PROJECTS</h1>
+        </TextReveal>
       </div>
 
       <div className="w-full py-10 flex flex-col items-center gap-70">

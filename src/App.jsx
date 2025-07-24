@@ -12,10 +12,12 @@ import ScrollVelocitySlide from "./components/scrollVelocity/ScrollVelocitySlide
 import AboutSection from "./components/aboutSection/AboutSection";
 import ProjectSection from "./components/projectSection/ProjectSection";
 import QuoteSection from "./components/quoteSection/QuoteSection";
+import ReactLenis from "lenis/react";
 
 const App = () => {
   
   return (
+    <ReactLenis root>
     <div style={{ padding: "0.55rem", backgroundColor: "#2C2C2C" }}>
       <div
         style={{
@@ -58,10 +60,11 @@ const App = () => {
         <QuoteSection />
 
         </div>
-        <AboutSection  />
+        <QuoteSection />
    
       
     </div>
+    </ReactLenis>
   );
 };
 
