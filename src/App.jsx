@@ -13,6 +13,7 @@ import AboutSection from "./components/aboutSection/AboutSection";
 import ProjectSection from "./components/projectSection/ProjectSection";
 import QuoteSection from "./components/quoteSection/QuoteSection";
 import ReactLenis from "lenis/react";
+import FooterSection from "./components/footerSection/FooterSection";
 
 const App = () => {
   
@@ -60,10 +61,10 @@ const App = () => {
         <QuoteSection />
 
         </div>
-        <QuoteSection />
+        <FooterSection />
+    </div>
    
       
-    </div>
     </ReactLenis>
   );
 };

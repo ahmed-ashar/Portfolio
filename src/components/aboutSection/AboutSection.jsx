@@ -32,7 +32,7 @@ const AboutSection = () => {
             </ScrollReveal>
           </Magnet>
         </div>
-      <div className="text-center mt-10">
+      <div className="text-center ml-3 mt-10">
         <Button text={'More About Me'} />
       </div>
       </div>

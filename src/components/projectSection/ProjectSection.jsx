@@ -114,7 +114,7 @@ const ProjectSection = () => {
         ))}
       </div>
 
-      <div className="text-center mt-10">
+      <div className="text-center ml-3 mt-10">
          <Button text={'More Projects'} />
       </div>
     </div>
