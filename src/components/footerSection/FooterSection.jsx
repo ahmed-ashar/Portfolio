@@ -17,7 +17,7 @@ const FooterSection = () => {
 
   return (
     <div className="h-[80vh] sm:h-[85vh] w-full overflow-hidden text-[#b7ab98] relative">
-      <div className="w-[80vw] mt-5 sm:mt-10 mx-auto flex flex-col sm:flex-row justify-between items-start  gap-10">
+      <div className="w-[85vw] mt-5 sm:mt-10 mx-auto flex flex-col sm:flex-row justify-between items-start  gap-10">
         <div className="">
           <div className="">
             <TextReveal delay={0.2}>

@@ -21,7 +21,8 @@ const ScrambleText = ({ navbarText, texts ,color,font,repeat }) => {
       tl.to(textRef.current, {
         scrambleText: {
           text: line,
-          chars: texts
+          chars: texts,
+          revealDirection: "center",
         },
         duration: 3,
         delay: index === 0 ? 0 : 5

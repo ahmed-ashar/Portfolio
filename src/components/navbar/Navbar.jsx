@@ -43,7 +43,7 @@ const Navbar = () => {
             <h1 className=" text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-5xl z-11 aladin  text-[#b7ab98]">Ahmed</h1>
           </Magnet>
           <div className="w-[50%] hidden sm:block">
-            <ScrambleText repeat={-1} texts={texts} color="text-zinc-400" font=" text-xs sm:text-xs md:text-xs lg:text-xs xl:text-xs 2xl:text-xs " />
+            <ScrambleText repeat={1} texts={texts} color="text-zinc-400" font=" text-xs sm:text-xs md:text-xs lg:text-xs xl:text-xs 2xl:text-xs " />
           </div>
         </div>
         <div>
