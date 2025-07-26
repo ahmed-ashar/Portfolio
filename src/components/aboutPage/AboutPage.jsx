@@ -63,12 +63,34 @@ const certificateData = [
   },
 ];
 
+const contactData = [
+  {
+    title: "Social Media Marketing Manager",
+    from: "Ummul Qura Secondary School",
+  },
+  {
+    title: "Saylani Mass IT Training - Institute",
+    from: "Saylani Mass IT Training",
+  },
+  {
+    title: "Computer Information Technology (CIT) - Diploma/Inter",
+    from: "Saylani Mass IT Training",
+  },
+];
 const AboutPage = () => {
   return (
     <div className="h-auto text-[#b7ab98]">
       <div className="max-w-[700px] sm:max-w-[500px] md:max-w-[700px] p-5 mx-auto">
+        {/* Image */}
+        <div className="rounded-full w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] mx-auto my-20">
+          <img
+            src="https://avatars.githubusercontent.com/u/155929233?v=4"
+            alt="Profile"
+            className="w-full h-full rounded-full object-cover"
+          />
+        </div>
         {/* Heading */}
-        <div>
+        <div className="">
           <TextReveal delay={0.2}>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl">
               {aboutInfo.heading}
@@ -150,6 +172,25 @@ const AboutPage = () => {
               </div>
               <TextReveal delay={0.2}>
                 <p className="text-sm w-[20%] text-end">{cer.from}</p>
+              </TextReveal>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact Section */}
+        <div className="my-20 mb-50">
+          <TextReveal delay={0.2}>
+            <h1 className="mb-10">Contact</h1>
+          </TextReveal>
+          {contactData.map((con, idx) => (
+            <div key={idx} className="flex justify-between items-center mb-5">
+              <div>
+                <TextReveal delay={0.2}>
+                  <h1 className="text-3xl ">{con.title}</h1>
+                </TextReveal>
+              </div>
+              <TextReveal delay={0.2}>
+                <p className="text-sm w-[20%] text-end">{con.from}</p>
               </TextReveal>
             </div>
           ))}
