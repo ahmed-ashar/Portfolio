@@ -16,7 +16,15 @@ import AboutPage from '../../components/aboutPage/AboutPage'
 const About = () => {
   return (
     <div>
-      <ReactLenis root>
+      <ReactLenis
+        root
+        options={{
+          duration: 1.5,        // Scroll animation duration
+          smooth: true,         // Enable smooth scroll
+          easing: (t) => 1 - Math.pow(1 - t, 3),  // Custom easing function
+          lerp: 0.02,           // Low value = smoother scroll
+        }}
+      >
         <div style={{ padding: "0.55rem", backgroundColor: "#2C2C2C" }}>
           <div
             style={{

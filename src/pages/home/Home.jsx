@@ -1,5 +1,6 @@
-import ReactLenis from "lenis/react";
 import React from "react";
+import { Lenis as ReactLenis } from "lenis/react";
+
 import Navbar from "../../components/navbar/Navbar";
 import BlobCursor from "../../utilis/blobCursor/BlobCursor";
 import Hero from "../../components/hero/Hero";
@@ -15,7 +16,15 @@ import FooterSection from "../../components/footerSection/FooterSection";
 const Home = () => {
   return (
     <div>
-      <ReactLenis root>
+      <ReactLenis
+        root
+        options={{
+          duration: 1.5,        // Scroll animation duration
+          smooth: true,         // Enable smooth scroll
+          easing: (t) => 1 - Math.pow(1 - t, 3),  // Custom easing function
+          lerp: 0.02,           // Low value = smoother scroll
+        }}
+      >
         <div style={{ padding: "0.55rem", backgroundColor: "#2C2C2C" }}>
           <div
             style={{
@@ -25,7 +34,6 @@ const Home = () => {
             }}
           >
             <Navbar />
-
             <BlobCursor
               blobType="circle"
               fillColor="#fd8b09"
@@ -44,7 +52,6 @@ const Home = () => {
               slowDuration={0.15}
               zIndex={5}
             />
-
             <Hero />
             <Icons />
             <ChatBot />
