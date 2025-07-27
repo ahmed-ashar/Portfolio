@@ -39,7 +39,7 @@ const Home = () => {
               shadowOffsetX={5}
               shadowOffsetY={5}
               filterStdDeviation={8}
-              useFilter={false}
+              useFilter={true}
               fastDuration={0.1}
               slowDuration={0.15}
               zIndex={5}
