@@ -7,6 +7,7 @@ import Icons from '../../components/icons/Icons'
 import ChatBot from '../../components/chatbot/ChatBot'
 import DockComp from '../../components/dock/DockComp'
 import FooterSection from '../../components/footerSection/FooterSection'
+import ProjectPage from '../../components/projectPage/ProjectPage'
 
 const Projects = () => {
   return (
@@ -49,7 +50,7 @@ const Projects = () => {
               zIndex={5}
             />
 
-            {/* <AboutPage /> */}
+            <ProjectPage />
             {/* <Hero /> */}
             <Icons />
             <ChatBot />
