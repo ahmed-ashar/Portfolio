@@ -8,44 +8,14 @@ import Magnet from "../../utilis/magnet/Magnet";
 import Button from "../button/Button";
 import TextReveal from "../../utilis/textReveal/TextReveal";
 import { useNavigate } from "react-router-dom";
+import ProjectData from "../../data/ProjectData";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectSection = () => {
 
 
-  const data = [
-    {
-      title: "Project 1",
-      image:
-        "https://www.emanuelepapale.com/assets/projects/featured_invest.webp",
-      link: "https://example.com/project1",
-      skills: ["React", "JavaScript", "CSS", "HTML"],
-      caption: "work1",
-    },
-    {
-      title: "Project 2",
-      image:
-        "https://www.emanuelepapale.com/assets/projects/featured_invest.webp",
-      link: "https://example.com/project2",
-      skills: ["React", "JavaScript", "CSS", "HTML"],
-      caption: "work2",
-    },
-    {
-      title: "Project 3",
-      image: pic1,
-      link: "https://example.com/project3",
-      skills: ["React", "JavaScript", "CSS", "HTML"],
-      caption: "work3",
-    },
-    {
-      title: "Project 4",
-      image: pic1,
-      link: "https://example.com/project4",
-      skills: ["React", "JavaScript", "CSS", "HTML"],
-      caption: "work4",
-    },
-  ];
+  const data = ProjectData();
 
   useEffect(() => {
     gsap.utils.toArray(".card").forEach((card) => {
