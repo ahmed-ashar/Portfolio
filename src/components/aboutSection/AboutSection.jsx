@@ -33,7 +33,7 @@ const AboutSection = () => {
           </Magnet>
         </div>
       <div className="text-center ml-3 mt-10">
-        <Button text={'More About Me'} />
+        <Button text={'More About Me'} to="/about"  />
       </div>
       </div>
     </div>

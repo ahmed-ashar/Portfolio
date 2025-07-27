@@ -7,21 +7,26 @@ import pic1 from "../../assets/1.png";
 import Magnet from "../../utilis/magnet/Magnet";
 import Button from "../button/Button";
 import TextReveal from "../../utilis/textReveal/TextReveal";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectSection = () => {
+
+
   const data = [
     {
       title: "Project 1",
-      image: "https://www.emanuelepapale.com/assets/projects/featured_invest.webp",
+      image:
+        "https://www.emanuelepapale.com/assets/projects/featured_invest.webp",
       link: "https://example.com/project1",
       skills: ["React", "JavaScript", "CSS", "HTML"],
       caption: "work1",
     },
     {
       title: "Project 2",
-      image: "https://www.emanuelepapale.com/assets/projects/featured_invest.webp",
+      image:
+        "https://www.emanuelepapale.com/assets/projects/featured_invest.webp",
       link: "https://example.com/project2",
       skills: ["React", "JavaScript", "CSS", "HTML"],
       caption: "work2",
@@ -61,61 +66,67 @@ const ProjectSection = () => {
     <div className="relative text-white">
       <div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
         <TextReveal delay={1}>
-        <h1 className="text-[17vw] sm:text-[18vw]">PROJECTS</h1>
+          <h1 className="text-[17vw] sm:text-[18vw]">PROJECTS</h1>
         </TextReveal>
       </div>
 
       <div className="w-full py-10 flex flex-col items-center gap-70">
         {data.map((item, index) => (
           <div
-  key={index}
-  id={index}
-  className="card group sticky top-[17vh] sm:top-[18vh] w-[85%] sm:w-[70%] h-[65vh] flex flex-col items-center gap-5 rounded-lg"
->
-  <a
-    href={item.link}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-full h-full"
-  >
-    <TiltedCard
-      imageSrc={item.image}
-      altText="Kendrick Lamar - GNX Album Cover"
-      captionText={item.caption}
-      containerHeight="100%"
-      containerWidth="100%"
-      imageHeight="100%"
-      imageWidth="100%"
-      rotateAmplitude={2}
-      scaleOnHover={1}
-      showMobileWarning={false}
-      showTooltip={true}
-      displayOverlayContent={true}
-      overlayContent={
-        <div className="flex flex-col sm:flex-row mx-5 gap-5 sm:mx-20 items-start sm:items-end sm:justify-between group-hover:mx-28 transition-all duration-500 ease-in-out">
-          <Magnet padding={20} disabled={false} magnetStrength={5}>
-          <p className="tilted-card-demo-text aladin uppercase">{item.title}</p>
-          </Magnet>
-          <div className="w-[100%] sm:w-[70%] flex flex-wrap-reverse justify-end sm:justify-end items-end gap-2">
-            {item.skills.map((skill, skillIndex) => (
-              <Magnet key={skillIndex} padding={20} disabled={false} magnetStrength={5}>
-                <span className="bg-[#2C2C2C] hover:bg-[#fd8b09] text-[#fd8b09] hover:text-[#2C2C2C] transition-all duration-500 ease-in-out px-3 py-1 rounded-full text-sm">
-                  {skill}
-                </span>
-              </Magnet>
-            ))}
+            key={index}
+            id={index}
+            className="card group sticky top-[17vh] sm:top-[18vh] w-[85%] sm:w-[70%] h-[65vh] flex flex-col items-center gap-5 rounded-lg"
+          >
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full h-full"
+            >
+              <TiltedCard
+                imageSrc={item.image}
+                altText="Kendrick Lamar - GNX Album Cover"
+                captionText={item.caption}
+                containerHeight="100%"
+                containerWidth="100%"
+                imageHeight="100%"
+                imageWidth="100%"
+                rotateAmplitude={2}
+                scaleOnHover={1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                overlayContent={
+                  <div className="flex flex-col sm:flex-row mx-5 gap-5 sm:mx-20 items-start sm:items-end sm:justify-between group-hover:mx-28 transition-all duration-500 ease-in-out">
+                    <Magnet padding={20} disabled={false} magnetStrength={5}>
+                      <p className="tilted-card-demo-text aladin uppercase">
+                        {item.title}
+                      </p>
+                    </Magnet>
+                    <div className="w-[100%] sm:w-[70%] flex flex-wrap-reverse justify-end sm:justify-end items-end gap-2">
+                      {item.skills.map((skill, skillIndex) => (
+                        <Magnet
+                          key={skillIndex}
+                          padding={20}
+                          disabled={false}
+                          magnetStrength={5}
+                        >
+                          <span className="bg-[#2C2C2C] hover:bg-[#fd8b09] text-[#fd8b09] hover:text-[#2C2C2C] transition-all duration-500 ease-in-out px-3 py-1 rounded-full text-sm">
+                            {skill}
+                          </span>
+                        </Magnet>
+                      ))}
+                    </div>
+                  </div>
+                }
+              />
+            </a>
           </div>
-        </div>
-      }
-    />
-  </a>
-</div>
-
         ))}
       </div>
 
       <div className="text-center ml-3 mt-10">
-         <Button text={'More Projects'} />
+        <Button text={"More Projects"} to="/projects" />
       </div>
     </div>
   );
