@@ -13,7 +13,9 @@
     font-family: var(--font-avant);
     cursor: none;
 }
-
+body{
+  margin-bottom: 80vh;
+}
 .pacifico{
   font-family: var(--font-pacifico);
 }

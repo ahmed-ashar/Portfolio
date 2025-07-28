@@ -16,25 +16,21 @@ const FooterSection = () => {
   ];
 
   return (
+    <div className=" fixed h-[80vh] bottom-0 top-auto w-full bg-[#2c2c2c] -z-1">
     <div className="h-[80vh] sm:h-[85vh] w-full overflow-hidden text-[#b7ab98] relative">
-      <div className="w-[85vw] mt-5 sm:mt-10 mx-auto flex flex-col sm:flex-row justify-between items-start  gap-10">
+      <div className="w-[calc(95%-2.1rem)] sm:w-[calc(75%-2.1rem)] md:w-[calc(80%-2.1rem)]  mt-5 sm:mt-10 mx-auto flex flex-col sm:flex-row justify-between items-start  gap-10">
         <div className="">
           <div className="">
-            <TextReveal delay={0.2}>
-              <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold   ">
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold   ">
                 Ready to start a conversation? <br /> Drop your thoughts,
                 questions, <br />
                 or ideas — I’m always <br />
                 open to connect.
               </h1>
-            </TextReveal>
           </div>
           <div className="flex flex-col mt-1 sm:mt-5 gap-1 sm:gap-2 ">
-            <TextReveal delay={0.2}>
               <p className="text-xs md:text-sm">CONTACT</p>
-            </TextReveal>
             <Magnet padding={5} disabled={false} magnetStrength={7}>
-              <TextReveal delay={0.2}>
                 <p className="text-sm md:text-2xl group  font-bold hover:text-[#fd8b09]">
                   hafizmahmedashar@gmail.com{" "}
                   <FontAwesomeIcon
@@ -42,20 +38,15 @@ const FooterSection = () => {
                     className="text-sm sm:text-xl transform transition-transform duration-500 rotate-50 group-hover:rotate-90"
                   />{" "}
                 </p>
-              </TextReveal>
             </Magnet>
-            <TextReveal delay={0.2}>
               <p className="text-xs md:text-sm">
                 Sector 11-C/1 North Karachi, <br /> Karachi, Pakistan
               </p>
-            </TextReveal>
           </div>
         </div>
 
         <div className=" sm:text-end ">
-          <TextReveal delay={0.2}>
             <p className="text-xs sm:text-sm">LINKS</p>
-          </TextReveal>
           <div className="text-sm sm:text-xl  sm:mt-2 text-end flex flex-wrap sm:flex-col gap-1 font-bold">
             {links.map((link, index) => (
               <Magnet
@@ -64,7 +55,6 @@ const FooterSection = () => {
                 disabled={false}
                 magnetStrength={7}
               >
-                <TextReveal delay={0.2}>
                   <a href={link.link} target="_blank" className="group hover:text-[#fd8b09]">
                     <FontAwesomeIcon
                       icon={link.icon}
@@ -72,7 +62,6 @@ const FooterSection = () => {
                     />{" "}
                     {link.name}
                   </a>
-                </TextReveal>
               </Magnet>
             ))}
           </div>
@@ -82,6 +71,7 @@ const FooterSection = () => {
       <div className=" absolute  bottom-0 w-full text-center font-extrabold opacity-10 text-[#b7ab98] leading-none">
         <h1 className="text-[20vw]   ">CONTACT</h1>
       </div>
+    </div>
     </div>
   );
 };

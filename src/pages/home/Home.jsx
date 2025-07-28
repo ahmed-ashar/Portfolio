@@ -61,8 +61,8 @@ const Home = () => {
             <ProjectSection />
             <QuoteSection />
           </div>
-          <FooterSection />
         </div>
+          <FooterSection />
       </ReactLenis>
     </div>
   );

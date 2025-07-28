@@ -64,8 +64,8 @@ const About = () => {
             {/* <ProjectSection /> */}
             {/* <QuoteSection /> */}
           </div>
-          <FooterSection />
         </div>
+          <FooterSection />
       </ReactLenis>
     </div>
   )

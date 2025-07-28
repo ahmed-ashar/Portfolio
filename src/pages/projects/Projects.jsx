@@ -21,13 +21,10 @@ const Projects = () => {
           lerp: 0.02,           // Low value = smoother scroll
         }}
       >
-        <div style={{ padding: "0.55rem", backgroundColor: "#2C2C2C" }}>
+        <div className='p-[0.55rem] bg-[#2c2c2c] relative overflow-hidden'>
           <div
-            style={{
-              borderRadius: "0.3rem",
-              backgroundColor: "#131313",
-              height: "100%",
-            }}
+          className='rounded-[0.3rem] bg-[#131313]'
+            
           >
             <Navbar />
 
@@ -60,8 +57,8 @@ const Projects = () => {
             {/* <ProjectSection /> */}
             {/* <QuoteSection /> */}
           </div>
-          <FooterSection />
         </div>
+          <FooterSection />
       </ReactLenis>
     </div>
   )
