@@ -19,7 +19,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="pt-23">
       <ReactLenis root>
       <DotGrid
         dotSize={5}

@@ -14,7 +14,7 @@ const AboutPage = () => {
   } = AboutData();
 
   return (
-    <div className="h-auto text-[#b7ab98]">
+    <div className="h-auto text-[#b7ab98] pt-15">
       <div className="max-w-[700px] sm:max-w-[500px] md:max-w-[700px] p-5 mx-auto">
         {/* Image */}
         <div className="rounded-full w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] mx-auto my-20">
