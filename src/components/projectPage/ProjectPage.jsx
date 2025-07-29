@@ -24,10 +24,11 @@ const ProjectPage = () => {
       className="card group   w-full h-[65vh] flex flex-col items-center gap-5 rounded-lg"
     >
       <a
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-full h-full"
-      >
+  href={project.link} // Make sure project.link is defined
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-full h-full"
+>
         <TiltedCard
           imageSrc={project.image}
           altText={project.title}
@@ -110,18 +111,15 @@ const ProjectPage = () => {
             <TextReveal delay={0.2}>
           <div className="flex my-10 justify-center items-center text-xl flex-wrap">
             {filterOptions.map((option) => (
-              <button
-                key={option}
-                onClick={() => setFilter(option)}
-                className={`px-4 py-2 mx-1 rounded-md orange-bg-hover   ${
-                  filter === option
-                    ? "orange-bg gray-text "
-                    : "bg-transparent text-off-white"
-                } transition-all duration-300`}
-              >
-
-                {option}
-              </button>
+             <button
+  key={option}
+  onClick={() => setFilter(option)}
+  className={`z-10 relative px-4 py-2 mx-1 rounded-md orange-bg-hover ${
+    filter === option ? "orange-bg gray-text" : "bg-transparent text-off-white"
+  } transition-all duration-300`}
+>
+  {option}
+</button>
             ))}
           </div>
             </TextReveal>
