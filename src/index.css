@@ -1,79 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Aladin&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aladin&display=swap");
 @import "tailwindcss";
+
 :root {
-  --font-pacifico: "Lobster", cursive; 
-  --font-avant: Avant Garde, sans-serif; 
-  --font-redHatMono: Red Hat Mono, sans-serif; 
---font-aladin: "aladin", sans-serif;
---black-bg:#131313;
---gray-bg:#2c2c2c;
---text-off-white:#b7ab98;
+  --font-pacifico: "Lobster", cursive;
+  --font-avant: Avant Garde, sans-serif;
+  --font-redHatMono: Red Hat Mono, sans-serif;
+  --font-aladin: "aladin", sans-serif;
 
-}
-
-*{
-    font-family: var(--font-avant);
-    cursor: none;
+  --black: #131313;
+  --gray: #2c2c2c;
+  --text-off: #b7ab98;
+  --orange: #fd8b09;
 }
 
-.text-off-white{
-  color: #b7ab98;
+* {
+  font-family: var(--font-avant);
+  cursor: none;
 }
-.bg-off-white{
-  background-color: #b7ab98;
+
+.text-off-white {
+  color: var(--text-off);
 }
-.gray-text{
-  color: #2c2c2c;
+
+.bg-off-white {
+  background-color: var(--text-off);
 }
-.gray-bg{
-  background-color: #2c2c2c;
+
+.gray-text {
+  color: var(--gray);
 }
-.orange-text{
-color: #fd8b09;
+
+.gray-bg {
+  background-color: var(--gray);
 }
-.orange-text-hover:hover{
-color: #fd8b09;
+
+.orange-text {
+  color: var(--orange);
 }
-.orange-bg{
-background-color: #fd8b09;
+
+.orange-text-hover:hover {
+  color: var(--orange);
 }
+
+.orange-bg {
+  background-color: var(--orange);
+}
+
 .orange-bg-hover:hover {
-  background-color: #fd8b09;
-  color: #2C2C2C;
-}
-.black-text{
-  color: #131313;
-}
-.black-bg{
-  background-color: #131313;
+  background-color: var(--orange);
+  color: var(--gray);
 }
 
+.black-text {
+  color: var(--black);
+}
 
-body{
+.black-bg {
+  background-color: var(--black);
+}
+
+body {
   margin-bottom: 79vh;
 }
-.pacifico{
+
+.pacifico {
   font-family: var(--font-pacifico);
 }
-.aladin{
+
+.aladin {
   font-family: var(--font-aladin);
 }
-.redHatMono{
+
+.redHatMono {
   font-family: var(--font-redHatMono);
 }
-.cursor{
-  filter: invert(1);
-}
-.nav{
-      background-image: linear-gradient(to bottom, #2c2c2c, #282828d6 80%, #1c1c1c66 95%, transparent);
-    backdrop-filter: blur(16px);
+
+.nav {
+  background-image: linear-gradient(
+    to bottom,
+    #2c2c2c,
+    #282828d6 80%,
+    #1c1c1c66 95%,
+    transparent
+  );
+  backdrop-filter: blur(16px);
 }
 
 ::-webkit-scrollbar {
-  
   display: none;
-  
 }
-

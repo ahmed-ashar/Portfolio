@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Home from "./pages/home/Home";
-import Projects from "./pages/projects/Projects";
-import About from "./pages/about/About";
+import Home from "./pages/Home";
+import Projects from "./pages/Projects";
+import About from "./pages/About";
 import { Route, Routes, useLocation } from "react-router-dom";
-import ScrollToTop from "./utilis/scrollToTop/ScrollToTop";
+import ScrollToTop from "./utilis/ScrollToTop";
 
 const App = () => {
    
