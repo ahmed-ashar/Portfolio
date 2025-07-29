@@ -9,13 +9,14 @@ import Button from "../button/Button";
 import TextReveal from "../../utilis/textReveal/TextReveal";
 import { useNavigate } from "react-router-dom";
 import ProjectData from "../../data/ProjectData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import ProjectCard from "../projectCard/ProjectCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectSection = () => {
-
-
-  const data = ProjectData();
+  const data = ProjectData().slice(0, 4);
 
   useEffect(() => {
     gsap.utils.toArray(".card").forEach((card) => {
@@ -66,29 +67,7 @@ const ProjectSection = () => {
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
-                overlayContent={
-                  <div className="flex flex-col sm:flex-row mx-5 gap-5 sm:mx-20 items-start sm:items-end sm:justify-between group-hover:mx-28 transition-all duration-500 ease-in-out">
-                    <Magnet padding={20} disabled={false} magnetStrength={5}>
-                      <p className="tilted-card-demo-text aladin uppercase">
-                        {item.title}
-                      </p>
-                    </Magnet>
-                    <div className="w-[100%] sm:w-[70%] flex flex-wrap-reverse justify-end sm:justify-end items-end gap-2">
-                      {item.skills.map((skill, skillIndex) => (
-                        <Magnet
-                          key={skillIndex}
-                          padding={20}
-                          disabled={false}
-                          magnetStrength={5}
-                        >
-                          <span className="bg-[#2C2C2C] hover:bg-[#fd8b09] text-[#fd8b09] hover:text-[#2C2C2C] transition-all duration-500 ease-in-out px-3 py-1 rounded-full text-sm">
-                            {skill}
-                          </span>
-                        </Magnet>
-                      ))}
-                    </div>
-                  </div>
-                }
+                overlayContent={<ProjectCard project={item} />}
               />
             </a>
           </div>

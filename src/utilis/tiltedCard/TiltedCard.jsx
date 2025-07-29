@@ -1,5 +1,6 @@
 import React,{ useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import SimpleParallax from "simple-parallax-js";
 
 const springValues = {
   damping: 30,
@@ -103,14 +104,15 @@ export default function TiltedCard({
   className="relative group rounded-[15px] overflow-hidden"
   style={{ width: imageWidth, height: imageHeight }}
 >
+  <SimpleParallax scale={1.5} delay={0.1} transition="cubic-bezier(0.25, 0.46, 0.45, 0.94)">
   <motion.img
     src={imageSrc}
     alt={altText}
     className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px]
       transition-transform duration-500 ease-in-out
-      group-hover:scale-110"
+        "
   />
-
+</SimpleParallax>
   {/* Solid Black Overlay: Visible normally, hidden on hover */}
   <div
     className="absolute top-0 left-0 w-full h-full
@@ -126,7 +128,7 @@ export default function TiltedCard({
 
         {displayOverlayContent && overlayContent && (
           <motion.div
-            className="absolute bottom-10 sm:bottom-20   text-4xl w-[100%] z-[2] will-change-transform [transform:translateZ(30px)]"
+            className="  text-4xl z-[2] will-change-transform [transform:translateZ(30px)]"
           >
             {overlayContent}
           </motion.div>
