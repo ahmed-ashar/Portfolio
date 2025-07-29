@@ -77,7 +77,7 @@ const AboutPage = () => {
             <div key={idx} className="flex justify-between items-center mb-5">
               <div className="">
                 <TextReveal delay={0.2}>
-                  <h1 className="text-3xl">{edu.title}</h1>
+                  <h1 className="text-xl sm:text-3xl">{edu.title}</h1>
                 </TextReveal>
                 <TextReveal delay={0.2}>
                   <p className="text-sm">{edu.destination}</p>
@@ -99,7 +99,7 @@ const AboutPage = () => {
             <div key={idx} className="flex justify-between items-center mb-5">
               <div>
                 <TextReveal delay={0.2}>
-                  <h1 className="text-3xl">{exp.title}</h1>
+                  <h1 className="text-xl sm:text-3xl">{exp.title}</h1>
                 </TextReveal>
                 <TextReveal delay={0.2}>
                   <p className="text-sm">{exp.company}</p>
@@ -121,7 +121,7 @@ const AboutPage = () => {
             <div key={idx} className="flex justify-between items-center mb-5">
               <div>
                 <TextReveal delay={0.2}>
-                  <h1 className="text-3xl ">{cer.title}</h1>
+                  <h1 className="text-xl sm:text-3xl ">{cer.title}</h1>
                 </TextReveal>
               </div>
               <TextReveal delay={0.2}>
@@ -140,7 +140,7 @@ const AboutPage = () => {
             <div key={idx} className="flex justify-between items-center mb-5">
               <div>
                 <TextReveal delay={0.2}>
-                  <h1 className="text-3xl ">{con.title}</h1>
+                  <h1 className="text-xl sm:text-3xl ">{con.title}</h1>
                 </TextReveal>
               </div>
               <TextReveal delay={0.2}>

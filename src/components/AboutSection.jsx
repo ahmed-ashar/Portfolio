@@ -1,7 +1,7 @@
 import React from "react";
-import ScrollReveal from "../utilis/ScrollReveal";
 import Magnet from "../utilis/Magnet";
 import Button from "./Button";
+import ScrollReveal from "../utilis/ScrollReveal";
 import TextReveal from "../utilis/TextReveal";
 
 const AboutSection = () => {
