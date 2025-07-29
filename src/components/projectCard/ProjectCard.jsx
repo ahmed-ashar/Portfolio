@@ -6,7 +6,7 @@ import Magnet from "../../utilis/magnet/Magnet";
 
 const ProjectCard = ({ project }) => {
   return (
-     <div className="flex  p-5 rounded-lg bg-[#2c2c2c] text-[#b7ab98]  absolute bottom-10 left-0 right-0 mx-5 gap-5 sm:mx-13 items-center  justify-between group-hover:mx-18 transition-all duration-500 ease-in-out">
+     <div className="flex  p-5 rounded-lg bg-[#2c2c2c] text-[#b7ab98]  absolute bottom-5 left-0 right-0 mx-5 gap-5 sm:mx-8 items-center  justify-between group-hover:mx-12 transition-all duration-500 ease-in-out">
                     {/* <Magnet padding={5} disabled={false} magnetStrength={7}> */}
                 <div className="">
                   <p className="  text-2xl uppercase aladin mb-1">{project.title}</p>
