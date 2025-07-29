@@ -25,14 +25,8 @@ const About = () => {
           lerp: 0.02,           // Low value = smoother scroll
         }}
       >
-        <div style={{ padding: "0.55rem", backgroundColor: "#2C2C2C" }}>
-          <div
-            style={{
-              borderRadius: "0.3rem",
-              backgroundColor: "#131313",
-              height: "100%",
-            }}
-          >
+            <div className='p-[0.55rem] gray-bg'>
+          <div className="rounded-[0.3rem] h-[100%] black-bg" >
             <Navbar />
 
             <BlobCursor
@@ -41,7 +35,7 @@ const About = () => {
               trailCount={2}
               sizes={[50, 30]}
               innerSizes={[8, 8]}
-              innerColor="#b7ab98"
+              innerColor="text-off-white"
               opacities={[0.6, 0.4]}
               shadowColor="rgba(0,0,0,0.4)"
               shadowBlur={8}

@@ -16,8 +16,8 @@ const FooterSection = () => {
   ];
 
   return (
-    <div className=" fixed h-[80vh] bottom-0 top-auto w-full bg-[#2c2c2c] -z-1">
-    <div className="h-[80vh] sm:h-[85vh] w-full overflow-hidden text-[#b7ab98] relative">
+    <div className=" fixed h-[80vh] bottom-0 top-auto w-full gray-bg  -z-1" >
+    <div className="h-[80vh] sm:h-[85vh] w-full overflow-hidden text-off-white relative">
       <div className="w-[calc(95%-2.1rem)] sm:w-[calc(75%-2.1rem)] md:w-[calc(80%-2.1rem)]  mt-5 sm:mt-10 mx-auto flex flex-col sm:flex-row justify-between items-start  gap-10">
         <div className="">
           <div className="">
@@ -31,7 +31,7 @@ const FooterSection = () => {
           <div className="flex flex-col mt-1 sm:mt-5 gap-1 sm:gap-2 ">
               <p className="text-xs md:text-sm">CONTACT</p>
             <Magnet padding={5} disabled={false} magnetStrength={7}>
-                <p className="text-sm md:text-2xl group  font-bold hover:text-[#fd8b09]">
+                <p className="text-sm md:text-2xl group  font-bold orange-text-hover">
                   hafizmahmedashar@gmail.com{" "}
                   <FontAwesomeIcon
                     icon={faArrowUp}
@@ -55,7 +55,7 @@ const FooterSection = () => {
                 disabled={false}
                 magnetStrength={7}
               >
-                  <a href={link.link} target="_blank" className="group hover:text-[#fd8b09]">
+                  <a href={link.link} target="_blank" className="group orange-text-hover">
                     <FontAwesomeIcon
                       icon={link.icon}
                       className="text-sm sm:text-xl transform transition-transform duration-500 rotate-50 group-hover:rotate-90"
@@ -68,7 +68,7 @@ const FooterSection = () => {
         </div>
       </div>
 
-      <div className=" absolute  bottom-0 w-full text-center font-extrabold opacity-10 text-[#b7ab98] leading-none">
+      <div className=" absolute  bottom-0 w-full text-center font-extrabold opacity-10  leading-none text-off-white">
         <h1 className="text-[20vw]   ">CONTACT</h1>
       </div>
     </div>

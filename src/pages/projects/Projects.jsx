@@ -21,11 +21,9 @@ const Projects = () => {
           lerp: 0.02,           // Low value = smoother scroll
         }}
       >
-        <div className='p-[0.55rem] bg-[#2c2c2c] relative overflow-hidden'>
-          <div
-          className='rounded-[0.3rem] bg-[#131313]'
-            
-          >
+        <div className='p-[0.55rem] relative overflow-hidden gray-bg' >
+          <div className="rounded-[0.3rem] black-bg" >
+
             <Navbar />
 
             <BlobCursor
@@ -34,7 +32,7 @@ const Projects = () => {
               trailCount={2}
               sizes={[50, 30]}
               innerSizes={[8, 8]}
-              innerColor="#b7ab98"
+              innerColor="text-off-white"
               opacities={[0.6, 0.4]}
               shadowColor="rgba(0,0,0,0.4)"
               shadowBlur={8}

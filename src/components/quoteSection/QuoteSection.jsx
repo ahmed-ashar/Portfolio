@@ -5,11 +5,11 @@ import TextReveal from '../../utilis/textReveal/TextReveal'
 
 const QuoteSection = () => {
   return (
-     <div className="h-auto relative pt-40 sm:pt-60 pb-40 w-full flex justify-center items-center text-[#b7ab98]">
+     <div className="h-auto relative pt-40 sm:pt-60 pb-40 w-full flex justify-center items-center text-off-white">
           <div className="w-full flex flex-col justify-center items-center relative px-4">
             {/* Background Text with responsive font size */}
             {/* Background Text */}
-   <div className="sticky top-50 sm:top-30 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
+   <div className="sticky top-50 sm:top-30 w-full text-center font-extrabold  opacity-30 leading-none gray-text" >
                 <TextReveal delay={1}>
     
   <h1 className="text-[20vw] sm:text-[22vw]">QUOTES</h1>

@@ -34,8 +34,8 @@ const ProjectSection = () => {
   }, []);
 
   return (
-    <div className="relative text-white">
-      <div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
+    <div className="relative ">
+      <div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold opacity-30 leading-none gray-text" >
         <TextReveal delay={1}>
           <h1 className="text-[17vw] sm:text-[18vw]">PROJECTS</h1>
         </TextReveal>

@@ -24,7 +24,6 @@ const ProjectPage = () => {
       className="card group   w-full h-[65vh] flex flex-col items-center gap-5 rounded-lg"
     >
       <a
-        href={project.liveUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="w-full h-full"
@@ -96,7 +95,7 @@ const ProjectPage = () => {
   const filterOptions = ["All", "Frontend", "Backend", "MERN Stack"];
 
   return (
-    <div className="text-[#b7ab98] pb-30 h-auto">
+    <div className="text-off-white pb-30 h-auto">
       <div className="flex flex-col items-center justify-center mb-10">
         <div className="mt-50  w-[90%] sm:w-[50%] text-center">
            <Magnet padding={5} magnetStrength={30}>
@@ -114,10 +113,10 @@ const ProjectPage = () => {
               <button
                 key={option}
                 onClick={() => setFilter(option)}
-                className={`px-4 py-2 mx-1 rounded-md hover:bg-[#fd8b09] hover:text-black  ${
+                className={`px-4 py-2 mx-1 rounded-md orange-bg-hover   ${
                   filter === option
-                    ? "bg-[#fd8b09] text-black "
-                    : "bg-transparent text-[#b7ab98]"
+                    ? "orange-bg gray-text "
+                    : "bg-transparent text-off-white"
                 } transition-all duration-300`}
               >
 

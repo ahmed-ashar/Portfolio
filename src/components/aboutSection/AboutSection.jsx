@@ -7,11 +7,11 @@ import TextReveal from "../../utilis/textReveal/TextReveal";
 
 const AboutSection = () => {
   return (
-    <div className="h-auto relative py-40 sm:pb-60 w-full flex justify-center items-center text-[#b7ab98]">
+    <div className="h-auto relative py-40 sm:pb-60 w-full flex justify-center items-center text-off-white" >
       <div className="w-full flex flex-col justify-center items-center relative px-4">
         {/* Background Text with responsive font size */}
         {/* Background Text */}
-<div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold text-[#2C2C2C] opacity-30 leading-none">
+<div className="sticky top-50 sm:top-30 left-0 w-full text-center gray-text font-extrabold  opacity-30 leading-none"  >
             <TextReveal delay={1}>
   
   <h1 className="text-[18vw]">ABOUT ME</h1>

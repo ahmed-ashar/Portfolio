@@ -15,7 +15,7 @@ const Icons = () => {
   ];
   return (
     <div
-      className="hidden sm:fixed sm:bottom-10 sm:left-15 left-9 text-[#b7ab98] sm:flex sm:flex-row sm:items-center sm:justify-between  sm:gap-5 z-[999] text-xl sm:text-2xl"
+      className="hidden sm:fixed sm:bottom-10 sm:left-15 left-9 text-off-white sm:flex sm:flex-row sm:items-center sm:justify-between  sm:gap-5 z-[999] text-xl sm:text-2xl"
       style={{ writingMode: "vertical-lr" }}
     >
       {icon.map((item, index) => (
@@ -23,7 +23,7 @@ const Icons = () => {
           <a href={item.link} target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon
               icon={item.icon}
-              className="bg-[#131313] p-3 rounded-full"
+              className="black-bg p-3 rounded-full"
             />
           </a>
         </Magnet>

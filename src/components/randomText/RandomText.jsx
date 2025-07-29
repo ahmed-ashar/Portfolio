@@ -12,7 +12,7 @@ const RandomText = () => {
     "Got ideas? Let’s talk over email."
   ];
   return (
-    <div className="text-white p-4 h-60 w-16 fixed bottom-10"
+    <div className=" p-4 h-60 w-16 fixed bottom-10 "
       style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
         <ScrambleText   texts={texts} />
       </div>

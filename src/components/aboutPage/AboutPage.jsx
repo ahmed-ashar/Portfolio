@@ -14,7 +14,7 @@ const AboutPage = () => {
   } = AboutData();
 
   return (
-    <div className="h-auto text-[#b7ab98] pt-15">
+    <div className="h-auto text-off-white pt-15 text-off-white" >
       <div className="max-w-[700px] sm:max-w-[500px] md:max-w-[700px] p-5 mx-auto">
         {/* Image */}
         <div className="rounded-full w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] mx-auto my-20">
@@ -58,7 +58,7 @@ const AboutPage = () => {
             {skills.map((skill, idx) => (
               // <TextReveal key={idx} delay={0.05 * idx}>
 
-              <div className="bg-[#2c2c2c] clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)  px-2 py-2 rounded-md shadow-md ">
+              <div className=" clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%) gray-bg px-2 py-2 rounded-md shadow-md ">
                 <Magnet padding={20} disabled={false} magnetStrength={5}>
                   <h2 className="text-sm font-semibold text-center">{skill}</h2>
                 </Magnet>

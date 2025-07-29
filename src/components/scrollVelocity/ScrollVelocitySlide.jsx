@@ -3,7 +3,7 @@ import ScrollVelocity from '../../utilis/scrollVelocity/ScrollVelocity'
 
 const ScrollVelocitySlide = () => {
   return (
-    <div className='bg-[#b7ab98]'>
+    <div className='bg-off-white'>
         
 <ScrollVelocity
   texts={['Html Css JavaScript ReactJS NextJS TailwindCss BootStrap', 'NodeJs ExpressJS MongoDB Firebase']} 

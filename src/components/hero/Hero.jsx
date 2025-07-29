@@ -37,15 +37,15 @@ const Hero = () => {
         <Magnet padding={5} disabled={false} magnetStrength={90}>
           <TextReveal delay={0.5}>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[9rem] text-[#b7ab98] font-extrabold leading-[0.8] tracking-tighter z-50">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[9rem] text-off-white font-extrabold leading-[0.8] tracking-tighter z-50">
 
             <div ref={(el) => (linesRef.current[0] = el)}>CODE.</div>
-            <div ref={(el) => (linesRef.current[1] = el)} className="text-[#fd8b09]">DEPLOY.</div>
+            <div ref={(el) => (linesRef.current[1] = el)} className="orange-text">DEPLOY.</div>
             <div ref={(el) => (linesRef.current[2] = el)}>
-              REPEAT <span className="text-[#fd8b09]">—</span>
+              REPEAT <span className="orange-text">—</span>
             </div>
             <div ref={(el) => (linesRef.current[3] = el)}>
-              <span className="text-[#fd8b09]">MERN</span> WAY.
+              <span className="orange-text">MERN</span> WAY.
             </div>
           </h1>
           </TextReveal>

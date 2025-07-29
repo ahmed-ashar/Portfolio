@@ -116,9 +116,9 @@ export default function TiltedCard({
   {/* Solid Black Overlay: Visible normally, hidden on hover */}
   <div
     className="absolute top-0 left-0 w-full h-full
-      bg-[#2C2C2C] opacity-30 group-hover:opacity-0
+       opacity-30 group-hover:opacity-0
       transition-opacity duration-500
-      rounded-[15px]"
+      rounded-[15px] gray-bg"
   />
 </div>
 
@@ -137,7 +137,7 @@ export default function TiltedCard({
 
       {showTooltip && (
         <motion.figcaption
-          className="pointer-events-none absolute left-5 top-0 rounded-[4px] bg-[#2C2C2C] px-[10px] py-[4px] text-[10px] text-[#b7ab98] opacity-0 z-[3] hidden sm:block"
+          className="pointer-events-none absolute left-5 top-0 rounded-[4px]  px-[10px] py-[4px] text-[10px]  opacity-0 z-[3] hidden sm:block gray-bg"
           style={{
             x,
             y,

@@ -13,14 +13,14 @@ const ChatBot = () => {
             text="ITS*NOT*COMPLETED*YET*"
             onHover="speedUp"
             spinDuration={20}
-            className="bg-[#131313]"
+            className="black-bg"
           />
           <FontAwesomeIcon
             icon={faArrowUp}
             onClick={() =>
               window.scrollTo({ top: 0, behavior: "smooth" })
             }
-            className="absolute bg-[#fd8b09] p-2 w-5 sm:w-10 h-5 sm:h-10 rounded-full text-xl sm:text-4xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer text-[#131313]"
+            className="absolute orange-bg p-2 w-5 sm:w-10 h-5 sm:h-10 rounded-full text-xl sm:text-4xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer black-text"
           />
         </Magnet>
       </div>
