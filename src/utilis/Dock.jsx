@@ -7,7 +7,7 @@ import {
   useTransform,
   AnimatePresence,
 } from "framer-motion";
-import React,{
+import React, {
   Children,
   cloneElement,
   useEffect,
@@ -61,9 +61,7 @@ function DockItem({
       role="button"
       aria-haspopup="true"
     >
-      {Children.map(children, (child) =>
-        cloneElement(child, { isHovered })
-      )}
+      {Children.map(children, (child) => cloneElement(child, { isHovered }))}
     </motion.div>
   );
 }
@@ -141,7 +139,7 @@ export default function Dock({
           mouseX.set(Infinity);
         }}
         className={`${className} absolute  bottom-2 left-[1%] sm:left-1/6 md:left-1/4 lg:left-1/3 xl:left-[70%] 2xl:left-[100%] transform -translate-x-1/2  flex items-end w-fit gap-2 sm:gap-4 rounded-2xl border-neutral-700 border-2 pb-2 px-4 gray-bg text-off-white`}
-        style={{ height: panelHeight }} 
+        style={{ height: panelHeight }}
         role="toolbar"
         aria-label="Application dock"
       >
@@ -156,7 +154,7 @@ export default function Dock({
             magnification={magnification}
             baseItemSize={baseItemSize}
           >
-            <DockIcon >{item.icon}</DockIcon>
+            <DockIcon>{item.icon}</DockIcon>
             <DockLabel>{item.label}</DockLabel>
           </DockItem>
         ))}

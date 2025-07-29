@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import TiltedCard from "../utilis/TiltedCard";
 import Magnet from "../utilis/Magnet";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import ProjectData from "../data/ProjectData";
 import ProjectCard from "./ProjectCard";
 import TextReveal from "../utilis/TextReveal";
@@ -24,18 +22,16 @@ const ProjectPage = () => {
       className="card group   w-full h-[65vh] flex flex-col items-center gap-5 rounded-lg"
     >
       <a
-  href={project.link} // Make sure project.link is defined
-  target="_blank"
-  rel="noopener noreferrer"
-  className="w-full h-full"
->
+        href={project.link} 
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full h-full"
+      >
         <TiltedCard
           imageSrc={project.image}
           altText={project.title}
           captionText={project.caption}
-          overlayContent={
-            <ProjectCard project={project} />
-          }
+          overlayContent={<ProjectCard project={project} />}
         />
       </a>
     </div>
@@ -90,36 +86,35 @@ const ProjectPage = () => {
     <div className="text-off-white pb-30 h-auto">
       <div className="flex flex-col items-center justify-center mb-10">
         <div className="mt-50  w-[90%] sm:w-[50%] text-center">
-           <Magnet padding={5} magnetStrength={30}>
-          <TextReveal delay={0.2}>
-
-          <p className="text-3xl sm:text-5xl font-extrabold">
-            From minimalist UIs to fully functional apps — here’s a glimpse of
-            what I build.
-          </p>
-</TextReveal>
-</Magnet>
+          <Magnet padding={5} magnetStrength={30}>
             <TextReveal delay={0.2}>
-          <div className="flex my-10 justify-center items-center text-xl flex-wrap">
-            {filterOptions.map((option) => (
-             <button
-  key={option}
-  onClick={() => setFilter(option)}
-  className={`z-10 relative px-4 py-2 mx-1 rounded-md orange-bg-hover ${
-    filter === option ? "orange-bg gray-text" : "bg-transparent text-off-white"
-  } transition-all duration-300`}
->
-  {option}
-</button>
-            ))}
-          </div>
+              <p className="text-3xl sm:text-5xl font-extrabold">
+                From minimalist UIs to fully functional apps — here’s a glimpse
+                of what I build.
+              </p>
             </TextReveal>
+          </Magnet>
+          <TextReveal delay={0.2}>
+            <div className="flex my-10 justify-center items-center text-xl flex-wrap">
+              {filterOptions.map((option) => (
+                <button
+                  key={option}
+                  onClick={() => setFilter(option)}
+                  className={`z-10 relative px-4 py-2 mx-1 rounded-md orange-bg-hover ${
+                    filter === option
+                      ? "orange-bg gray-text"
+                      : "bg-transparent text-off-white"
+                  } transition-all duration-300`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </TextReveal>
         </div>
       </div>
 
-      <div className="w-[90%] sm:w-[70%] mx-auto flex flex-col">
-        {rows}
-      </div>
+      <div className="w-[90%] sm:w-[70%] mx-auto flex flex-col">{rows}</div>
     </div>
   );
 };

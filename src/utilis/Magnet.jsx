@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Magnet = ({
   children,
@@ -24,7 +24,8 @@ const Magnet = ({
     const handleMouseMove = (e) => {
       if (!magnetRef.current) return;
 
-      const { left, top, width, height } = magnetRef.current.getBoundingClientRect();
+      const { left, top, width, height } =
+        magnetRef.current.getBoundingClientRect();
       const centerX = left + width / 2;
       const centerY = top + height / 2;
 

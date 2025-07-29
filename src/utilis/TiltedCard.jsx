@@ -1,4 +1,4 @@
-import React,{ useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import SimpleParallax from "simple-parallax-js";
 
@@ -10,7 +10,7 @@ const springValues = {
 
 export default function TiltedCard({
   imageSrc,
-  altText ,
+  altText,
   captionText,
   containerHeight = "100%",
   containerWidth = "100%",
@@ -100,36 +100,33 @@ export default function TiltedCard({
           scale,
         }}
       >
-<div
-  className="relative group rounded-[15px] overflow-hidden"
-  style={{ width: imageWidth, height: imageHeight }}
->
-  <SimpleParallax scale={1.5} delay={0.1} transition="cubic-bezier(0.25, 0.46, 0.45, 0.94)">
-  <motion.img
-    src={imageSrc}
-    alt={altText}
-    className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px]
+        <div
+          className="relative group rounded-[15px] overflow-hidden"
+          style={{ width: imageWidth, height: imageHeight }}
+        >
+          <SimpleParallax
+            scale={1.5}
+            delay={0.1}
+            transition="cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+          >
+            <motion.img
+              src={imageSrc}
+              alt={altText}
+              className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px]
       transition-transform duration-500 ease-in-out
         "
-  />
-</SimpleParallax>
-  {/* Solid Black Overlay: Visible normally, hidden on hover */}
-  <div
-    className="absolute top-0 left-0 w-full h-full
+            />
+          </SimpleParallax>
+          <div
+            className="absolute top-0 left-0 w-full h-full
        opacity-30 group-hover:opacity-0
       transition-opacity duration-500
       rounded-[15px] gray-bg"
-  />
-</div>
-
-
-
-
+          />
+        </div>
 
         {displayOverlayContent && overlayContent && (
-          <motion.div
-            className="  text-4xl z-[2] will-change-transform [transform:translateZ(30px)]"
-          >
+          <motion.div className="  text-4xl z-[2] will-change-transform [transform:translateZ(30px)]">
             {overlayContent}
           </motion.div>
         )}

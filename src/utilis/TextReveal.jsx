@@ -15,7 +15,7 @@ export default function TextReveal({
 }) {
   const containerRef = useRef(null);
   const elementRef = useRef([]);
-  const splitRef = useRef([]); // ✅ Add this line
+  const splitRef = useRef([]); 
   const lines = useRef([]);
 
   useGSAP(
@@ -62,7 +62,7 @@ export default function TextReveal({
       const animateOnProps = {
         y: "0%",
         duration: 1,
-        stagger: 0.1, // ✅ This creates the stagger effect
+        stagger: 0.1, 
         ease: "power4.out",
         delay: delay,
       };

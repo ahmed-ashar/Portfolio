@@ -37,10 +37,8 @@ const DockComp = () => {
   ];
 
   return (
-    <div className="fixed  bottom-5 left-[49.5%] text-off-white z-999  text-2xl" >
-      <Dock
-        items={items}
-      />
+    <div className="fixed  bottom-5 left-[49.5%] text-off-white z-999  text-2xl">
+      <Dock items={items} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React, { useEffect } from "react";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
 
 const getRotationTransition = (duration, from, loop = true) => ({

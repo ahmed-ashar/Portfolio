@@ -2,15 +2,9 @@ import React, { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TiltedCard from "../utilis/TiltedCard";
-import { caption, link, title } from "framer-motion/client";
-import pic1 from "../../assets/1.png";
-import Magnet from "../utilis/Magnet";
 import Button from "./Button";
 import TextReveal from "../utilis/TextReveal";
-import { useNavigate } from "react-router-dom";
 import ProjectData from "../data/ProjectData";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import ProjectCard from "./ProjectCard";
 
 gsap.registerPlugin(ScrollTrigger);

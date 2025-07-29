@@ -17,9 +17,7 @@ const ChatBot = () => {
           />
           <FontAwesomeIcon
             icon={faArrowUp}
-            onClick={() =>
-              window.scrollTo({ top: 0, behavior: "smooth" })
-            }
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="absolute orange-bg p-2 w-5 sm:w-10 h-5 sm:h-10 rounded-full text-xl sm:text-4xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer black-text"
           />
         </Magnet>
