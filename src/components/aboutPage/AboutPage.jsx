@@ -3,16 +3,14 @@ import TextReveal from "../../utilis/textReveal/TextReveal";
 import AboutData from "../../data/AboutData";
 import Magnet from "../../utilis/magnet/Magnet";
 
-
 const AboutPage = () => {
-
-   const {
+  const {
     about: aboutInfo,
     education: educationData,
     experience: experienceData,
     certificate: certificateData,
     contact: contactData,
-    skills: skills
+    skills: skills,
   } = AboutData();
 
   return (
@@ -50,27 +48,25 @@ const AboutPage = () => {
             </p>
           </TextReveal>
         </div>
-{/* Skills Section */}
-<div className="my-20">
-  <TextReveal delay={0.2}>
-    <h1 className="text-center mb-12">Skills</h1>
-  </TextReveal>
+        {/* Skills Section */}
+        <div className="my-20">
+          <TextReveal delay={0.2}>
+            <h1 className="text-center mb-12">Skills</h1>
+          </TextReveal>
 
-  <div className="flex flex-wrap justify-center gap-1">
-    {skills.map((skill, idx) => (
-      <TextReveal key={idx} delay={0.05 * idx}>
-        
-        <div className="bg-[#2c2c2c] clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)  px-2 py-2 rounded-md shadow-md ">
+          <div className="flex flex-wrap justify-center gap-1">
+            {skills.map((skill, idx) => (
+              // <TextReveal key={idx} delay={0.05 * idx}>
+
+              <div className="bg-[#2c2c2c] clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)  px-2 py-2 rounded-md shadow-md ">
                 <Magnet padding={20} disabled={false} magnetStrength={5}>
-          <h2 className="text-sm font-semibold text-center">{skill}</h2>
-          </Magnet>
+                  <h2 className="text-sm font-semibold text-center">{skill}</h2>
+                </Magnet>
+              </div>
+              // {/* </TextReveal> */}
+            ))}
+          </div>
         </div>
-      </TextReveal>
-    ))}
-  </div>
-</div>
-
-
 
         {/* Education Section */}
         <div className="my-20">

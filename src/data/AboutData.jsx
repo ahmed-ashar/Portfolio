@@ -5,7 +5,7 @@ const AboutData = () => {
     heading:
       "From concept to code — I build interactive experiences that spark curiosity and delight.",
     paragraphs: [
-      "Hey, I’m Muhammad Ahmed Ashar — a front-end developer and graphic design enthusiast who enjoys turning ideas into clean, creative digital experiences.",
+      "Hey, I’m Muhammad Ahmed Ashar — a MERN Stack developer and graphic design enthusiast who enjoys turning ideas into clean, creative digital experiences.",
       "I studied MERN Stack development at Saylani Mass IT Training, where I built full-stack projects using MongoDB, Express, React, and Node.js. Before that, I completed a 3-year diploma in Computer Information Technology (CIT), which laid a strong foundation for my tech journey.",
       "Along the way, I also got into graphic design — creating logos, social media posts, and UI mockups helped me develop an eye for detail and aesthetics. Tools like Figma, Canva, and Adobe Illustrator are part of my creative process whenever I'm working on interfaces or personal projects.",
       "I enjoy coding with HTML, CSS, JavaScript, and building with Firebase and React. I also love exploring animation tools like GSAP and UI trends that make websites feel alive.",

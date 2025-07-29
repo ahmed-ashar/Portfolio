@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import ProjectData from "../../data/ProjectData";
 import ProjectCard from "../projectCard/ProjectCard";
+import TextReveal from "../../utilis/textReveal/TextReveal";
 
 const projects = ProjectData();
 const pattern = ["single", "40-60", "60-40"];
@@ -97,27 +98,34 @@ const ProjectPage = () => {
   return (
     <div className="text-[#b7ab98] pb-30 h-auto">
       <div className="flex flex-col items-center justify-center mb-10">
-        <div className="mt-50 w-[90%] sm:w-[60%] text-center">
-          <p className="text-5xl font-extrabold">
+        <div className="mt-50  w-[90%] sm:w-[50%] text-center">
+           <Magnet padding={5} magnetStrength={30}>
+          <TextReveal delay={0.2}>
+
+          <p className="text-3xl sm:text-5xl font-extrabold">
             From minimalist UIs to fully functional apps — here’s a glimpse of
             what I build.
           </p>
-
-          <div className="flex gap-5 my-10 justify-center items-center text-xl flex-wrap">
+</TextReveal>
+</Magnet>
+            <TextReveal delay={0.2}>
+          <div className="flex my-10 justify-center items-center text-xl flex-wrap">
             {filterOptions.map((option) => (
               <button
                 key={option}
                 onClick={() => setFilter(option)}
-                className={`px-4 py-2 rounded-lg border ${
+                className={`px-4 py-2 mx-1 rounded-md hover:bg-[#fd8b09] hover:text-black  ${
                   filter === option
-                    ? "bg-[#fd8b09]  text-black font-bold"
-                    : "bg-transparent border-[#b7ab98] text-[#b7ab98] font-bold"
+                    ? "bg-[#fd8b09] text-black "
+                    : "bg-transparent text-[#b7ab98]"
                 } transition-all duration-300`}
               >
+
                 {option}
               </button>
             ))}
           </div>
+            </TextReveal>
         </div>
       </div>
 
