@@ -86,8 +86,8 @@ body {
 .nav {
   background-image: linear-gradient(
     to bottom,
-    #2c2c2c,
-    #282828d6 80%,
+    var(--gray),
+    var(--gray) 20%,
     #1c1c1c66 95%,
     transparent
   );
