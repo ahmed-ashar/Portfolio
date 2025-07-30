@@ -59,7 +59,7 @@ const ProjectSection = () => {
         ))}
       </div>
 
-      <div className="text-center ml-3 mt-10">
+      <div className="text-center ml-3 mt-10 relative z-55">
         <Button text={"More Projects"} to="/projects" />
       </div>
     </div>

@@ -14,7 +14,7 @@ const AboutSection = () => {
           </TextReveal>
         </div>
 
-        <div className="w-full md:w-[70%] p-4 text-center z-10">
+        <div className="w-full md:w-[70%] p-4 text-center z-55 ">
           <Magnet padding={5} disabled={false} magnetStrength={90}>
             <ScrollReveal
               baseOpacity={1}
@@ -29,7 +29,7 @@ const AboutSection = () => {
             </ScrollReveal>
           </Magnet>
         </div>
-        <div className="text-center ml-3 mt-10">
+        <div className="text-center ml-3 mt-10 z-55">
           <Button text={"More About Me"} to="/about" />
         </div>
       </div>

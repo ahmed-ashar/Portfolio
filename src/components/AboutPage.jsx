@@ -27,7 +27,7 @@ const AboutPage = () => {
         {/* Heading */}
         <div className="">
           <TextReveal delay={0.2}>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl z-55">
               {aboutInfo.heading}
             </h1>
           </TextReveal>
@@ -37,21 +37,21 @@ const AboutPage = () => {
         <div className="flex flex-col gap-3 mt-10">
           {aboutInfo.paragraphs.map((para, idx) => (
             <TextReveal delay={0.5}>
-              <p key={idx} className="text-sm">
+              <p key={idx} className="text-sm z-55">
                 {para}
               </p>
             </TextReveal>
           ))}
           <TextReveal delay={0.2}>
-            <p className="text-center text-lg font-bold mt-5">
+            <p className="text-center text-lg font-bold mt-5 z-55">
               {aboutInfo.closing}
             </p>
           </TextReveal>
         </div>
         {/* Skills Section */}
-        <div className="my-20">
+        <div className="my-20 ">
           <TextReveal delay={0.2}>
-            <h1 className="text-center mb-12">Skills</h1>
+            <h1 className="text-center mb-12 ">Skills</h1>
           </TextReveal>
 
           <div className="flex flex-wrap justify-center gap-1">
@@ -74,7 +74,7 @@ const AboutPage = () => {
             <h1 className="text-center mb-10">Education</h1>
           </TextReveal>
           {educationData.map((edu, idx) => (
-            <div key={idx} className="flex justify-between items-center mb-5">
+            <div key={idx} className="flex justify-between items-center p-2.5  orange-bg-hover">
               <div className="">
                 <TextReveal delay={0.2}>
                   <h1 className="text-xl sm:text-3xl">{edu.title}</h1>
@@ -96,7 +96,7 @@ const AboutPage = () => {
             <h1 className=" text-center mb-10">Experience</h1>
           </TextReveal>
           {experienceData.map((exp, idx) => (
-            <div key={idx} className="flex justify-between items-center mb-5">
+            <div key={idx} className="flex justify-between items-center p-2.5  orange-bg-hover">
               <div>
                 <TextReveal delay={0.2}>
                   <h1 className="text-xl sm:text-3xl">{exp.title}</h1>
@@ -118,7 +118,7 @@ const AboutPage = () => {
             <h1 className=" text-center mb-10">Certificates</h1>
           </TextReveal>
           {certificateData.map((cer, idx) => (
-            <div key={idx} className="flex justify-between items-center mb-5">
+            <div key={idx} className="flex justify-between items-center p-2.5  orange-bg-hover">
               <div>
                 <TextReveal delay={0.2}>
                   <h1 className="text-xl sm:text-3xl ">{cer.title}</h1>
@@ -137,7 +137,7 @@ const AboutPage = () => {
             <h1 className="text-center mb-10">Contact</h1>
           </TextReveal>
           {contactData.map((con, idx) => (
-            <div key={idx} className="flex justify-between items-center mb-5">
+            <div key={idx} className="flex justify-between items-center p-2.5  orange-bg-hover">
               <div>
                 <TextReveal delay={0.2}>
                   <h1 className="text-xl sm:text-3xl ">{con.title}</h1>

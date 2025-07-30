@@ -15,7 +15,7 @@ const Icons = () => {
   ];
   return (
     <div
-      className="hidden sm:fixed sm:bottom-10 sm:left-15 left-9 text-off-white sm:flex sm:flex-row sm:items-center sm:justify-between  sm:gap-5 z-[999] text-xl sm:text-2xl"
+      className="hidden sm:fixed sm:bottom-10 sm:left-15 left-9 text-off-white sm:flex sm:flex-row sm:items-center sm:justify-between  sm:gap-5  text-xl sm:text-2xl z-55"
       style={{ writingMode: "vertical-lr" }}
     >
       {icon.map((item, index) => (

@@ -51,6 +51,7 @@
 .orange-bg-hover:hover {
   background-color: var(--orange);
   color: var(--gray);
+  transition: all 0.5s ease-in-out;
 }
 
 .black-text {

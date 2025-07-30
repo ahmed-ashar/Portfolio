@@ -27,7 +27,7 @@ const Time = () => {
   }, []);
 
   return (
-    <div className="z-11 text-zinc-400 text-xs redHatMono">{currentTime}</div>
+    <div className=" text-zinc-400 text-xs redHatMono">{currentTime}</div>
   );
 };
 

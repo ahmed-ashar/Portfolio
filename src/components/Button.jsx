@@ -15,7 +15,7 @@ const Button = ({ text, to }) => {
       <Magnet padding={10} disabled={false} magnetStrength={20}>
         <button
           onClick={handleClick}
-          className="px-4 w-auto group text-3xl text-off-white font-extrabold transition-all duration-500 ease-in-out flex items-center justify-center gap-2 orange-bg-hover"
+          className="px-4 w-auto group text-3xl text-off-white font-extrabold transition-all duration-500 ease-in-out flex items-center justify-center gap-2 orange-bg-hover "
         >
           {text}
           <FontAwesomeIcon

@@ -23,7 +23,7 @@ export default function BlobCursor({
   slowDuration = 0.15,
   fastEase = "power3.out",
   slowEase = "power1.out",
-  zIndex = 5,
+  zIndex = 50,
 }) {
   const containerRef = useRef(null);
   const blobsRef = useRef([]);

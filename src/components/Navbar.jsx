@@ -33,14 +33,14 @@ const Navbar = () => {
       <div
         className={`nav transition-transform duration-500 ease-in-out ${
           showNavbar ? "translate-y-0" : "-translate-y-full"
-        } fixed top-0 left-0 w-full z-[998] shadow-md mx-auto h-20 sm:h-24`}
+        } fixed top-0 left-0 w-full  shadow-md mx-auto h-20 sm:h-24 z-60`}
       >
         {" "}
       </div>
-      <div className="flex  justify-between items-center z-999 p-5 sm:p-6 h-20 sm:h-23  fixed   w-[98.9vw] rounded-md shadow-md">
+      <div className="flex  justify-between items-center  p-5 sm:p-6 h-20 sm:h-23  fixed   w-[98.9vw] rounded-md shadow-md z-65">
         <div className="flex  justify-between items-center w-[50%] sm:w-[50%] md:w-[50%] lg:w-[40%] xl:w-[25%] 2xl:w-[30%] ">
           <Magnet padding={20} disabled={false} magnetStrength={5}>
-            <h1 className=" text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-5xl z-11 aladin  text-off-white">
+            <h1 className=" text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-5xl  aladin  text-off-white">
               Ahmed
             </h1>
           </Magnet>
@@ -55,7 +55,7 @@ const Navbar = () => {
         </div>
         <div>
           <Magnet padding={20} disabled={false} magnetStrength={5}>
-            <p className="z-11 text-zinc-300 text-xs redHatMono">Karachi, PK</p>
+            <p className=" text-zinc-300 text-xs redHatMono">Karachi, PK</p>
             <Time />
           </Magnet>
         </div>

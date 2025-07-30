@@ -13,7 +13,7 @@ const QuoteSection = () => {
           </TextReveal>
         </div>
 
-        <div className="text-center text-9xl   z-10">
+        <div className="text-center text-9xl  z-55 ">
           <h1>
             <svg
               stroke="currentColor"
@@ -29,7 +29,7 @@ const QuoteSection = () => {
             </svg>
           </h1>
         </div>
-        <div className="w-full md:w-[70%] p-4 text-center z-10 ">
+        <div className="w-full md:w-[70%] p-4 text-center z-55 ">
           <Magnet padding={5} disabled={false} magnetStrength={90}>
             <ScrollReveal
               baseOpacity={1}
@@ -42,7 +42,7 @@ const QuoteSection = () => {
             </ScrollReveal>
           </Magnet>
         </div>
-        <div className="text-center mt-10">
+        <div className="text-center mt-10 z-55">
           <h1>Said by me… or someone else?</h1>
         </div>
       </div>

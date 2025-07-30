@@ -84,23 +84,23 @@ const ProjectPage = () => {
 
   return (
     <div className="text-off-white pb-30 h-auto">
-      <div className="flex flex-col items-center justify-center mb-10">
+      <div className="flex flex-col items-center justify-center mb-10 z-55 relative" >
         <div className="mt-50  w-[90%] sm:w-[50%] text-center">
           <Magnet padding={5} magnetStrength={30}>
             <TextReveal delay={0.2}>
-              <p className="text-3xl sm:text-5xl font-extrabold">
+              <p className="text-3xl sm:text-5xl font-extrabold  ">
                 From minimalist UIs to fully functional apps — here’s a glimpse
                 of what I build.
               </p>
             </TextReveal>
           </Magnet>
           <TextReveal delay={0.2}>
-            <div className="flex my-10 justify-center items-center text-xl flex-wrap">
+            <div className="flex my-10 justify-center items-center text-xl flex-wrap ">
               {filterOptions.map((option) => (
                 <button
                   key={option}
                   onClick={() => setFilter(option)}
-                  className={`z-10 relative px-4 py-2 mx-1 rounded-md orange-bg-hover ${
+                  className={` relative px-4 py-2 mx-1 rounded-md orange-bg-hover ${
                     filter === option
                       ? "orange-bg gray-text"
                       : "bg-transparent text-off-white"
