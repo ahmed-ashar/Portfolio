@@ -137,14 +137,14 @@ const AboutPage = () => {
             <h1 className="text-center mb-10">Contact</h1>
           </TextReveal>
           {contactData.map((con, idx) => (
-            <div key={idx} className="flex justify-between items-center p-2.5  ">
+            <div key={idx} className="flex justify-start sm:justify-between items-start sm:items-center flex-col sm:flex-row p-2.5  ">
               <div>
                 <TextReveal delay={0.2}>
                   <a href={con.link} target="_blank" className="text-xl sm:text-3xl orange-text-hover">{con.title}</a>
                 </TextReveal>
               </div>
               <TextReveal delay={0.2}>
-                <p className="text-sm w-[20%] text-end">{con.from}</p>
+                <p className="text-sm sm:w-[20%] sm:text-end">{con.from}</p>
               </TextReveal>
             </div>
           ))}
