@@ -1,10 +1,11 @@
 "use client";
-import React, { useRef, useEffect, useCallback, useMemo } from "react";
+import React, { useRef, useEffect, useCallback, useMemo, useState } from "react";
 import { gsap } from "gsap";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 
 gsap.registerPlugin(InertiaPlugin);
 
+// Throttle function
 const throttle = (func, limit) => {
   let lastCall = 0;
   return function (...args) {
@@ -16,6 +17,7 @@ const throttle = (func, limit) => {
   };
 };
 
+// Convert HEX to RGB
 function hexToRgb(hex) {
   const m = hex.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
   if (!m) return { r: 0, g: 0, b: 0 };
@@ -29,8 +31,6 @@ function hexToRgb(hex) {
 const DotGrid = ({
   dotSize = 5,
   gap = 10,
-  baseColor = "#131313",
-  activeColor = "#fd8b09",
   proximity = 200,
   speedTrigger = 100,
   shockRadius = 100,
@@ -55,12 +55,36 @@ const DotGrid = ({
     lastY: 0,
   });
 
+  // Function to get CSS variable
+  const getCSSVar = (name) =>
+    getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  const [baseColor, setBaseColor] = useState("#131313");
+  const [activeColor, setActiveColor] = useState("#fd8b09");
+
+  // Update colors from CSS variables
+  useEffect(() => {
+    const updateColors = () => {
+      setBaseColor(getCSSVar("--black") || "#131313");
+      setActiveColor(getCSSVar("--orange") || "#fd8b09");
+    };
+
+    updateColors();
+
+    const observer = new MutationObserver(updateColors);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const baseRgb = useMemo(() => hexToRgb(baseColor), [baseColor]);
   const activeRgb = useMemo(() => hexToRgb(activeColor), [activeColor]);
 
   const circlePath = useMemo(() => {
     if (typeof window === "undefined" || !window.Path2D) return null;
-
     const p = new Path2D();
     p.arc(0, 0, dotSize / 2, 0, Math.PI * 2);
     return p;
@@ -106,8 +130,22 @@ const DotGrid = ({
   }, [dotSize, gap]);
 
   useEffect(() => {
-    if (!circlePath) return;
+    buildGrid();
+    let ro = null;
+    if ("ResizeObserver" in window) {
+      ro = new ResizeObserver(buildGrid);
+      wrapperRef.current && ro.observe(wrapperRef.current);
+    } else {
+      window.addEventListener("resize", buildGrid);
+    }
+    return () => {
+      if (ro) ro.disconnect();
+      else window.removeEventListener("resize", buildGrid);
+    };
+  }, [buildGrid]);
 
+  useEffect(() => {
+    if (!circlePath) return;
     let rafId;
     const proxSq = proximity * proximity;
 
@@ -149,22 +187,7 @@ const DotGrid = ({
 
     draw();
     return () => cancelAnimationFrame(rafId);
-  }, [proximity, baseColor, activeRgb, baseRgb, circlePath]);
-
-  useEffect(() => {
-    buildGrid();
-    let ro = null;
-    if ("ResizeObserver" in window) {
-      ro = new ResizeObserver(buildGrid);
-      wrapperRef.current && ro.observe(wrapperRef.current);
-    } else {
-      window.addEventListener("resize", buildGrid);
-    }
-    return () => {
-      if (ro) ro.disconnect();
-      else window.removeEventListener("resize", buildGrid);
-    };
-  }, [buildGrid]);
+  }, [baseColor, activeColor, baseRgb, activeRgb, proximity, circlePath]);
 
   useEffect(() => {
     const onMove = (e) => {
@@ -264,7 +287,7 @@ const DotGrid = ({
 
   return (
     <section
-      className={`p-4  flex items-center justify-center h-[85vh] w-full relative ${className}`}
+      className={`p-4 flex items-center justify-center h-[85vh] w-full relative ${className}`}
       style={style}
     >
       <div ref={wrapperRef} className="w-full h-full relative">

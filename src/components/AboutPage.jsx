@@ -69,7 +69,7 @@ const AboutPage = () => {
         </div>
 
         {/* Education Section */}
-        <div className="my-20">
+        <div className="my-20 z-55 relative">
           <TextReveal delay={0.2}>
             <h1 className="text-center mb-10">Education</h1>
           </TextReveal>
@@ -91,7 +91,7 @@ const AboutPage = () => {
         </div>
 
         {/* Experience Section */}
-        <div className="my-20">
+        <div className="my-20 z-55 relative">
           <TextReveal delay={0.2}>
             <h1 className=" text-center mb-10">Experience</h1>
           </TextReveal>
@@ -113,7 +113,7 @@ const AboutPage = () => {
         </div>
 
         {/* Experience Section */}
-        <div className="my-20">
+        <div className="my-20 z-55 relative">
           <TextReveal delay={0.2}>
             <h1 className=" text-center mb-10">Certificates</h1>
           </TextReveal>
@@ -132,7 +132,7 @@ const AboutPage = () => {
         </div>
 
         {/* Contact Section */}
-        <div className="my-20 mb-50">
+        <div className="my-20 mb-50 z-55 relative">
           <TextReveal delay={0.2}>
             <h1 className="text-center mb-10">Contact</h1>
           </TextReveal>

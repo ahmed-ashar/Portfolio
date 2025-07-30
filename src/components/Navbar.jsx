@@ -48,14 +48,14 @@ const Navbar = () => {
             <ScrambleText
               repeat={-1}
               texts={texts}
-              color="text-zinc-400"
+              color="text-off-white"
               font=" text-xs sm:text-xs md:text-xs lg:text-xs xl:text-xs 2xl:text-xs "
             />
           </div>
         </div>
         <div>
           <Magnet padding={20} disabled={false} magnetStrength={5}>
-            <p className=" text-zinc-300 text-xs redHatMono">Karachi, PK</p>
+            <p className=" text-off-white text-xs redHatMono">Karachi, PK</p>
             <Time />
           </Magnet>
         </div>

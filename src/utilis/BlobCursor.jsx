@@ -1,15 +1,14 @@
 "use client";
 
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import gsap from "gsap";
 
 export default function BlobCursor({
   blobType = "circle",
-  fillColor = "#fd8b09",
   trailCount = 2,
   sizes = [50, 30],
   innerSizes = [8, 8],
-  innerColor = "text-off-white",
+  innerColor = "#b7ab98",
   opacities = [0.6, 0.4],
   shadowColor = "rgba(0,0,0,0.4)",
   shadowBlur = 8,
@@ -27,6 +26,28 @@ export default function BlobCursor({
 }) {
   const containerRef = useRef(null);
   const blobsRef = useRef([]);
+  const [fillColor, setFillColor] = useState(() => {
+    try {
+      const themeColors = JSON.parse(localStorage.getItem("colors"));
+      return themeColors?.orange || "#fd8b09";
+    } catch {
+      return "#fd8b09";
+    }
+  });
+
+  // Optional: Live update every second from localStorage
+  useEffect(() => {
+    const interval = setInterval(() => {
+      try {
+        const updated = JSON.parse(localStorage.getItem("colors"));
+        if (updated?.orange && updated.orange !== fillColor) {
+          setFillColor(updated.orange);
+        }
+      } catch {}
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [fillColor]);
 
   const updateOffset = useCallback(() => {
     if (!containerRef.current) return { left: 0, top: 0 };
@@ -57,12 +78,11 @@ export default function BlobCursor({
   useEffect(() => {
     window.addEventListener("mousemove", handleMove);
     window.addEventListener("touchmove", handleMove);
-    const onResize = () => updateOffset();
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", updateOffset);
     return () => {
       window.removeEventListener("mousemove", handleMove);
       window.removeEventListener("touchmove", handleMove);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", updateOffset);
     };
   }, [handleMove, updateOffset]);
 

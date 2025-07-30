@@ -17,7 +17,7 @@
 
 * {
   font-family: var(--font-avant);
-  cursor: none;
+  /* cursor: none; */
 }
 
 .text-off-white {
@@ -57,6 +57,10 @@
 
 .black-text {
   color: var(--black);
+}
+
+.black-border{
+  border: 2px solid var(--black);
 }
 
 .black-bg {
