@@ -42,6 +42,7 @@
 
 .orange-text-hover:hover {
   color: var(--orange);
+  transition: all 0.2s ease-in-out;
 }
 
 .orange-bg {

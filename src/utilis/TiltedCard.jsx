@@ -105,7 +105,7 @@ export default function TiltedCard({
           style={{ width: imageWidth, height: imageHeight }}
         >
           <SimpleParallax
-            scale={1.5}
+            scale={1.2}
             delay={0.1}
             transition="cubic-bezier(0.25, 0.46, 0.45, 0.94)"
           >

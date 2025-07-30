@@ -74,10 +74,10 @@ const AboutPage = () => {
             <h1 className="text-center mb-10">Education</h1>
           </TextReveal>
           {educationData.map((edu, idx) => (
-            <div key={idx} className="flex justify-between items-center p-2.5  orange-bg-hover">
+            <div key={idx} className="flex justify-between items-center p-2.5  ">
               <div className="">
                 <TextReveal delay={0.2}>
-                  <h1 className="text-xl sm:text-3xl">{edu.title}</h1>
+                  <h1 className="text-xl sm:text-3xl orange-text-hover">{edu.title}</h1>
                 </TextReveal>
                 <TextReveal delay={0.2}>
                   <p className="text-sm">{edu.destination}</p>
@@ -96,10 +96,10 @@ const AboutPage = () => {
             <h1 className=" text-center mb-10">Experience</h1>
           </TextReveal>
           {experienceData.map((exp, idx) => (
-            <div key={idx} className="flex justify-between items-center p-2.5  orange-bg-hover">
+            <div key={idx} className="flex justify-between items-center p-2.5  ">
               <div>
                 <TextReveal delay={0.2}>
-                  <h1 className="text-xl sm:text-3xl">{exp.title}</h1>
+                  <h1 className="text-xl sm:text-3xl orange-text-hover">{exp.title}</h1>
                 </TextReveal>
                 <TextReveal delay={0.2}>
                   <p className="text-sm">{exp.company}</p>
@@ -118,10 +118,10 @@ const AboutPage = () => {
             <h1 className=" text-center mb-10">Certificates</h1>
           </TextReveal>
           {certificateData.map((cer, idx) => (
-            <div key={idx} className="flex justify-between items-center p-2.5  orange-bg-hover">
+            <div key={idx} className="flex justify-between items-center p-2.5  ">
               <div>
                 <TextReveal delay={0.2}>
-                  <h1 className="text-xl sm:text-3xl ">{cer.title}</h1>
+                  <h1 className="text-xl sm:text-3xl orange-text-hover">{cer.title}</h1>
                 </TextReveal>
               </div>
               <TextReveal delay={0.2}>
@@ -137,10 +137,10 @@ const AboutPage = () => {
             <h1 className="text-center mb-10">Contact</h1>
           </TextReveal>
           {contactData.map((con, idx) => (
-            <div key={idx} className="flex justify-between items-center p-2.5  orange-bg-hover">
+            <div key={idx} className="flex justify-between items-center p-2.5  ">
               <div>
                 <TextReveal delay={0.2}>
-                  <h1 className="text-xl sm:text-3xl ">{con.title}</h1>
+                  <a href={con.link} target="_blank" className="text-xl sm:text-3xl orange-text-hover">{con.title}</a>
                 </TextReveal>
               </div>
               <TextReveal delay={0.2}>

@@ -57,51 +57,76 @@ const AboutData = () => {
       destination: "Diploma / Inter",
       duration: "2022 - 2025",
     },
+    {
+      title: "Hafiz",
+      destination: "Hafiz-e-Quran",
+      duration: "2012 - 2016",
+    },
   ];
 
   const experience = [
     {
       title: "Social Media Marketing Manager",
       company: "Magical Marketing Agency",
-      duration: "2016 - 2022",
+      duration: "2023 - 2024",
     },
     {
-      title: "Saylani Mass IT Training - Institute",
+      title: "Front End Developer",
+      company: "Code Alpha",
       duration: "2024 - 2025",
-    },
-    {
-      title: "Computer Information Technology (CIT) - Diploma/Inter",
-      duration: "2022 - 2025",
     },
   ];
 
   const certificate = [
     {
-      title: "Social Media Marketing Manager",
-      from: "Ummul Qura Secondary School",
+      title: "Front End Internship",
+      from: "Code Alpha",
     },
     {
-      title: "Saylani Mass IT Training - Institute",
+      title: "MERN Stack Developer",
       from: "Saylani Mass IT Training",
     },
     {
-      title: "Computer Information Technology (CIT) - Diploma/Inter",
-      from: "Saylani Mass IT Training",
+      title: "Advanced JavaScript",
+      from: "Cisco",
     },
   ];
 
   const contact = [
     {
-      title: "Social Media Marketing Manager",
-      from: "Ummul Qura Secondary School",
+      title: "hafizmahmedashar@gmail.com",
+      from: "Email Address",
+      link: "mailto:hafizmahmedashar@gmail.com",
     },
     {
-      title: "Saylani Mass IT Training - Institute",
-      from: "Saylani Mass IT Training",
+      title: "linkedin.com/in/ahmed-ashar",
+      from: "Linkedin",
+      link: "https://www.linkedin.com/in/ahmed-ashar/",
     },
     {
-      title: "Computer Information Technology (CIT) - Diploma/Inter",
-      from: "Saylani Mass IT Training",
+      title: "@ahm3d_ashar",
+      from: "Personal Instagram",
+      link: "https://www.instagram.com/ahm3d_ashar/",
+    },
+    {
+      title: "@ahmed.ashar.58",
+      from: "A very old Facebook",
+      link: "https://www.facebook.com/ahmed.ashar.58",
+    },
+    {
+      title: "Curriculum Vitae",
+      from: "My cv",
+      link: "#",
+    },
+    {
+      title: "github.com/ahmed-ashar",
+      from: "Where I store my Code",
+      link: "https://github.com/ahmed-ashar",
+    },
+    {
+      title: "My Resume",
+      from: "PDF",
+      link: "#",
     },
   ];
   return {

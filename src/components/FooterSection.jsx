@@ -22,7 +22,7 @@ const FooterSection = () => {
     { name: "GitHub", icon: faArrowUp, link: "https://github.com/ahmed-ashar" },
     { name: "Whatsapp", icon: faArrowUp, link: "#" },
     { name: "Resume", icon: faArrowUp, link: "#" },
-    { name: "Read.cv", icon: faArrowUp, link: "#" },
+    { name: "Cv", icon: faArrowUp, link: "#" },
   ];
 
   return (
