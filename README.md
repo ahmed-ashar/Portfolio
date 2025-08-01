@@ -1,7 +1,6 @@
 # 🚀 React + Vite Project
 
 ![Project Screenshot](path/to/your/image.jpg)
-<!-- 🔁 Replace "path/to/your/image.jpg" with the actual image path or a GitHub image URL -->
 
 ## 📋 Overview
 
@@ -72,6 +71,6 @@ If you’d like to connect or report an issue:
 
 📧 Email: hafizmahmedashar@gmail.com
 
-🐙 GitHub: @yourusername
+🐙 GitHub: @ahmed-ashar
 
-🌐 Website: yourportfolio.co
+🌐 Website: https://ahmed-ashar.vercel.app/
