@@ -9,39 +9,45 @@ Welcome to the **React + Vite** project! This repository is a minimal and effici
 
 ## ✨ Features
 
-- ⚛️ React for building UI components
-- ⚡ Fast development environment with Vite
-- ✅ ESLint for code quality and consistency
-- 💡 Clear and modular folder structure
-- 📱 Responsive design using modern CSS
+- ⚛️ React for building UI components  
+- ⚡ Fast development environment with Vite  
+- ✅ ESLint for code quality and consistency  
+- 💡 Clear and modular folder structure  
+- 📱 Responsive design using modern CSS  
 
 ## 🛠 Technologies Used
 
-- React
-- Vite
-- JavaScript (ES6+)
-- ESLint
+- React  
+- Vite  
+- JavaScript (ES6+)  
+- ESLint  
 
 ## 📦 Installation
 
 Follow these steps to run the project locally:
 
-```bash
 # Step 1: Clone the repository
+```bash
 git clone https://github.com/yourusername/your-repo.git
 cd your-repo
+```
 
 # Step 2: Install dependencies
+```
 npm install
+```
 
 # Step 3: Run the development server
-npm run dev
 
+```
+npm run dev
+```
 Now open your browser and go to:
 👉 http://localhost:3000
 
 🗂 Project Structure
 
+```
 your-repo/
 │
 ├── public/                # Static files
@@ -56,17 +62,16 @@ your-repo/
 ├── index.html             # Main HTML file
 ├── vite.config.js         # Vite configuration
 └── README.md              # This file
-
+```
 
 📸 Screenshots
-<!-- Add project screenshots or demo GIFs below -->
-
+<!-- Add project screenshots or demo GIFs below --> <!-- Example: ![Home Page](path/to/homepage.jpg) ![Projects Page](path/to/projects.jpg) -->
 
 📬 Contact
 If you’d like to connect or report an issue:
 
-Email: your.email@example.com
+📧 Email: hafizmahmedashar@gmail.com
 
-GitHub: @yourusername
+🐙 GitHub: @yourusername
 
-Website: yourportfolio.com
+🌐 Website: yourportfolio.co
