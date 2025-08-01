@@ -1,6 +1,6 @@
 # 🚀 React + Vite Project
 
-![Project Screenshot]((https://github.com/ahmed-ashar/Portfolio/blob/main/src/assets/7.png))
+![Project Screenshot](https://github.com/ahmed-ashar/Portfolio/blob/main/src/assets/7.png)
 
 <!--
 ## 📋 Overview
