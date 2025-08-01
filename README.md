@@ -1,10 +1,11 @@
 # 🚀 React + Vite Project
 
-![Project Screenshot](path/to/your/image.jpg)
+![Project Screenshot]((https://github.com/ahmed-ashar/Portfolio/blob/main/src/assets/7.png))
 
+<!--
 ## 📋 Overview
 
-Welcome to the **React + Vite** project! This repository is a minimal and efficient starter template for building modern React applications with [Vite](https://vitejs.dev/). Vite enables super fast development with features like Hot Module Replacement (HMR) and a lightweight config.
+Welcome to the **React + Vite** project! This repository is a minimal and efficient starter template for building modern React applications with [Vite](https://vitejs.dev/). Vite enables super fast development with features like Hot Module Replacement (HMR) and a lightweight config. -->
 
 ## ✨ Features
 
@@ -27,8 +28,7 @@ Follow these steps to run the project locally:
 
 # Step 1: Clone the repository
 ```bash
-git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+git clone https://github.com/ahmed-ashar/Portfolio.git
 ```
 
 # Step 2: Install dependencies
@@ -47,8 +47,6 @@ Now open your browser and go to:
 🗂 Project Structure
 
 ```
-your-repo/
-│
 ├── public/                # Static files
 ├── src/                   # Source code
 │   ├── assets/            # Images and media
@@ -63,7 +61,7 @@ your-repo/
 └── README.md              # This file
 ```
 
-📸 Screenshots
+<!-- 📸 Screenshots -->
 <!-- Add project screenshots or demo GIFs below --> <!-- Example: ![Home Page](path/to/homepage.jpg) ![Projects Page](path/to/projects.jpg) -->
 
 📬 Contact
