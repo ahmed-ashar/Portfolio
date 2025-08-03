@@ -2,11 +2,6 @@
 
 ![Project Screenshot](https://github.com/ahmed-ashar/Portfolio/blob/main/src/assets/7.png)
 
-<!--
-## 📋 Overview
-
-Welcome to the **React + Vite** project! This repository is a minimal and efficient starter template for building modern React applications with [Vite](https://vitejs.dev/). Vite enables super fast development with features like Hot Module Replacement (HMR) and a lightweight config. -->
-
 ## ✨ Features
 
 - ⚛️ React for building UI components  
