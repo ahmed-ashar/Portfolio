@@ -83,7 +83,7 @@ const FooterSection = () => {
         </div>
 
         <div className=" absolute  bottom-0 w-full text-center font-extrabold opacity-10  leading-none text-off-white">
-          <h1 className="text-[20vw]   ">CONTACT</h1>
+          <h1 className="text-[18vw]   ">CONTACT</h1>
         </div>
       </div>
     </div>

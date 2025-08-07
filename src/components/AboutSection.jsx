@@ -10,7 +10,7 @@ const AboutSection = () => {
       <div className="w-full flex flex-col justify-center items-center relative px-4">
         <div className="sticky top-50 sm:top-30 left-0 w-full text-center gray-text font-extrabold  opacity-30 leading-none">
           <TextReveal delay={1}>
-            <h1 className="text-[18vw]">ABOUT ME</h1>
+            <h1 className="text-[14vw] sm:text-[15vw] ">ABOUT ME</h1>
           </TextReveal>
         </div>
 

@@ -31,7 +31,7 @@ const ProjectSection = () => {
     <div className="relative ">
       <div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold opacity-30 leading-none gray-text" >
         <TextReveal delay={1}>
-          <h1 className="text-[17vw] sm:text-[18vw]">PROJECTS</h1>
+          <h1 className="text-[15vw] sm:text-[16vw]">PROJECTS</h1>
         </TextReveal>
       </div>
 

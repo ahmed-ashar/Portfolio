@@ -9,7 +9,7 @@ const QuoteSection = () => {
       <div className="w-full flex flex-col justify-center items-center relative px-4">
         <div className="sticky top-50 sm:top-30 w-full text-center font-extrabold  opacity-30 leading-none gray-text">
           <TextReveal delay={1}>
-            <h1 className="text-[20vw] sm:text-[22vw]">QUOTES</h1>
+            <h1 className="text-[18vw] sm:text-[20vw]">QUOTES</h1>
           </TextReveal>
         </div>
 
