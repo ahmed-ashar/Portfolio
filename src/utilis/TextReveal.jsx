@@ -1,76 +1,106 @@
-import React, { useRef, useEffect } from "react";
+"use client";
+
+import React, { useRef } from "react";
 import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitType from "split-type";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
-const TextReveal = ({ children, delay = 0 }) => {
+export default function TextReveal({
+  children,
+  animateOnScroll = true,
+  delay = 0,
+}) {
   const containerRef = useRef(null);
+  const elementRef = useRef([]);
+  const splitRef = useRef([]); 
+  const lines = useRef([]);
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
 
-    const element = containerRef.current;
-    const split = new SplitType(element, {
-      types: "lines",
-      linesClass: "lineChild",
-    });
+      splitRef.current = [];
+      elementRef.current = [];
+      lines.current = [];
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: element,
-        start: "top bottom+=100",
-        end: "bottom top+=100",
-      },
-    });
+      let elements = [];
+      if (containerRef.current.hasAttribute("data-copy-wrapper")) {
+        elements = Array.from(containerRef.current.children);
+      } else {
+        elements = [containerRef.current];
+      }
 
-    tl.set(
-      element,
-      {
-        perspective: "1000px",
-        transformStyle: "preserve-3d",
-        transformOrigin: "center center",
-      },
-      delay
-    );
+      elements.forEach((element) => {
+        elementRef.current.push(element);
 
-    tl.fromTo(
-      split.lines,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.15, stagger: 0.15 },
-      delay
-    );
+        const split = SplitText.create(element, {
+          type: "lines",
+          mask: "lines",
+          innerClass: "line++",
+        });
 
-    tl.fromTo(
-      split.lines,
-      { yPercent: 100, skewY: 2, scale: 0.8, rotateX: -60 },
-      {
-        yPercent: 0,
-        skewY: 0,
-        rotateX: 0,
-        scale: 1,
-        ease: "expo.out",
-        stagger: 0.1,
-        duration: 2.3,
-        force3D: true,
-      },
-      delay
-    );
+        splitRef.current.push(split);
 
-    tl.set(element, { willChange: "auto" }, "+=0.1");
+        const computedStyle = window.getComputedStyle(element);
+        const textIndent = computedStyle.textIndent;
 
-    return () => {
-      split.revert();
-      tl.kill();
-      ScrollTrigger.kill();
-    };
-  }, [delay, children]);
+        if (textIndent && textIndent !== "0px") {
+          if (split.lines.length > 0) {
+            split.lines[0].style.paddingLeft = textIndent;
+          }
+          element.style.textIndent = "0";
+        }
 
-  // Render children with ref
-  return React.Children.count(children) === 1
-    ? React.cloneElement(children, { ref: containerRef })
-    : <div ref={containerRef} data-copy-wrapper="true">{children}</div>;
-};
+        lines.current.push(...split.lines);
+      });
 
-export default TextReveal;
+      gsap.set(lines.current, { y: "100%" });
+
+      const animateOnProps = {
+        y: "0%",
+        duration: 1,
+        stagger: 0.1, 
+        ease: "power4.out",
+        delay: delay,
+      };
+
+      if (animateOnScroll) {
+        gsap.to(lines.current, {
+          ...animateOnProps,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        });
+      } else {
+        gsap.to(lines.current, animateOnProps);
+      }
+
+      return () => {
+        splitRef.current.forEach((split) => {
+          if (split) {
+            split.revert();
+          }
+        });
+      };
+    },
+    {
+      scope: containerRef,
+      dependencies: [animateOnScroll, delay],
+    }
+  );
+
+  if (React.Children.count(children) === 1) {
+    return React.cloneElement(children, { ref: containerRef });
+  }
+
+  return (
+    <div ref={containerRef} data-copy-wrapper="true">
+      {children}
+    </div>
+  );
+}

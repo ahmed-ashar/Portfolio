@@ -22,6 +22,7 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1",
     "simple-parallax-js": "^6.2.1",
+    "split-type": "^0.3.4",
     "tailwindcss": "^4.1.11",
     "three": "^0.178.0",
     "vanta": "^0.5.24"
