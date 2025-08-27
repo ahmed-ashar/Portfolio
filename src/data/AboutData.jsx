@@ -113,11 +113,11 @@ const AboutData = () => {
       from: "A very old Facebook",
       link: "https://www.facebook.com/ahmed.ashar.58",
     },
-    {
-      title: "Curriculum Vitae",
-      from: "My cv",
-      link: "#",
-    },
+    // {
+    //   title: "Curriculum Vitae",
+    //   from: "My cv",
+    //   link: "#",
+    // },
     {
       title: "github.com/ahmed-ashar",
       from: "Where I store my Code",
@@ -126,7 +126,7 @@ const AboutData = () => {
     {
       title: "My Resume",
       from: "PDF",
-      link: "#",
+      link: "https://drive.google.com/file/d/12QX5Zdka9KQMKChuSpxzOglC6u1W06bu/view?usp=sharing",
     },
   ];
   return {

@@ -1,5 +1,4 @@
 import React from "react";
-import { Lenis as ReactLenis } from "lenis/react";
 import Navbar from "../components/Navbar";
 import BlobCursor from "../utilis/BlobCursor";
 import Hero from "../components/Hero";
@@ -15,15 +14,7 @@ import FooterSection from "../components/FooterSection";
 const Home = () => {
   return (
     <div>
-      <ReactLenis
-        root
-        options={{
-          duration: 1.5,
-          smooth: true,
-          easing: (t) => 1 - Math.pow(1 - t, 3),
-          lerp: 0.02,
-        }}
-      >
+     
         <div className="p-[0.55rem] gray-bg">
           <div className="rounded-[0.3rem] h-[100%] black-bg">
             <Navbar />
@@ -39,7 +30,6 @@ const Home = () => {
           </div>
         </div>
         <FooterSection />
-      </ReactLenis>
     </div>
   );
 };

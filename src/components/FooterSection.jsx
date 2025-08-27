@@ -20,9 +20,9 @@ const FooterSection = () => {
       link: "https://www.linkedin.com/in/ahmed-ashar/",
     },
     { name: "GitHub", icon: faArrowUp, link: "https://github.com/ahmed-ashar" },
-    { name: "Whatsapp", icon: faArrowUp, link: "#" },
-    { name: "Resume", icon: faArrowUp, link: "#" },
-    { name: "Cv", icon: faArrowUp, link: "#" },
+    // { name: "Whatsapp", icon: faArrowUp, link: "#" },
+    { name: "Resume", icon: faArrowUp, link: "https://drive.google.com/file/d/12QX5Zdka9KQMKChuSpxzOglC6u1W06bu/view?usp=sharing" },
+    // { name: "Cv", icon: faArrowUp, link: "#" },
   ];
 
   return (

@@ -67,6 +67,13 @@ export default function TextReveal({
         delay: delay,
       };
 
+      // Detect Lenis scroll container
+      let scroller = window;
+      // If you use a custom scroll container, set its selector here
+      // Example: const scrollerSelector = '.lenis-root';
+      // const scrollerElem = document.querySelector(scrollerSelector);
+      // if (scrollerElem) scroller = scrollerElem;
+
       if (animateOnScroll) {
         gsap.to(lines.current, {
           ...animateOnProps,
@@ -74,6 +81,7 @@ export default function TextReveal({
             trigger: containerRef.current,
             start: "top 75%",
             once: true,
+            scroller: scroller,
           },
         });
       } else {
