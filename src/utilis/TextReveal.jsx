@@ -1,114 +1,76 @@
-"use client";
-
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
-import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-export default function TextReveal({
-  children,
-  animateOnScroll = true,
-  delay = 0,
-}) {
+const TextReveal = ({ children, delay = 0 }) => {
   const containerRef = useRef(null);
-  const elementRef = useRef([]);
-  const splitRef = useRef([]); 
-  const lines = useRef([]);
 
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-      splitRef.current = [];
-      elementRef.current = [];
-      lines.current = [];
+    const element = containerRef.current;
+    const split = new SplitType(element, {
+      types: "lines",
+      linesClass: "lineChild",
+    });
 
-      let elements = [];
-      if (containerRef.current.hasAttribute("data-copy-wrapper")) {
-        elements = Array.from(containerRef.current.children);
-      } else {
-        elements = [containerRef.current];
-      }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: "top bottom+=100",
+        end: "bottom top+=100",
+      },
+    });
 
-      elements.forEach((element) => {
-        elementRef.current.push(element);
+    tl.set(
+      element,
+      {
+        perspective: "1000px",
+        transformStyle: "preserve-3d",
+        transformOrigin: "center center",
+      },
+      delay
+    );
 
-        const split = SplitText.create(element, {
-          type: "lines",
-          mask: "lines",
-          innerClass: "line++",
-        });
+    tl.fromTo(
+      split.lines,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.15, stagger: 0.15 },
+      delay
+    );
 
-        splitRef.current.push(split);
+    tl.fromTo(
+      split.lines,
+      { yPercent: 100, skewY: 2, scale: 0.8, rotateX: -60 },
+      {
+        yPercent: 0,
+        skewY: 0,
+        rotateX: 0,
+        scale: 1,
+        ease: "expo.out",
+        stagger: 0.1,
+        duration: 2.3,
+        force3D: true,
+      },
+      delay
+    );
 
-        const computedStyle = window.getComputedStyle(element);
-        const textIndent = computedStyle.textIndent;
+    tl.set(element, { willChange: "auto" }, "+=0.1");
 
-        if (textIndent && textIndent !== "0px") {
-          if (split.lines.length > 0) {
-            split.lines[0].style.paddingLeft = textIndent;
-          }
-          element.style.textIndent = "0";
-        }
+    return () => {
+      split.revert();
+      tl.kill();
+      ScrollTrigger.kill();
+    };
+  }, [delay, children]);
 
-        lines.current.push(...split.lines);
-      });
+  // Render children with ref
+  return React.Children.count(children) === 1
+    ? React.cloneElement(children, { ref: containerRef })
+    : <div ref={containerRef} data-copy-wrapper="true">{children}</div>;
+};
 
-      gsap.set(lines.current, { y: "100%" });
-
-      const animateOnProps = {
-        y: "0%",
-        duration: 1,
-        stagger: 0.1, 
-        ease: "power4.out",
-        delay: delay,
-      };
-
-      // Detect Lenis scroll container
-      let scroller = window;
-      // If you use a custom scroll container, set its selector here
-      // Example: const scrollerSelector = '.lenis-root';
-      // const scrollerElem = document.querySelector(scrollerSelector);
-      // if (scrollerElem) scroller = scrollerElem;
-
-      if (animateOnScroll) {
-        gsap.to(lines.current, {
-          ...animateOnProps,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 75%",
-            once: true,
-            scroller: scroller,
-          },
-        });
-      } else {
-        gsap.to(lines.current, animateOnProps);
-      }
-
-      return () => {
-        splitRef.current.forEach((split) => {
-          if (split) {
-            split.revert();
-          }
-        });
-      };
-    },
-    {
-      scope: containerRef,
-      dependencies: [animateOnScroll, delay],
-    }
-  );
-
-  if (React.Children.count(children) === 1) {
-    return React.cloneElement(children, { ref: containerRef });
-  }
-
-  return (
-    <div ref={containerRef} data-copy-wrapper="true">
-      {children}
-    </div>
-  );
-}
+export default TextReveal;
