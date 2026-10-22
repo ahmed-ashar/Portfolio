@@ -25,6 +25,7 @@ const ProjectPage = () => {
     >
       <a
         href={project.link}
+        data-analytics-project={project.title}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${project.title}: ${project.para} (opens in a new tab)`}
@@ -112,6 +113,7 @@ const ProjectPage = () => {
             {filterOptions.map((option) => (
               <button
                 key={option}
+                data-analytics-filter={option}
                 type="button"
                 onClick={() => setFilter(option)}
                 aria-pressed={filter === option}

@@ -2,7 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useContent } from "../context/ContentContext";
 import { defaults, templates, validateContent } from "../content/schema";
 import "./dashboard.css";
+import AnalyticsPanel from "./AnalyticsPanel";
 const sections = [
+  { id: "analytics", name: "Analytics", icon: "\u2197", group: "INSIGHTS", description: "Understand your audience. See what makes them stay." },
   {
     id: "overview",
     name: "Overview",
@@ -905,7 +907,7 @@ export default function Dashboard() {
               </h1>
               <p>{active.description}</p>
             </div>
-            {selected !== "overview" && (
+            {selected !== "overview" && selected !== "analytics" && (
               <button
                 className="secondary-button"
                 aria-pressed={preview}
@@ -928,7 +930,7 @@ export default function Dashboard() {
               {notice}
             </div>
           )}
-          {selected === "overview" ? (
+          {selected === "analytics" ? <AnalyticsPanel /> : selected === "overview" ? (
             <>
               <section className="overview-banner">
                 <div>
@@ -990,6 +992,7 @@ export default function Dashboard() {
                     ["01", "Home", "Your first impression", "home.hero"],
                     ["02", "About", "The person behind the work", "about"],
                     ["03", "Projects", "Work worth sharing", "portfolio"],
+                    ["04", "Analytics", "Visitors, engagement and exploration", "analytics"],
                   ].map(([n, name, desc, id]) => (
                     <button
                       className="page-row"

@@ -19,10 +19,13 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run check
+      - run: npx playwright test --config playwright.dashboard.config.js
       - run: npm audit --audit-level=high
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: browser-failures
-          path: test-results/
+          path: |
+            test-results/
+            artifacts/dashboard-test-results/
           retention-days: 7

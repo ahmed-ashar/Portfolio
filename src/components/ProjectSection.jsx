@@ -56,6 +56,7 @@ const ProjectSection = () => {
           >
             <a
               href={item.link}
+              data-analytics-project={item.title}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.title}: ${item.para} (opens in a new tab)`}

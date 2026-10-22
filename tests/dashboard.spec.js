@@ -46,6 +46,18 @@ test("admin edits, previews, saves and publishes shared content with secure sess
   expect(sessionCookie.httpOnly).toBe(true);
   expect(sessionCookie.sameSite).toBe("Strict");
   const nav = page.getByRole("navigation", { name: "Dashboard sections" });
+  await test.step("analytics requires an admin session and shows honest connection status", async () => {
+    expect((await request.get("/api/admin?action=analytics&days=30")).status()).toBe(401);
+    expect((await page.request.get("/api/admin?action=analytics&days=999")).status()).toBe(400);
+    const response = await page.request.get("/api/admin?action=analytics&days=30");
+    expect(response.status()).toBe(200);
+    expect(response.headers()["cache-control"]).toBe("no-store");
+    expect(await response.json()).toMatchObject({ configured: false });
+    await nav.getByRole("button", { name: "Analytics", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Your visitors. The full picture." })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Export CSV" })).toBeDisabled();
+  });
+
   await nav.getByRole("button", { name: "Hero", exact: true }).click();
   await page.getByLabel("Lines 1", { exact: true }).fill("CREATE.");
   await expect(page.frameLocator("iframe").locator("h1")).toContainText(
@@ -410,4 +422,75 @@ test("dashboard supports wheel, keyboard and touch scrolling without blocking th
   } finally {
     await mobile.close();
   }
+});
+
+test("analytics charts, comparisons, ranges, export and mobile states work with controlled report fixtures", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", error => errors.push(error.message));
+  let mode = "ready";
+  const metrics = { totalUsers: 1248, activeUsers: 1100, newUsers: 840, sessions: 1820, engagedSessions: 1256, screenPageViews: 4932, userEngagementDuration: 145600, averageSessionDuration: 126, engagementRate: 0.69 };
+  const report = days => ({
+    configured: true, days, provider: "Google Analytics 4", timezone: "Asia/Karachi", host: "ahmed-ashar.vercel.app", startDate: "2026-09-23", endDate: "2026-10-22", generatedAt: "2026-10-23T10:00:00Z",
+    current: mode === "empty" ? Object.fromEntries(Object.keys(metrics).map(key => [key, 0])) : metrics,
+    previous: { ...metrics, totalUsers: 980, sessions: 1400, screenPageViews: 3600, engagementRate: 0.61 },
+    trend: Array.from({ length: days }, (_, i) => ({ dateLabel: new Date(Date.UTC(2026, 9, 23 - days + i)).toISOString().slice(0, 10), totalUsers: mode === "empty" ? 0 : 20 + i * 3 + i % 5 * 10, screenPageViews: mode === "empty" ? 0 : 70 + i * 7, sessions: mode === "empty" ? 0 : 30 + i * 4 })),
+    pages: mode === "empty" ? [] : [{ pagePath: "/", screenPageViews: 2400, totalUsers: 1080, userEngagementDuration: 42000 }, { pagePath: "/projects", screenPageViews: 1800, totalUsers: 720, userEngagementDuration: 72000 }, { pagePath: "/about", screenPageViews: 732, totalUsers: 450, userEngagementDuration: 31600 }],
+    sources: mode === "empty" ? [] : [{ sessionSourceMedium: "google / organic", sessions: 840 }, { sessionSourceMedium: "(direct) / (none)", sessions: 610 }, { sessionSourceMedium: "linkedin.com / referral", sessions: 290 }, { sessionSourceMedium: '=HYPERLINK("https://example.com")', sessions: 1 }],
+    devices: mode === "empty" ? [] : [{ deviceCategory: "mobile", sessions: 1092 }, { deviceCategory: "desktop", sessions: 655 }, { deviceCategory: "tablet", sessions: 73 }],
+    countries: mode === "empty" ? [] : [{ country: "Pakistan", totalUsers: 620 }, { country: "United States", totalUsers: 330 }, { country: "United Kingdom", totalUsers: 160 }, { country: "United Arab Emirates", totalUsers: 138 }],
+    events: mode === "empty" ? [] : [{ eventName: "portfolio_project_open", eventCount: 240, totalUsers: 160 }, { eventName: "portfolio_contact", eventCount: 42, totalUsers: 31 }, { eventName: "portfolio_filter", eventCount: 185, totalUsers: 120 }, { eventName: "portfolio_navigation", eventCount: 610, totalUsers: 450 }],
+    scroll: mode === "empty" ? [] : [25, 50, 75, 90].flatMap((depth, i) => [{ pagePath: "/", eventName: `portfolio_scroll_${depth}`, eventCount: 1100 - i * 230 }, { pagePath: "/projects", eventName: `portfolio_scroll_${depth}`, eventCount: 700 - i * 140 }]),
+    details: { available: true, rows: mode === "empty" ? [] : [{ eventName: "portfolio_project_open", "customEvent:interaction_label": "Event Management Platform", eventCount: 86, totalUsers: 61 }, { eventName: "portfolio_filter", "customEvent:interaction_label": "Frontend", eventCount: 76, totalUsers: 55 }] },
+    quality: {},
+  });
+  await page.route("**/api/admin*", route => {
+    const url = new URL(route.request().url());
+    if (url.searchParams.get("action") === "analytics") return mode === "error" ? route.fulfill({ status: 503, json: { error: "Google Analytics is temporarily unavailable." } }) : route.fulfill({ json: report(Number(url.searchParams.get("days"))) });
+    return route.fulfill({ json: url.searchParams.get("action") === "content" ? { revision: 0, draft: defaults, published: defaults } : { configured: true, authenticated: true, storage: "Local development" } });
+  });
+  await page.route("**/_vercel/speed-insights/**", route => route.fulfill({ body: "" }));
+  await page.setViewportSize({ width: 1600, height: 1050 });
+  await page.goto("/dashboard");
+  await page.getByRole("navigation", { name: "Dashboard sections" }).getByRole("button", { name: "Analytics", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Audience over time" })).toBeVisible();
+  await expect(page.locator("iframe")).toHaveCount(0);
+  await expect(page.getByRole("region", { name: "Audience metrics" })).toContainText("1,248");
+  await page.getByRole("button", { name: "Page views", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Page views", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await page.getByLabel("Scroll depth page").selectOption("/projects");
+  await expect(page.locator(".analytics-scroll-bars")).toContainText("700");
+  await page.getByLabel("Sort by").selectOption("userEngagementDuration");
+  await expect(page.locator(".analytics-pages tbody tr").first()).toContainText("/projects");
+  const downloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export CSV" }).click();
+  const download = await downloadPromise;
+  const stream = await download.createReadStream();
+  const chunks = [];
+  for await (const chunk of stream) chunks.push(chunk);
+  const csv = Buffer.concat(chunks).toString("utf8");
+  expect(csv).toContain("' =HYPERLINK".replace("' ", "'"));
+  expect(csv).toContain("Current");
+  expect(csv).toContain("4932");
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.screenshot({ path: "artifacts/analytics-desktop.png", fullPage: true });
+  await page.getByLabel("Period", { exact: true }).selectOption("7");
+  await expect(page.locator(".analytics-trend .chart-point")).toHaveCount(7);
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  await page.screenshot({ path: "artifacts/analytics-mobile.png", fullPage: true });
+  await page.getByRole("button", { name: "Visits", exact: true }).click();
+  await page.locator(".chart-point").first().focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator(".analytics-chart-value")).toContainText("30");
+  mode = "empty";
+  await page.getByRole("button", { name: "Refresh", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Your next visit starts the story." })).toBeVisible();
+  mode = "error";
+  await page.getByRole("button", { name: "Refresh", exact: true }).click();
+  await expect(page.getByRole("alert")).toContainText("temporarily unavailable");
+  await expect(page.getByRole("button", { name: "Export CSV" })).toBeDisabled();
+  mode = "ready";
+  await page.getByRole("button", { name: "Try again" }).click();
+  await expect(page.getByRole("heading", { name: "Audience over time" })).toBeVisible();
+  expect(errors).toEqual([]);
 });

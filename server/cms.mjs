@@ -1,3 +1,4 @@
+import { analyticsReport } from "./analytics.mjs";
 import {
   randomBytes,
   createHash,
@@ -156,6 +157,12 @@ async function handle(req, res) {
   }
   if (url.pathname !== "/api/admin") throw fail(404, "Not found.");
   if (req.method === "GET") {
+    if (url.searchParams.get("action") === "analytics") {
+      await authenticate(req);
+      const content = await publishedContent();
+      const host = new URL(content.seo.siteUrl).hostname;
+      return send(res, 200, await analyticsReport(Number(url.searchParams.get("days") || 30), host));
+    }
     const config = available() ? await credentials() : null;
     let authenticated = false;
     if (config)

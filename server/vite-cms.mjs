@@ -5,7 +5,7 @@ export default function cmsPlugin() {
     name: "portfolio-cms",
     configResolved(config) {
       const env = loadEnv(config.mode, config.root, "");
-      for (const key of ["ADMIN_PASSWORD_HASH", "CMS_DATA_DIR"])
+      for (const key of ["ADMIN_PASSWORD_HASH", "CMS_DATA_DIR", "GA_PROPERTY_ID", "GA_CLIENT_EMAIL", "GA_PRIVATE_KEY"])
         if (env[key]) process.env[key] = env[key];
     },
     configureServer(server) {

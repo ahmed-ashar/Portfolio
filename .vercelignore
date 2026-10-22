@@ -43,3 +43,6 @@ coverage/
 .gemini/
 .continue/
 .aider*
+
+# Local Google Analytics service-account credentials
+/portfolio-analytics-512420-*.json

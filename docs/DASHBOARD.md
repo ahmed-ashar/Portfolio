@@ -39,3 +39,45 @@ Deployment and the real Blob integration require access to the owner's Vercel pr
 Images are limited to PNG, JPEG, WebP and GIF, at 3 MB per file. Uploads are stored privately and served from immutable same-origin media URLs. Content is rendered as text, not arbitrary HTML. A content backup does not include image binary data. Old uploaded images are retained, including those referenced by a previous publication.
 
 Run `npx playwright test --config playwright.dashboard.config.js` for isolated dashboard browser tests; they use a separate temporary directory under `.local/` and a separate server port. Run `npm test` for public-page regressions. Run `npm run lint` for code checks.
+## Audience analytics
+
+The dashboard's **Analytics** section reads real Google Analytics 4 reports through the authenticated backend. It includes unique visitors, sessions, page views, engagement rate, foreground engagement time per visit, pages per visit, new users, average visit duration, daily trends, page-level engagement, sources, countries, devices, scroll milestones, and project/contact/filter/navigation interactions. CSV exports contain the displayed report data.
+
+Choose 7, 30 or 90 complete days. Reports end yesterday in the GA4 property's time zone and compare with the preceding equally sized period. Reports are cached for five minutes per server instance. Google processing can take 24-48 hours. Unique visitors are GA4 estimates, not identifiable people; daily or per-page user counts must not be added together to get period uniques. Scroll charts count milestone events, not funnel conversions, and contact clicks are not confirmed enquiries.
+
+### Connect your existing GA4 property
+
+1. Sign in at https://analytics.google.com/ and find the web stream with measurement ID `G-77MPKKC7BM`. Open the property's details and copy its **numeric Property ID**, which is different from the measurement ID. If this property is owned by someone else, ask them to grant you access; the public measurement ID cannot grant report access.
+2. In Google Cloud, enable the **Google Analytics Data API**. Create a service account and generate a JSON key. Keep the downloaded file outside the repository or under ignored `.local/`; never commit it.
+3. In GA4 property access management, add the service account's `client_email` as a **Viewer**. No domain-wide delegation or write access is required.
+4. Add these server-only Production environment variables in Vercel, then deploy:
+
+| Variable | Value |
+| --- | --- |
+| `GA_PROPERTY_ID` | Numeric GA4 Property ID |
+| `GA_CLIENT_EMAIL` | The JSON key's `client_email` |
+| `GA_PRIVATE_KEY` | The JSON key's `private_key`; set as a Secret. Actual line breaks or literal `\n` are supported. |
+
+Do not use `VITE_` prefixes. Do not paste the full JSON into `GA_PRIVATE_KEY` or share the key in chat. For local development, the Vite middleware reads these same names from ignored `.env.local`. The production review server instead uses its process environment.
+
+5. In GA4 **Custom definitions**, create an event-scoped dimension named **Interaction label**, with event parameter **`interaction_label`**. This enables project names and selected filter names in the interaction table. Core reports work without this definition. Named details are not retroactive and can take time to process.
+6. Confirm that the GA4 stream's enhanced measurement tracks History API page changes. The existing loader handles standard page views; the new tracker deliberately does not emit a second `page_view`.
+7. Sign into `/dashboard`, open Analytics, and verify reports against the same property, period and hostname in GA4. The hostname comes from the **published** Search & sharing site URL, not an unsaved draft. Only `/`, `/about` and `/projects` are included.
+
+Existing traffic can appear after connection if GA4 collected it. New custom events only start after this code is deployed; they cannot reconstruct past clicks or scroll depth. Without credentials, the panel displays setup instructions instead of example statistics. API failures display an error rather than zero traffic. Lack of a custom dimension displays a scoped detail-table notice while core reports remain usable.
+
+### Tracking boundaries
+
+`public/analytics.js` loads GA4 only on the production hostname, public routes, and top-level windows. It skips Global Privacy Control and Do Not Track opt-outs. `AnalyticsTracker` adds `portfolio_scroll_25`, `_50`, `_75`, `_90` once per route mount, `portfolio_project_open`, `portfolio_contact` (email/phone/WhatsApp), `portfolio_filter`, and `portfolio_navigation`. Custom events contain authored labels and a query-free page URL, not form values, email addresses or full external URLs. Standard GA4 tracking retains its own configured collection behavior; review the property's consent and retention settings as appropriate to the website's audience.
+
+The reports require an admin session and are not public API data. Credentials stay in server environment variables. The Analytics read-only OAuth scope cannot modify the property. Analytics data is held by Google; it is not written to the CMS Blob store or included in content backups. The feature does not provide session recordings, heatmaps, individual visitor identities or live presence.
+
+### Analytics validation
+
+- `npm run test:analytics`: report date math, cache/coalescing, filtering, missing credentials, safe API errors and optional custom dimension behavior.
+- `npm test`: public-site regression tests plus scroll/click tracking, route changes, privacy and iframe exclusions.
+- `npx playwright test --config playwright.dashboard.config.js`: real local admin authorization and isolated CMS flows, plus controlled-report analytics charts, ranges, CSV injection protection, empty/error states and mobile layout.
+
+Browser chart fixtures exist only in tests and are never used by the dashboard. Passing local tests does not verify Google account permissions or live report compatibility; the owner's GA4 connection must be checked after deployment.
+
+References: [GA4 Data API setup](https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart-client-libraries), [dimensions and metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema), [data freshness](https://support.google.com/analytics/answer/11198161).

@@ -25,6 +25,7 @@ The public website brings together selected work, professional background and co
 - Save drafts and preview changes before publishing to the website.
 - Export or import content backups and restore the previous publication as a draft.
 - Manage content through authenticated server endpoints and persistent storage.
+- Explore audience trends, scroll depth, project interactions and page engagement with GA4 charts, period comparisons and CSV exports (requires Analytics property access).
 
 ## Technology
 

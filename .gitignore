@@ -79,3 +79,6 @@ coverage/
 
 # Owner-approved consolidated project reference
 !/AGENTS.md
+
+# Local Google Analytics service-account credentials
+/portfolio-analytics-512420-*.json

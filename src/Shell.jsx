@@ -1,3 +1,4 @@
+import AnalyticsTracker from "./components/AnalyticsTracker";
 import ReactLenis from "lenis/react";
 import { MotionConfig } from "framer-motion";
 import { BrowserRouter, useLocation } from "react-router-dom";
@@ -46,6 +47,7 @@ export default function Shell({
       <MotionConfig reducedMotion="never">
         <ThemeProvider>
           <Router {...routerProps}>
+            <AnalyticsTracker />
             <RouteExperience />
           </Router>
         </ThemeProvider>

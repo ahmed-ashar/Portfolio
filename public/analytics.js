@@ -8,10 +8,13 @@
  * manual page_view is sent here — that would double-count every navigation.
  */
 (function () {
-  var MEASUREMENT_ID = "G-QCCHYRL2R0";
+  var MEASUREMENT_ID = "G-77MPKKC7BM";
   var PRODUCTION_HOSTS = ["ahmed-ashar.vercel.app"];
 
   if (PRODUCTION_HOSTS.indexOf(window.location.hostname) === -1) return;
+  if (window.self !== window.top) return;
+  if (["/", "/about", "/projects"].indexOf(window.location.pathname) === -1) return;
+  if (navigator.globalPrivacyControl || navigator.doNotTrack === "1") return;
 
   window.dataLayer = window.dataLayer || [];
   function gtag() {
@@ -25,4 +28,5 @@
   script.async = true;
   script.src = "https://www.googletagmanager.com/gtag/js?id=" + MEASUREMENT_ID;
   document.head.appendChild(script);
+  window.dispatchEvent(new Event("portfolio-analytics-ready"));
 })();
