@@ -100,7 +100,7 @@ All paths below are relative to the repository root. `src/utilis/` is the actual
 | `scripts/dashboard-test-server.mjs` | Starts the review server on 4174 for isolated dashboard tests. |
 | `scripts/visual-review.mjs` | Captures 390/1440px dark/light screenshots for Home/About/Projects/404 into ignored artifacts. Masks live clock/scramble and rotating decoration for comparisons. |
 | `vite.config.js` | React, Tailwind and CMS plugins; loopback host; dev fs restrictions; manual vendor chunks; ES2020 client build target. |
-| `vite.ssr.config.js` | SSR entry/output configuration. Bundles GSAP, @gsap/react and simple-parallax-js as noExternal for server rendering. |
+| `vite.ssr.config.js` | SSR entry/output configuration. Bundles react-router, react-router-dom, GSAP, @gsap/react and simple-parallax-js as noExternal for server rendering. |
 | `vercel.json` | Function tracing includes, exact public/dashboard rewrites, security headers, caching, clean URLs and no trailing slashes. |
 | `eslint.config.js` | Flat ESLint config, browser vs Node globals, React/hooks/refresh rules, JSX usage recognition, key and unsafe-HTML checks, generated-output ignores. |
 | `playwright.config.js` | Public suite, 2 workers, port 4173, 30-second tests, no existing-server reuse; excludes dashboard.spec.js. |
@@ -454,6 +454,8 @@ node scripts/build-seo.mjs
 api/page.js has includeFiles `{dist/template.html,dist-ssr/**}` and maxDuration 30 seconds. api/admin.js also has maxDuration 30. The literal dynamic import of `../dist-ssr/entry-server.js` in server/page.mjs is important for tracing. Do not replace it with an opaque computed filesystem path without testing Vercel packaging.
 
 The server renderer is a required deployment artifact for this architecture, even though dist and dist-ssr remain excluded from source control and are rebuilt by Vercel.
+
+Deployment fix (2026-10-23): production logs showed `Cannot find module /var/task/node_modules/react-router/dist/development/dom-export.js`. Both `react-router` and `react-router-dom` are now explicitly bundled via `ssr.noExternal` in `vite.ssr.config.js`, so server rendering no longer depends on Vercel tracing those conditional package exports. Keep both entries together. This local fix requires a new deployment; runtime environment variables must also be present in that deployment. Validation: production build passed, all 42 public and 2 dashboard browser tests passed, and an isolated Node module-resolution check blocked both external router packages while successfully rendering /, /about, /projects, /dashboard and a missing route. The same check reproduced a missing-router failure before the change. Live Vercel verification remains pending the owner's new deployment.
 
 ### Runtime page response
 
