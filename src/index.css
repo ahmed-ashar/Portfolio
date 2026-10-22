@@ -1,13 +1,56 @@
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Aladin&display=swap");
-@import "tailwindcss";
+/* Scan application code only; examples in docs/tests must not generate site CSS. */
+@import "tailwindcss" source("./");
+@source "../index.html";
+
+/* Self-hosted (latin + latin-ext subsets, SIL Open Font License).
+   Previously three render-blocking cross-origin requests to Google Fonts;
+   serving them from this origin drops a DNS+TLS round trip off the critical
+   path and keeps visitor IPs away from a third party. */
+@font-face {
+  font-family: "Aladin";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/aladin-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Aladin";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/aladin-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Red Hat Mono";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/red-hat-mono-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Red Hat Mono";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/red-hat-mono-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 :root {
-  --font-pacifico: "Lobster", cursive;
   --font-avant: Avant Garde, sans-serif;
-  --font-redHatMono: Red Hat Mono, sans-serif;
-  --font-aladin: "aladin", sans-serif;
+  --font-redHatMono: "Red Hat Mono", ui-monospace, monospace;
+  --font-aladin: "Aladin", cursive;
 
   --black: #131313;
   --gray: #2c2c2c;
@@ -17,7 +60,6 @@
 
 * {
   font-family: var(--font-avant);
-  /* cursor: none; */
 }
 
 .text-off-white {
@@ -51,7 +93,7 @@
 
 .orange-bg-hover:hover {
   background-color: var(--orange);
-  color: var(--gray);
+  color: var(--black);
   transition: all 0.5s ease-in-out;
 }
 
@@ -67,12 +109,13 @@
   background-color: var(--black);
 }
 
-body {
-  margin-bottom: 79vh;
+/* Paints the brand background before React mounts, instead of a white flash. */
+html {
+  background-color: var(--black);
 }
 
-.pacifico {
-  font-family: var(--font-pacifico);
+body {
+  margin-bottom: 79vh;
 }
 
 .aladin {
@@ -96,4 +139,12 @@ body {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* Keyboard focus was invisible: Tailwind's reset removes the UA outline on
+   anything with an explicit background, and nothing replaced it. */
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 2px;
 }

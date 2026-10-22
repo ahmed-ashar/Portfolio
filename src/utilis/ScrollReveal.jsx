@@ -39,48 +39,35 @@ const ScrollReveal = ({
         ? scrollContainerRef.current
         : window;
 
-    gsap.fromTo(
-      el,
-      { transformOrigin: "0% 50%", rotate: baseRotation },
-      {
-        ease: "none",
-        rotate: 0,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: "top bottom",
-          end: rotationEnd,
-          scrub: true,
-        },
-      }
+    const tweens = [];
+
+    tweens.push(
+      gsap.fromTo(
+        el,
+        { transformOrigin: "0% 50%", rotate: baseRotation },
+        {
+          ease: "none",
+          rotate: 0,
+          scrollTrigger: {
+            trigger: el,
+            scroller,
+            start: "top bottom",
+            end: rotationEnd,
+            scrub: true,
+          },
+        }
+      )
     );
 
     const wordElements = el.querySelectorAll(".word");
 
-    gsap.fromTo(
-      wordElements,
-      { opacity: baseOpacity, willChange: "opacity" },
-      {
-        ease: "none",
-        opacity: 1,
-        stagger: 0.05,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: "top bottom-=20%",
-          end: wordAnimationEnd,
-          scrub: true,
-        },
-      }
-    );
-
-    if (enableBlur) {
+    tweens.push(
       gsap.fromTo(
         wordElements,
-        { filter: `blur(${blurStrength}px)` },
+        { opacity: baseOpacity, willChange: "opacity" },
         {
           ease: "none",
-          filter: "blur(0px)",
+          opacity: 1,
           stagger: 0.05,
           scrollTrigger: {
             trigger: el,
@@ -90,14 +77,37 @@ const ScrollReveal = ({
             scrub: true,
           },
         }
+      )
+    );
+
+    if (enableBlur) {
+      tweens.push(
+        gsap.fromTo(
+          wordElements,
+          { filter: `blur(${blurStrength}px)` },
+          {
+            ease: "none",
+            filter: "blur(0px)",
+            stagger: 0.05,
+            scrollTrigger: {
+              trigger: el,
+              scroller,
+              start: "top bottom-=20%",
+              end: wordAnimationEnd,
+              scrub: true,
+            },
+          }
+        )
       );
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      tweens.forEach((tween) => tween.scrollTrigger?.kill());
+      tweens.forEach((tween) => tween.kill());
     };
   }, [
     scrollContainerRef,
+    splitText,
     enableBlur,
     baseRotation,
     baseOpacity,
@@ -107,13 +117,13 @@ const ScrollReveal = ({
   ]);
 
   return (
-    <h2 ref={containerRef} className={`my-5 ${containerClassName}`}>
+    <div ref={containerRef} className={`my-5 ${containerClassName}`}>
       <p
         className={`text-[clamp(1.6rem,4vw,3rem)] leading-[1.5] font-semibold ${textClassName}`}
       >
         {splitText}
       </p>
-    </h2>
+    </div>
   );
 };
 

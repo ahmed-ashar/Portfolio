@@ -1,16 +1,22 @@
-import React from "react";
+import { useContent } from "../context/ContentContext";
 import Magnet from "../utilis/Magnet";
 import Button from "./Button";
 import ScrollReveal from "../utilis/ScrollReveal";
 import TextReveal from "../utilis/TextReveal";
 
 const AboutSection = () => {
+  const section = useContent().home.intro;
   return (
-    <div className="h-auto relative py-40 sm:pb-60 w-full flex justify-center items-center text-off-white">
+    <section
+      aria-labelledby="about-heading"
+      className="h-auto relative py-40 sm:pb-60 w-full flex justify-center items-center text-off-white"
+    >
       <div className="w-full flex flex-col justify-center items-center relative px-4">
         <div className="sticky top-50 sm:top-30 left-0 w-full text-center gray-text font-extrabold  opacity-30 leading-none">
           <TextReveal delay={1}>
-            <h1 className="text-[14vw] sm:text-[15vw] ">ABOUT ME</h1>
+            <h2 id="about-heading" className="text-[14vw] sm:text-[15vw] ">
+              {section.heading}
+            </h2>
           </TextReveal>
         </div>
 
@@ -22,18 +28,15 @@ const AboutSection = () => {
               baseRotation={0}
               blurStrength={10}
             >
-              Hello, my name is Muhammad Ahmed Ashar, and I am a passionate MERN
-              Stack developer from Pakistan. For as long as I can remember, I've
-              been drawn to creating — whether it was sketching ideas, solving
-              problems, or building something meaningful with code.
+              {section.body}
             </ScrollReveal>
           </Magnet>
         </div>
         <div className="text-center ml-3 mt-10 z-55">
-          <Button text={"More About Me"} to="/about" />
+          <Button text={section.buttonText} to={section.buttonLink} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

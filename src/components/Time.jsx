@@ -1,34 +1,8 @@
-import React, { useEffect, useState } from "react";
-
-const Time = () => {
-  const [currentTime, setCurrentTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
-      const ampm = hours >= 12 ? "PM" : "AM";
-
-      hours = hours % 12;
-      hours = hours ? hours : 12;
-
-      const formattedTime = `${hours}:${minutes
-        .toString()
-        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")} ${ampm}`;
-      setCurrentTime(formattedTime);
-    };
-
-    updateTime(); 
-    const interval = setInterval(updateTime, 1000);
-
-    return () => clearInterval(interval); 
-  }, []);
-
-  return (
-    <div className=" text-off-white text-xs redHatMono">{currentTime}</div>
-  );
-};
-
-export default Time;
+import { useEffect, useState } from 'react';
+import { useContent } from '../context/ContentContext';
+export default function Time() {
+ const { timeZone,location }=useContent().identity;
+ const [time,setTime]=useState('');
+ useEffect(()=>{const formatter=new Intl.DateTimeFormat('en-US',{timeZone,hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true});const tick=()=>setTime(formatter.format(new Date()));tick();const id=setInterval(tick,1000);return ()=>clearInterval(id);},[timeZone]);
+ return <div className="text-off-white text-xs redHatMono"><span className="sr-only">Local time in {location}: </span>{time}</div>;
+}

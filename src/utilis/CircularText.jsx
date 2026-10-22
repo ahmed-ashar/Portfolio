@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
 
 const getRotationTransition = (duration, from, loop = true) => ({
@@ -24,6 +24,7 @@ const CircularText = ({
   spinDuration = 20,
   onHover = "speedUp",
   className = "",
+  ...rest
 }) => {
   const letters = Array.from(text);
   const controls = useAnimation();
@@ -91,6 +92,7 @@ const CircularText = ({
       animate={controls}
       onMouseEnter={handleHoverStart}
       onMouseLeave={handleHoverEnd}
+      {...rest}
     >
       {letters.map((letter, i) => {
         const rotationDeg = (360 / letters.length) * i;

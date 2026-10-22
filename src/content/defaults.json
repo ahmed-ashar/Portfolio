@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "identity": {
+    "brand": "Ahmed",
+    "name": "Muhammad Ahmed Ashar",
+    "siteName": "Ahmed Ashar",
+    "location": "Karachi, PK",
+    "city": "Karachi",
+    "country": "PK",
+    "timeZone": "Asia/Karachi",
+    "role": "Web Developer",
+    "taglines": [
+      "Good work starts with a good question.",
+      "Thinking through the small details.",
+      "Design and development, together.",
+      "From the first sketch to the final build.",
+      "Have something in mind? Let's talk."
+    ],
+    "showClock": true,
+    "showSocials": true,
+    "showCursor": true,
+    "showBackToTop": true,
+    "showDock": true,
+    "homeLabel": "Home",
+    "aboutLabel": "About",
+    "projectsLabel": "Projects"
+  },
+  "appearance": {
+    "font": "Avant Garde, sans-serif",
+    "dark": {
+      "black": "#131313",
+      "gray": "#2c2c2c",
+      "textOff": "#b7ab98",
+      "orange": "#fd8b09"
+    },
+    "light": {
+      "black": "#e4e1d8",
+      "gray": "#b0b9ae",
+      "textOff": "#2a3439",
+      "orange": "#59614b"
+    }
+  },
+  "home": {
+    "order": [
+      "hero",
+      "marquee",
+      "intro",
+      "featured",
+      "approach"
+    ],
+    "hero": {
+      "enabled": true,
+      "lines": [
+        "THINK.",
+        "DESIGN.",
+        "DEVELOP",
+        "WITH CARE."
+      ],
+      "accentLine": 2,
+      "showDots": true
+    },
+    "marquee": {
+      "enabled": true,
+      "texts": [
+        "JavaScript React Node.js Express MongoDB Firebase",
+        "Shopify WordPress Webflow Squarespace Tailwind CSS"
+      ],
+      "speed": 190
+    },
+    "intro": {
+      "enabled": true,
+      "heading": "ABOUT ME",
+      "body": "I'm Muhammad Ahmed Ashar, a web developer based in Karachi. I turn ideas into websites and applications, with close attention to how they look, how they work and how people use them.",
+      "buttonText": "More About Me",
+      "buttonLink": "/about"
+    },
+    "featured": {
+      "enabled": true,
+      "heading": "PROJECTS",
+      "buttonText": "More Projects",
+      "buttonLink": "/projects",
+      "count": 4
+    },
+    "approach": {
+      "enabled": true,
+      "heading": "APPROACH",
+      "body": "Good design helps people understand where they are, what they can do and what happens next.",
+      "caption": "A principle behind my work."
+    }
+  },
+  "about": {
+    "about": {
+      "heading": "I care about how it works, and how it feels to use.",
+      "paragraphs": [
+        "I'm Muhammad Ahmed Ashar, a web developer based in Karachi. My work brings together development and a background in graphic design, so I think about the interface and the code behind it as parts of the same job.",
+        "Before choosing a platform or writing code, I want to understand what you're trying to do, who it's for and how it will be used. Those questions shape the layout, the features and the tools I work with.",
+        "I build websites, online stores and web applications. Some projects call for custom development; others need a platform that makes everyday updates straightforward. I work with both, choosing the approach around the project and the people who will manage it.",
+        "Working on logos, layouts and UI mockups has taught me to pay attention to the small decisions: how content is arranged, where the eye goes and whether an interaction feels clear. I bring that same attention to development.",
+        "I studied MERN stack development at Saylani Mass IT Training and completed a three-year diploma in Computer Information Technology. My toolkit includes custom development and CMS platforms, with the specific tools listed below.",
+        "Outside of work, I'm a Hafiz-e-Quran. The focus and consistency that took are still part of how I learn and work. I also enjoy sketching ideas and tinkering with custom keyboards."
+      ],
+      "closing": "The details matter, from the first layout to the final interaction."
+    },
+    "education": [
+      {
+        "title": "Ummul Qura Secondary School",
+        "destination": "School",
+        "duration": "2016 - 2022"
+      },
+      {
+        "title": "Saylani Mass IT Training",
+        "destination": "Institute",
+        "duration": "2024 - 2025"
+      },
+      {
+        "title": "Computer Information Technology (CIT)",
+        "destination": "Diploma / Inter",
+        "duration": "2022 - 2025"
+      },
+      {
+        "title": "Hafiz",
+        "destination": "Hafiz-e-Quran",
+        "duration": "2012 - 2016"
+      }
+    ],
+    "experience": [
+      {
+        "title": "Social Media Marketing Manager",
+        "company": "Magical Marketing Agency",
+        "duration": "2023 - 2024"
+      },
+      {
+        "title": "Front End Developer",
+        "company": "Code Alpha",
+        "duration": "2024 - 2025"
+      }
+    ],
+    "certificate": [
+      {
+        "title": "Front End Internship",
+        "from": "Code Alpha"
+      },
+      {
+        "title": "MERN Stack Developer",
+        "from": "Saylani Mass IT Training"
+      },
+      {
+        "title": "Advanced JavaScript",
+        "from": "Cisco"
+      }
+    ],
+    "contact": [
+      {
+        "title": "hafizmahmedashar@gmail.com",
+        "from": "Email Address",
+        "link": "mailto:hafizmahmedashar@gmail.com"
+      },
+      {
+        "title": "linkedin.com/in/ahmed-ashar",
+        "from": "Linkedin",
+        "link": "https://www.linkedin.com/in/ahmed-ashar/"
+      },
+      {
+        "title": "@ahm3d_ashar",
+        "from": "Personal Instagram",
+        "link": "https://www.instagram.com/ahm3d_ashar/"
+      },
+      {
+        "title": "@ahmed.ashar.58",
+        "from": "Facebook",
+        "link": "https://www.facebook.com/ahmed.ashar.58"
+      },
+      {
+        "title": "github.com/ahmed-ashar",
+        "from": "Where I store my Code",
+        "link": "https://github.com/ahmed-ashar"
+      },
+      {
+        "title": "My Resume",
+        "from": "PDF",
+        "link": "https://drive.google.com/file/d/12QX5Zdka9KQMKChuSpxzOglC6u1W06bu/view?usp=sharing"
+      }
+    ],
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js & Express",
+      "MongoDB",
+      "Firebase",
+      "Shopify",
+      "WordPress",
+      "Webflow",
+      "Squarespace",
+      "GSAP",
+      "Figma",
+      "Adobe Illustrator",
+      "Git & GitHub",
+      "Responsive Design"
+    ],
+    "profile": "/profile.webp",
+    "profileAlt": "Portrait of Muhammad Ahmed Ashar",
+    "showProfile": true,
+    "order": [
+      "skills",
+      "education",
+      "experience",
+      "certificate",
+      "contact"
+    ],
+    "sections": {
+      "skills": {
+        "enabled": true,
+        "heading": "Skills"
+      },
+      "education": {
+        "enabled": true,
+        "heading": "Education"
+      },
+      "experience": {
+        "enabled": true,
+        "heading": "Experience"
+      },
+      "certificate": {
+        "enabled": true,
+        "heading": "Certificates"
+      },
+      "contact": {
+        "enabled": true,
+        "heading": "Contact"
+      }
+    }
+  },
+  "portfolio": {
+    "heading": "Different projects. The same attention to detail.",
+    "intro": "A selection of websites, applications and interfaces I've built. Explore the projects to see the design and development in context.",
+    "allLabel": "All",
+    "emptyMessage": "No projects match that filter yet.",
+    "categories": [
+      "Frontend",
+      "Backend",
+      "MERN Stack"
+    ],
+    "projects": [
+      {
+        "title": "Event Central",
+        "para": "Create, update and manage events in one place.",
+        "image": "/images/Project6.webp",
+        "width": 1582,
+        "height": 823,
+        "alt": "Event Central event management app showing the events dashboard",
+        "link": "https://eventcentral.netlify.app/",
+        "tags": [
+          "MERN Stack",
+          "Frontend",
+          "Backend"
+        ],
+        "caption": "Event manager platform",
+        "visible": true,
+        "featured": true
+      },
+      {
+        "title": "FoodSpot Frontend",
+        "image": "/images/5.webp",
+        "width": 1579,
+        "height": 731,
+        "alt": "FoodSpot food delivery storefront with dish categories and menu",
+        "para": "A food delivery storefront for browsing dishes and menus.",
+        "link": "https://foodspot-frontend.vercel.app/",
+        "tags": [
+          "Frontend",
+          "MERN Stack"
+        ],
+        "caption": "Food delivery frontend app",
+        "visible": true,
+        "featured": true
+      },
+      {
+        "title": "FoodSpot Backend",
+        "image": "/images/4.webp",
+        "width": 1427,
+        "height": 720,
+        "alt": "FoodSpot admin dashboard for adding and managing food items",
+        "para": "An admin interface for managing FoodSpot's menu.",
+        "link": "https://foodspot-admin.vercel.app/",
+        "tags": [
+          "MERN Stack",
+          "Backend"
+        ],
+        "caption": "Admin panel for FoodSpot",
+        "visible": true,
+        "featured": true
+      },
+      {
+        "title": "Homyz Website",
+        "para": "Property listings with search and filtering.",
+        "image": "/images/Project3.webp",
+        "width": 1582,
+        "height": 870,
+        "alt": "Homyz real estate website hero with property search",
+        "link": "https://homyz-front-end.vercel.app/",
+        "tags": [
+          "Frontend"
+        ],
+        "caption": "Property rental platform",
+        "visible": true,
+        "featured": true
+      },
+      {
+        "title": "Resume Builder",
+        "para": "Create, edit and export a resume.",
+        "image": "/images/Project1.webp",
+        "width": 1600,
+        "height": 777,
+        "alt": "Resume Builder app showing the resume editing interface",
+        "link": "https://resume-x-frontend.vercel.app/",
+        "tags": [
+          "MERN Stack",
+          "Backend",
+          "Frontend"
+        ],
+        "caption": "Dynamic resume creator",
+        "visible": true,
+        "featured": true
+      },
+      {
+        "title": "Ahmed Ashar Portfolio (This Site)",
+        "image": "/images/7.webp",
+        "width": 1599,
+        "height": 735,
+        "alt": "Ahmed Ashar portfolio homepage with the THINK. DESIGN. DEVELOP WITH CARE. headline",
+        "para": "Typography, motion and interaction brought together in my own portfolio.",
+        "link": "https://ahmed-ashar.vercel.app/",
+        "tags": [
+          "Frontend"
+        ],
+        "caption": "My personal portfolio site",
+        "visible": true,
+        "featured": true
+      }
+    ]
+  },
+  "footer": {
+    "enabled": true,
+    "heading": "Have something in mind?\nTell me what you're working on\nand where you'd like to take it.",
+    "contactLabel": "CONTACT",
+    "linksLabel": "LINKS",
+    "email": "hafizmahmedashar@gmail.com",
+    "address": "Sector 11-C/1 North Karachi,\nKarachi, Pakistan",
+    "watermark": "CONTACT",
+    "links": [
+      {
+        "name": "Instagram",
+        "link": "https://www.instagram.com/ahm3d_ashar/",
+        "showInSidebar": true
+      },
+      {
+        "name": "Facebook",
+        "link": "https://www.facebook.com/ahmed.ashar.58",
+        "showInSidebar": true
+      },
+      {
+        "name": "LinkedIn",
+        "link": "https://www.linkedin.com/in/ahmed-ashar/",
+        "showInSidebar": true
+      },
+      {
+        "name": "GitHub",
+        "link": "https://github.com/ahmed-ashar",
+        "showInSidebar": true
+      },
+      {
+        "name": "Resume",
+        "link": "https://drive.google.com/file/d/12QX5Zdka9KQMKChuSpxzOglC6u1W06bu/view?usp=sharing",
+        "showInSidebar": false
+      }
+    ]
+  },
+  "seo": {
+    "siteUrl": "https://ahmed-ashar.vercel.app",
+    "image": "/og-image.png",
+    "imageAlt": "Ahmed Ashar web development portfolio",
+    "home": {
+      "title": "Ahmed Ashar | Web Developer in Karachi",
+      "description": "Ahmed Ashar is a web developer in Karachi, building websites and applications with care for design, usability and the details. Explore his work and approach."
+    },
+    "about": {
+      "title": "About Ahmed Ashar | Web Developer",
+      "description": "Meet Ahmed Ashar, a web developer with a background in graphic design. Read about his approach to building for the web, his experience and the tools he uses."
+    },
+    "projects": {
+      "title": "Selected Work | Ahmed Ashar",
+      "description": "Explore websites, applications and interfaces built by Ahmed Ashar, from an event management app to a resume builder. View selected work and live projects."
+    }
+  },
+  "notFound": {
+    "heading": "This page took a wrong turn.",
+    "body": "The page you are looking for does not exist or has been moved.",
+    "title": "Page Not Found | Ahmed Ashar",
+    "description": "That page does not exist or has moved. Head back to the homepage, projects or about page of Ahmed Ashar's portfolio."
+  }
+}

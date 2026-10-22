@@ -14,7 +14,6 @@ export default function TextReveal({
   delay = 0,
 }) {
   const containerRef = useRef(null);
-  const elementRef = useRef([]);
   const splitRef = useRef([]); 
   const lines = useRef([]);
 
@@ -23,7 +22,6 @@ export default function TextReveal({
       if (!containerRef.current) return;
 
       splitRef.current = [];
-      elementRef.current = [];
       lines.current = [];
 
       let elements = [];
@@ -34,12 +32,15 @@ export default function TextReveal({
       }
 
       elements.forEach((element) => {
-        elementRef.current.push(element);
-
         const split = SplitText.create(element, {
           type: "lines",
           mask: "lines",
-          innerClass: "line++",
+          linesClass: "line++",
+          // SplitText's default hides line wrappers from assistive technology.
+          // Preserve nested controls and any authored group label.
+          aria: element.querySelector("a, button, input, select, textarea, [tabindex], [role='button']")
+            ? "none"
+            : "auto",
         });
 
         splitRef.current.push(split);
@@ -91,6 +92,7 @@ export default function TextReveal({
     {
       scope: containerRef,
       dependencies: [animateOnScroll, delay],
+      revertOnUpdate: true,
     }
   );
 

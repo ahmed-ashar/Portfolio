@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import gsap from "gsap";
+import { useTheme } from "../context/ThemeContext";
 
 export default function BlobCursor({
   blobType = "circle",
@@ -22,32 +23,20 @@ export default function BlobCursor({
   slowDuration = 0.15,
   fastEase = "power3.out",
   slowEase = "power1.out",
+  // Content across the site sits at z-55; the blob is a glow behind it.
   zIndex = 50,
 }) {
   const containerRef = useRef(null);
   const blobsRef = useRef([]);
-  const [fillColor, setFillColor] = useState(() => {
-    try {
-      const themeColors = JSON.parse(localStorage.getItem("colors"));
-      return themeColors?.orange || "#fd8b09";
-    } catch {
-      return "#fd8b09";
-    }
-  });
+  const { colors } = useTheme();
+  const fillColor = colors.orange;
 
-  // Optional: Live update every second from localStorage
+  // A trailing cursor blob is meaningless without a real pointer, and it costs
+  // a full-screen SVG filter to composite. Touch devices skip it entirely.
+  const [enabled, setEnabled] = useState(false);
   useEffect(() => {
-    const interval = setInterval(() => {
-      try {
-        const updated = JSON.parse(localStorage.getItem("colors"));
-        if (updated?.orange && updated.orange !== fillColor) {
-          setFillColor(updated.orange);
-        }
-      } catch {}
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [fillColor]);
+    setEnabled(window.matchMedia("(pointer: fine)").matches);
+  }, []);
 
   const updateOffset = useCallback(() => {
     if (!containerRef.current) return { left: 0, top: 0 };
@@ -58,8 +47,8 @@ export default function BlobCursor({
   const handleMove = useCallback(
     (e) => {
       const { left, top } = updateOffset();
-      const x = "clientX" in e ? e.clientX : e.touches[0].clientX;
-      const y = "clientY" in e ? e.clientY : e.touches[0].clientY;
+      const x = e.clientX;
+      const y = e.clientY;
 
       blobsRef.current.forEach((el, i) => {
         if (!el) return;
@@ -76,19 +65,21 @@ export default function BlobCursor({
   );
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMove);
-    window.addEventListener("touchmove", handleMove);
-    window.addEventListener("resize", updateOffset);
+    if (!enabled) return;
+    const blobs = blobsRef.current;
+    window.addEventListener("mousemove", handleMove, { passive: true });
     return () => {
       window.removeEventListener("mousemove", handleMove);
-      window.removeEventListener("touchmove", handleMove);
-      window.removeEventListener("resize", updateOffset);
+      gsap.killTweensOf(blobs.filter(Boolean));
     };
-  }, [handleMove, updateOffset]);
+  }, [enabled, handleMove]);
+
+  if (!enabled) return null;
 
   return (
     <div
       ref={containerRef}
+      aria-hidden="true"
       className="fixed top-0 left-0 w-full h-full pointer-events-none"
       style={{ zIndex }}
     >

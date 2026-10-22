@@ -1,7 +1,8 @@
 "use client";
-import React, { useRef, useEffect, useCallback, useMemo, useState } from "react";
+import React, { useRef, useEffect, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
+import { useTheme } from "../context/ThemeContext";
 
 gsap.registerPlugin(InertiaPlugin);
 
@@ -55,30 +56,9 @@ const DotGrid = ({
     lastY: 0,
   });
 
-  // Function to get CSS variable
-  const getCSSVar = (name) =>
-    getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-
-  const [baseColor, setBaseColor] = useState("#131313");
-  const [activeColor, setActiveColor] = useState("#fd8b09");
-
-  // Update colors from CSS variables
-  useEffect(() => {
-    const updateColors = () => {
-      setBaseColor(getCSSVar("--black") || "#131313");
-      setActiveColor(getCSSVar("--orange") || "#fd8b09");
-    };
-
-    updateColors();
-
-    const observer = new MutationObserver(updateColors);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["style"],
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const { colors } = useTheme();
+  const baseColor = colors.black;
+  const activeColor = colors.orange;
 
   const baseRgb = useMemo(() => hexToRgb(baseColor), [baseColor]);
   const activeRgb = useMemo(() => hexToRgb(activeColor), [activeColor]);
@@ -147,9 +127,35 @@ const DotGrid = ({
   useEffect(() => {
     if (!circlePath) return;
     let rafId;
+    let onScreen = true;
     const proxSq = proximity * proximity;
 
+    // The hero canvas repaints thousands of dots per frame. Without this gate
+    // it kept doing that while scrolled three sections away, or in a background
+    // tab, for the whole session.
+    const wrap = wrapperRef.current;
+    let observer = null;
+    if (wrap && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          onScreen = entry.isIntersecting;
+          if (onScreen && !rafId) rafId = requestAnimationFrame(draw);
+        },
+        { rootMargin: "100px" }
+      );
+      observer.observe(wrap);
+    }
+
+    const onVisibility = () => {
+      if (!document.hidden && onScreen && !rafId) {
+        rafId = requestAnimationFrame(draw);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
     const draw = () => {
+      rafId = 0;
+      if (!onScreen || document.hidden) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
@@ -185,8 +191,12 @@ const DotGrid = ({
       rafId = requestAnimationFrame(draw);
     };
 
-    draw();
-    return () => cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(draw);
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (observer) observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, [baseColor, activeColor, baseRgb, activeRgb, proximity, circlePath]);
 
   useEffect(() => {
@@ -212,6 +222,7 @@ const DotGrid = ({
       pr.vy = vy;
       pr.speed = speed;
 
+      if (!canvasRef.current) return;
       const rect = canvasRef.current.getBoundingClientRect();
       pr.x = e.clientX - rect.left;
       pr.y = e.clientY - rect.top;
@@ -240,6 +251,7 @@ const DotGrid = ({
     };
 
     const onClick = (e) => {
+      if (!canvasRef.current) return;
       const rect = canvasRef.current.getBoundingClientRect();
       const cx = e.clientX - rect.left;
       const cy = e.clientY - rect.top;
@@ -274,6 +286,7 @@ const DotGrid = ({
     return () => {
       window.removeEventListener("mousemove", throttledMove);
       window.removeEventListener("click", onClick);
+      gsap.killTweensOf(dotsRef.current);
     };
   }, [
     maxSpeed,
@@ -293,6 +306,7 @@ const DotGrid = ({
       <div ref={wrapperRef} className="w-full h-full relative">
         <canvas
           ref={canvasRef}
+          aria-hidden="true"
           className="absolute inset-0 w-full h-full pointer-events-none"
         />
       </div>

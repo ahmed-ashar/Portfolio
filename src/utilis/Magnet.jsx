@@ -1,5 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
+/*
+ * Every Magnet on the page listens to the same window mousemove, and there can
+ * be a dozen of them (the skills grid alone renders ten). The original version
+ * called setState on every single move event, for every instance, even while
+ * the pointer was nowhere near — which re-rendered the whole tree ~60x a second.
+ *
+ * Two fixes: coalesce work into one rAF per frame, and bail out early when the
+ * resulting position would be unchanged.
+ */
 const Magnet = ({
   children,
   padding = 100,
@@ -14,43 +23,57 @@ const Magnet = ({
   const [isActive, setIsActive] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const magnetRef = useRef(null);
+  const wasActiveRef = useRef(false);
 
   useEffect(() => {
     if (disabled) {
+      wasActiveRef.current = false;
+      setIsActive(false);
       setPosition({ x: 0, y: 0 });
       return;
     }
 
-    const handleMouseMove = (e) => {
+    let frame = 0;
+
+    const measure = (clientX, clientY) => {
+      frame = 0;
       if (!magnetRef.current) return;
 
       const { left, top, width, height } =
         magnetRef.current.getBoundingClientRect();
       const centerX = left + width / 2;
       const centerY = top + height / 2;
+      const inRange =
+        Math.abs(centerX - clientX) < width / 2 + padding &&
+        Math.abs(centerY - clientY) < height / 2 + padding;
 
-      const distX = Math.abs(centerX - e.clientX);
-      const distY = Math.abs(centerY - e.clientY);
-
-      if (distX < width / 2 + padding && distY < height / 2 + padding) {
+      if (inRange) {
+        wasActiveRef.current = true;
         setIsActive(true);
-
-        const offsetX = (e.clientX - centerX) / magnetStrength;
-        const offsetY = (e.clientY - centerY) / magnetStrength;
-        setPosition({ x: offsetX, y: offsetY });
-      } else {
+        setPosition({
+          x: (clientX - centerX) / magnetStrength,
+          y: (clientY - centerY) / magnetStrength,
+        });
+      } else if (wasActiveRef.current) {
+        // Only reset once, on the frame the pointer actually leaves.
+        wasActiveRef.current = false;
         setIsActive(false);
         setPosition({ x: 0, y: 0 });
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    const handleMouseMove = (e) => {
+      if (frame) return;
+      const { clientX, clientY } = e;
+      frame = requestAnimationFrame(() => measure(clientX, clientY));
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      if (frame) cancelAnimationFrame(frame);
     };
   }, [padding, disabled, magnetStrength]);
-
-  const transitionStyle = isActive ? activeTransition : inactiveTransition;
 
   return (
     <div
@@ -63,7 +86,7 @@ const Magnet = ({
         className={innerClassName}
         style={{
           transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-          transition: transitionStyle,
+          transition: isActive ? activeTransition : inactiveTransition,
           willChange: "transform",
         }}
       >

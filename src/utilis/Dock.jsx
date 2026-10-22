@@ -7,6 +7,7 @@ import {
   useTransform,
   AnimatePresence,
 } from "framer-motion";
+import { Link } from "react-router-dom";
 import React, {
   Children,
   cloneElement,
@@ -16,16 +17,23 @@ import React, {
   useState,
 } from "react";
 
+const MotionLink = motion.create(Link);
+
 function DockItem({
   children,
   className = "",
   onClick,
+  to,
+  active,
+  label,
+  ariaLabel,
   mouseX,
   spring,
   distance,
   magnification,
   baseItemSize,
 }) {
+  const Item = to ? MotionLink : motion.button;
   const ref = useRef(null);
   const isHovered = useMotionValue(0);
 
@@ -45,7 +53,10 @@ function DockItem({
   const size = useSpring(targetSize, spring);
 
   return (
-    <motion.div
+    <Item
+      to={to}
+      type={to ? undefined : "button"}
+      aria-current={active ? "page" : undefined}
       ref={ref}
       style={{
         width: size,
@@ -56,13 +67,11 @@ function DockItem({
       onFocus={() => isHovered.set(1)}
       onBlur={() => isHovered.set(0)}
       onClick={onClick}
-      className={`relative inline-flex items-center justify-center rounded-2xl black-bg border-neutral-700 border-2 shadow-md  ${className}`}
-      tabIndex={0}
-      role="button"
-      aria-haspopup="true"
+      className={`relative inline-flex items-center justify-center rounded-2xl black-bg border-neutral-700 border-2 shadow-md cursor-pointer  ${className}`}
+      aria-label={ariaLabel || label}
     >
       {Children.map(children, (child) => cloneElement(child, { isHovered }))}
-    </motion.div>
+    </Item>
   );
 }
 
@@ -80,7 +89,7 @@ function DockLabel({ children, className = "", ...rest }) {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
+        <motion.span
           initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: 1, y: -10 }}
           exit={{ opacity: 0, y: 0 }}
@@ -90,17 +99,21 @@ function DockLabel({ children, className = "", ...rest }) {
           style={{ x: "-50%" }}
         >
           {children}
-        </motion.div>
+        </motion.span>
       )}
     </AnimatePresence>
   );
 }
 
-function DockIcon({ children, className = "" }) {
+function DockIcon({ children, className = "", ...rest }) {
+  // Swallows the `isHovered` motion value DockItem clones onto every child so
+  // it never reaches the DOM as an unknown attribute.
+  // eslint-disable-next-line no-unused-vars
+  const { isHovered, ...domProps } = rest;
   return (
-    <div className={`flex items-center justify-center  ${className}`}>
+    <span className={`flex items-center justify-center  ${className}`} {...domProps}>
       {children}
-    </div>
+    </span>
   );
 }
 
@@ -130,9 +143,9 @@ export default function Dock({
       className="mx-2 flex max-w-full items-center "
     >
       <motion.div
-        onMouseMove={({ pageX }) => {
+        onMouseMove={({ clientX }) => {
           isHovered.set(1);
-          mouseX.set(pageX);
+          mouseX.set(clientX);
         }}
         onMouseLeave={() => {
           isHovered.set(0);
@@ -140,13 +153,15 @@ export default function Dock({
         }}
         className={`${className} absolute  bottom-2 left-[1%] sm:left-1/6 md:left-1/4 lg:left-1/3 xl:left-[70%] 2xl:left-[100%] transform -translate-x-1/2  flex items-end w-fit gap-2 sm:gap-4 rounded-2xl border-neutral-700 border-2 pb-2 px-4 gray-bg text-off-white`}
         style={{ height: panelHeight }}
-        role="toolbar"
-        aria-label="Application dock"
       >
-        {items.map((item, index) => (
+        {items.map((item) => (
           <DockItem
-            key={index}
+            key={item.to ?? "theme"}
+            to={item.to}
+            active={item.active}
             onClick={item.onClick}
+            label={item.label}
+            ariaLabel={item.ariaLabel}
             className={item.className}
             mouseX={mouseX}
             spring={spring}
@@ -154,7 +169,7 @@ export default function Dock({
             magnification={magnification}
             baseItemSize={baseItemSize}
           >
-            <DockIcon>{item.icon}</DockIcon>
+            <DockIcon aria-hidden="true">{item.icon}</DockIcon>
             <DockLabel>{item.label}</DockLabel>
           </DockItem>
         ))}

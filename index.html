@@ -1,23 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ahmed - Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#131313" />
+    <meta name="author" content="Muhammad Ahmed Ashar" />
+    <script src="/theme.js"></script>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QCCHYRL2R0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Fonts are self-hosted from /fonts; preload the two latin subsets that
+         actually render above the fold. -->
+    <link rel="preload" href="/fonts/aladin-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/red-hat-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-  gtag('config', 'G-QCCHYRL2R0');
-</script>
+    <!--seo-start-->
+    <title>Ahmed Ashar | Web Developer in Karachi</title>
+    <meta
+      name="description"
+      content="Ahmed Ashar is a web developer in Karachi, building websites and applications with care for design, usability and the details. Explore his work and approach."
+    />
+    <link rel="canonical" href="https://ahmed-ashar.vercel.app/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ahmed Ashar" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Ahmed Ashar | Web Developer in Karachi" />
+    <meta
+      property="og:description"
+      content="Ahmed Ashar is a web developer in Karachi, building websites and applications with care for design, usability and the details. Explore his work and approach."
+    />
+    <meta property="og:url" content="https://ahmed-ashar.vercel.app/" />
+    <meta property="og:image" content="https://ahmed-ashar.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ahmed Ashar web development portfolio" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ahmed Ashar | Web Developer in Karachi" />
+    <meta
+      name="twitter:description"
+      content="Ahmed Ashar is a web developer in Karachi, building websites and applications with care for design, usability and the details. Explore his work and approach."
+    />
+    <meta name="twitter:image" content="https://ahmed-ashar.vercel.app/og-image.png" />
+    <meta name="twitter:image:alt" content="Ahmed Ashar web development portfolio" />
+    <!--seo-end-->
+
+    <script src="/analytics.js" defer></script>
   </head>
   <body>
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import SimpleParallax from "simple-parallax-js";
 
@@ -12,6 +12,9 @@ export default function TiltedCard({
   imageSrc,
   altText,
   captionText,
+  imageIntrinsicWidth,
+  imageIntrinsicHeight,
+  eager = false,
   containerHeight = "100%",
   containerWidth = "100%",
   imageHeight = "100%",
@@ -37,6 +40,21 @@ export default function TiltedCard({
   });
 
   const [lastY, setLastY] = useState(0);
+
+  const image = (
+    <motion.img
+      src={imageSrc}
+      alt={altText}
+      width={imageIntrinsicWidth}
+      height={imageIntrinsicHeight}
+      loading={eager ? "eager" : "lazy"}
+      fetchPriority={eager ? "high" : "auto"}
+      decoding="async"
+      className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px]
+      transition-transform duration-500 ease-in-out
+        "
+    />
+  );
 
   function handleMouse(e) {
     if (!ref.current) return;
@@ -109,13 +127,7 @@ export default function TiltedCard({
             delay={0.1}
             transition="cubic-bezier(0.25, 0.46, 0.45, 0.94)"
           >
-            <motion.img
-              src={imageSrc}
-              alt={altText}
-              className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px]
-      transition-transform duration-500 ease-in-out
-        "
-            />
+            {image}
           </SimpleParallax>
           <div
             className="absolute top-0 left-0 w-full h-full

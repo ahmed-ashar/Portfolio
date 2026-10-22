@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Local environment files and secrets
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +27,55 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local regression and visual review output
+artifacts/
+test-results/
+playwright-report/
+
+# Dashboard credentials, content and uploads for local development
+.local/
+.vercel/
+
+# Local assistant notes and tooling (not project source)
+/PROJECT_STATUS.md
+/SESSION_NOTES.md
+/docs/DESIGN_SYSTEM.md
+/.codex/
+/.agents/
+
+# AI instructions and local assistant configuration (all directories)
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md
+CLAUDE.local.md
+GEMINI.md
+SKILL.md
+.codex/
+.agents/
+.claude/
+.cursor/
+.cursorrules
+.windsurf/
+.windsurfrules
+.github/copilot-instructions.md
+.github/instructions/
+.github/prompts/
+
+# Local caches and temporary output
+coverage/
+.cache/
+.vite/
+*.tsbuildinfo
+*.tmp
+*.bak
+*.orig
+
+# Additional local assistant metadata
+.openai/
+.gemini/
+.continue/
+.aider*
+
+# Owner-approved consolidated project reference
+!/AGENTS.md
