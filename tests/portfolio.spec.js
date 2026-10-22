@@ -212,3 +212,29 @@ test("touch visitors can filter projects and use the footer social links", async
     await expect(page.locator("footer").getByRole("link", { name: "Facebook" })).toHaveAttribute("href", "https://www.facebook.com/ahmed.ashar.58");
   } finally { await context.close(); }
 });
+
+
+test("returning from a scrolled page keeps offscreen reveals waiting for their viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/about");
+  await expect(page.locator("#education-heading .line1")).toHaveCount(1);
+  // Warm the lazy route, then revisit it from far down another page.
+  for (let visit = 0; visit < 2; visit++) {
+    await page.getByRole("link", { name: "Go to projects page" }).click();
+    await expect(page.locator("main li.card")).toHaveCount(6);
+    await page.evaluate(() => window.scrollTo(0, 3000));
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(2500);
+    await page.getByRole("link", { name: "Go to about page" }).click();
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2);
+    const line = page.locator("#education-heading .line1");
+    await expect(line).toHaveCount(1);
+    // A full entrance duration must not consume an offscreen, once-only reveal.
+    await page.waitForTimeout(1600);
+    expect(await line.evaluate(el => new DOMMatrixReadOnly(getComputedStyle(el).transform).m42)).toBeGreaterThan(10);
+    await page.evaluate(() => {
+      const heading = document.querySelector("#education-heading");
+      window.scrollTo(0, heading.getBoundingClientRect().top + scrollY - innerHeight / 2);
+    });
+    await expect.poll(() => line.evaluate(el => Math.abs(new DOMMatrixReadOnly(getComputedStyle(el).transform).m42))).toBeLessThan(1);
+  }
+});
