@@ -46,6 +46,17 @@ test("public interactions and scroll milestones are recorded once and reset on n
           .interaction_label,
     ),
   ).toBe(project);
+  // The project card opens its story route, which mounts after the click and
+  // resets scroll to the top. Wait for that route (and its delayed tracker) to
+  // settle so the scroll below belongs to the story page, not the listing it
+  // replaced, then start from an empty event list. Scrolling before the route
+  // mounts would either be reset to the top or be counted by that page.
+  await expect(page).toHaveURL(/\/projects\/[^/]+$/);
+  await expect(page.locator("main h1")).toHaveText(project);
+  await page.waitForTimeout(600);
+  await page.evaluate(() => {
+    window.__events = [];
+  });
   await page.evaluate(() =>
     window.scrollTo(0, document.documentElement.scrollHeight),
   );
