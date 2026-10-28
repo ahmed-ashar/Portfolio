@@ -9,10 +9,10 @@ const AboutSection = () => {
   return (
     <section
       aria-labelledby="about-heading"
-      className="h-auto relative py-40 sm:pb-60 w-full flex justify-center items-center text-off-white"
+      className="relative py-16 sm:py-24 w-full flex justify-center items-center text-off-white"
     >
       <div className="w-full flex flex-col justify-center items-center relative px-4">
-        <div className="sticky top-50 sm:top-30 left-0 w-full text-center gray-text font-extrabold  opacity-30 leading-none">
+        <div className="sticky top-50 sm:top-30 left-0 w-full text-center gray-text font-extrabold opacity-30 leading-none">
           <TextReveal delay={1}>
             <h2 id="about-heading" className="text-[14vw] sm:text-[15vw] ">
               {section.heading}

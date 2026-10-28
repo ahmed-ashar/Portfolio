@@ -109,6 +109,10 @@
       "destination": "/api/page?route=/projects"
     },
     {
+      "source": "/projects/:slug",
+      "destination": "/api/page?route=/projects/:slug"
+    },
+    {
       "source": "/dashboard",
       "destination": "/api/page?route=/dashboard"
     },

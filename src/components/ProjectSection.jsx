@@ -1,46 +1,43 @@
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
+import { projectPath } from "../content/projects";
 import TiltedCard from "../utilis/TiltedCard";
 import Button from "./Button";
 import TextReveal from "../utilis/TextReveal";
 import { useContent } from "../context/ContentContext";
 import ProjectCard from "./ProjectCard";
-
-gsap.registerPlugin(ScrollTrigger);
+import "../pages/projects.css";
 
 const ProjectSection = () => {
   const content = useContent();
   const section = content.home.featured;
   const data = content.portfolio.projects.filter(p=>p.visible && p.featured).slice(0, section.count);
-  const sectionRef = useRef(null);
+  const stackRef = useRef(null);
 
   useEffect(() => {
-    const cards = gsap.utils.toArray(".card", sectionRef.current);
-    const tweens = cards.map((card) =>
-      gsap.to(card, {
-        scale: 0.8,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: card,
-          start: "top -30%",
-          end: "bottom -20%",
-          scrub: true,
-        },
-      })
-    );
-
-    return () => {
-      tweens.forEach((tween) => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
-      });
+    const list = stackRef.current;
+    const cards = [...list.children];
+    if (!cards.length) return;
+    const measure = () => {
+      const last = cards.at(-1);
+      const lastTop = parseFloat(getComputedStyle(last).top);
+      const base = parseFloat(getComputedStyle(list).getPropertyValue("--stack-padding"));
+      // A taller earlier image needs room at the list's end to stay pinned
+      // when the final card reaches its own (lower) sticky position.
+      const extra = Math.max(0, ...cards.map(card =>
+        card.offsetHeight - last.offsetHeight - (lastTop - parseFloat(getComputedStyle(card).top)),
+      ));
+      list.style.setProperty("--stack-tail", `${Math.ceil(base + extra)}px`);
     };
-  }, []);
+    const observer = new ResizeObserver(measure);
+    cards.forEach(card => observer.observe(card));
+    measure();
+    return () => observer.disconnect();
+  }, [content]);
 
   return (
-    <section aria-labelledby="projects-heading" className="relative " ref={sectionRef}>
-      <div className="sticky top-50 sm:top-30 left-0 w-full text-center font-extrabold opacity-30 leading-none gray-text">
+    <section aria-labelledby="projects-heading" className="home-featured relative py-8 sm:py-12">
+      <div className="sticky top-24 sm:top-20 left-0 w-full text-center font-extrabold opacity-30 leading-none gray-text">
         <TextReveal delay={1}>
           <h2 id="projects-heading" className="text-[15vw] sm:text-[16vw]">
             {section.heading}
@@ -48,29 +45,32 @@ const ProjectSection = () => {
         </TextReveal>
       </div>
 
-      <ul role="list" className="w-full py-10 flex flex-col items-center gap-70 list-none">
-        {data.map((item) => (
+      <ul ref={stackRef} role="list" className="project-stack w-full py-8 sm:py-10 flex flex-col items-center gap-10 sm:gap-16 list-none">
+        {data.map((item, index) => (
           <li
             key={item.title}
-            className="card group sticky top-[17vh] sm:top-[18vh] w-[85%] sm:w-[70%] h-[65vh] flex flex-col items-center gap-5 rounded-lg"
+            className="card group sticky w-[85%] sm:w-[70%] rounded-lg"
+            style={{ "--stack-index": index, zIndex: index + 1 }}
           >
-            <a
-              href={item.link}
+            <Link
+              to={projectPath(item)}
               data-analytics-project={item.title}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${item.title}: ${item.para} (opens in a new tab)`}
-              className="w-full h-full"
+              aria-label={`${item.title}: Read the project story`}
+              className="block w-full"
             >
               <TiltedCard
+                naturalHeight
                 imageSrc={item.image}
+                mobileImageSrc={item.mobileImage}
+                mobileIntrinsicWidth={item.mobileWidth}
+                mobileIntrinsicHeight={item.mobileHeight}
                 altText={item.alt}
                 imageIntrinsicWidth={item.width}
                 imageIntrinsicHeight={item.height}
                 captionText={item.caption}
                 overlayContent={<ProjectCard project={item} />}
               />
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

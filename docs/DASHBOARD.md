@@ -4,6 +4,10 @@ Open `/dashboard` to edit the complete portfolio. In local development, the firs
 
 ## What you can edit
 
+Each project supports a **Desktop image** and an optional **Mobile image**. In **Projects**, expand a project and upload or paste the two image URLs. Screens below 640px use the mobile image on the homepage, project listing and project story; larger screens use the desktop image. An empty mobile image falls back to desktop. **Use desktop image on mobile** removes the override. Uploads fill the corresponding dimensions automatically; for pasted mobile URLs, enter the image width and height. The image description is shared between both versions. Save and publish as usual; the dashboard's mobile/desktop iframe previews show the appropriate source.
+
+Existing version 1 and 2 records/backups migrate in memory to version 3 with no mobile override. Reading content does not rewrite the owner's store. An explicit save/publish persists the upgraded model.
+
 - Home: hero lines and accent, dot background, scrolling skills and speed, introduction, featured projects, approach, section visibility and ordering.
 - About: biography, portrait, skills, education, experience, certificates, contact links, section headings, visibility and ordering.
 - Projects: add, remove and reorder projects; upload images; change descriptions, URLs, captions, accessibility text, image dimensions, categories and featured/visible flags.
@@ -81,3 +85,15 @@ The reports require an admin session and are not public API data. Credentials st
 Browser chart fixtures exist only in tests and are never used by the dashboard. Passing local tests does not verify Google account permissions or live report compatibility; the owner's GA4 connection must be checked after deployment.
 
 References: [GA4 Data API setup](https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart-client-libraries), [dimensions and metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema), [data freshness](https://support.google.com/analytics/answer/11198161).
+
+## Writing project stories
+
+Every visible project has a page at `/projects/<slug>`. Cards on the homepage and Projects page open that story. Its **Visit live site** button uses the project's existing link; **View source on GitHub** appears when a repository URL is provided.
+
+Open **Project stories** in the dashboard and choose a project. Edit the page URL slug, introduction label, role, timeline, tools, GitHub URL and optional search metadata. The project title, cover, description, live link and visibility are managed under **Projects**. Changing a slug changes the public URL; old URLs are not redirected automatically.
+
+Story sections support a heading, paragraphs and an optional image upload. Add, reorder or remove sections to describe goals, development, challenges, solutions, results and lessons. Separate paragraphs with a blank line. Empty sections without an enabled image are omitted from the public page. Text is rendered as plain text, not HTML or Markdown. The contents navigation and reading time follow the authored sections automatically.
+
+Preview the selected story, save the draft, then publish when ready. Draft stories and new projects do not become public until publication. Hidden projects return a 404 and are omitted from the sitemap. Backups include stories and URLs, but uploaded media still needs its original storage.
+
+Version 1 backups and existing CMS records are upgraded to version 2 in memory, preserving existing content and assigning unique slugs. Reading a record does not rewrite storage. Saving or publishing persists the upgraded model. The portfolio's own story is seeded from the repository; other projects start with their existing descriptions and editable empty sections, so unverified project history is not presented as fact.

@@ -1,4 +1,5 @@
 import { analyticsReport } from "./analytics.mjs";
+import { projectPath } from "../src/content/projects.js";
 import {
   randomBytes,
   createHash,
@@ -57,7 +58,11 @@ const initialState = () => ({
 export async function publishedContent() {
   if (!available()) return defaults;
   const record = await readRecord("content.json");
-  return record.data?.published || defaults;
+  return validateContent(record.data?.published || defaults);
+}
+function upgradeState(state) {
+  return { ...state, draft: validateContent(state.draft), published: validateContent(state.published),
+    previous: state.previous ? validateContent(state.previous) : null };
 }
 async function authRecord() {
   const record = await readRecord("auth.json");
@@ -161,7 +166,8 @@ async function handle(req, res) {
       await authenticate(req);
       const content = await publishedContent();
       const host = new URL(content.seo.siteUrl).hostname;
-      return send(res, 200, await analyticsReport(Number(url.searchParams.get("days") || 30), host));
+      return send(res, 200, await analyticsReport(Number(url.searchParams.get("days") || 30), host,
+        content.portfolio.projects.filter(project => project.visible).map(projectPath)));
     }
     const config = available() ? await credentials() : null;
     let authenticated = false;
@@ -177,7 +183,7 @@ async function handle(req, res) {
       return send(
         res,
         200,
-        (await readRecord("content.json")).data || initialState(),
+        upgradeState((await readRecord("content.json")).data || initialState()),
       );
     }
     return send(res, 200, {
@@ -293,7 +299,7 @@ async function handle(req, res) {
   if (!["save", "publish", "restore"].includes(body.action))
     throw fail(400, "Unknown action.");
   const record = await readRecord("content.json");
-  const state = record.data || initialState();
+  const state = upgradeState(record.data || initialState());
   if (body.revision !== state.revision)
     throw fail(
       409,
@@ -305,7 +311,7 @@ async function handle(req, res) {
     state.draft = structuredClone(state.previous);
   } else {
     try {
-      validateContent(body.content);
+      body.content = validateContent(body.content);
     } catch (error) {
       throw fail(400, error.message);
     }

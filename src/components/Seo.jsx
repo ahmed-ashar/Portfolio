@@ -27,6 +27,8 @@ const Seo = () => {
       pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
     const meta = normalized === "/dashboard" ? DASHBOARD : ROUTES[normalized] ?? NOT_FOUND;
     const canonical = `${SITE_URL}${meta.path === "/" ? "/" : meta.path}`;
+    const shareImage = meta.image || OG_IMAGE;
+    const shareAlt = meta.imageAlt || OG_IMAGE_ALT;
 
     // Match the build-time schema in both directions, including entry via 404.html.
     let schema = document.getElementById(STRUCTURED_DATA_ID);
@@ -72,11 +74,11 @@ const Seo = () => {
       name: "twitter:description",
       content: meta.description,
     });
-    setTag('meta[property="og:image"]', {property:'og:image',content:OG_IMAGE});
-    setTag('meta[property="og:image:alt"]', {property:'og:image:alt',content:OG_IMAGE_ALT});
+    setTag('meta[property="og:image"]', {property:'og:image',content:shareImage});
+    setTag('meta[property="og:image:alt"]', {property:'og:image:alt',content:shareAlt});
     setTag('meta[property="og:site_name"]', {property:'og:site_name',content:SITE_NAME});
-    setTag('meta[name="twitter:image"]', {name:'twitter:image',content:OG_IMAGE});
-    setTag('meta[name="twitter:image:alt"]', {name:'twitter:image:alt',content:OG_IMAGE_ALT});
+    setTag('meta[name="twitter:image"]', {name:'twitter:image',content:shareImage});
+    setTag('meta[name="twitter:image:alt"]', {name:'twitter:image:alt',content:shareAlt});
   }, [pathname,content]);
 
   return null;

@@ -62,6 +62,25 @@ SKILL.md
 .github/instructions/
 .github/prompts/
 
+# Local credential material (service accounts, private keys, certificates)
+*.pem
+*.key
+*.p12
+*.pfx
+*service-account*.json
+/google-credentials*.json
+
+# Dashboard backups exported locally
+portfolio-backup-*.json
+
+# OS and tool junk
+Thumbs.db
+desktop.ini
+*.lnk
+.playwright/
+blob-report/
+.eslintcache
+
 # Local caches and temporary output
 coverage/
 .cache/

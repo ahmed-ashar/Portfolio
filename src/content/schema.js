@@ -1,4 +1,5 @@
 import defaults from "./defaults.json" with { type: "json" };
+import { createStory, migrateContent, storySection } from "./projects.js";
 export { defaults };
 export const templates = {
   "portfolio.projects": {
@@ -7,12 +8,17 @@ export const templates = {
     image: "/profile.webp",
     width: 400,
     height: 400,
+    mobileImage: "",
+    mobileWidth: 400,
+    mobileHeight: 400,
     alt: "Project screenshot",
     link: "https://example.com",
     tags: ["Frontend"],
     caption: "Project",
     visible: true,
     featured: true,
+    slug: "new-project",
+    story: createStory({ tags: [], para: "" }),
   },
   "footer.links": {
     name: "New link",
@@ -32,7 +38,10 @@ export const templates = {
     link: "https://example.com",
   },
 };
+export const templateFor = (path) => templates[path] ||
+  (/^portfolio\.projects\.\d+\.story\.sections$/.test(path) ? storySection : undefined);
 export function validateContent(value) {
+  value = migrateContent(value);
   function walk(input, sample, path) {
     if (Array.isArray(sample)) {
       if (!Array.isArray(input) || input.length > 100)
@@ -56,6 +65,8 @@ export function validateContent(value) {
     else if (typeof input === "string") {
       if (input.length > 10000) throw new Error(path + ": text is too long.");
       const key = path.split(".").pop();
+      if (key === "sourceUrl" && input && !/^https:\/\/[^\s]+$/.test(input))
+        throw new Error(path + ": use an HTTPS repository URL or leave empty.");
       if (
         ["link", "buttonLink"].includes(key) &&
         !/^(https?:\/\/[^\s]+|mailto:[^\s]+|tel:[+\d\s-]+|\/(?!\/)[^\\]*|#[^\s]*)$/.test(
@@ -66,7 +77,7 @@ export function validateContent(value) {
           path + ": enter a valid website, email, telephone or local link.",
         );
       if (
-        ["image", "profile"].includes(key) &&
+        (["image", "profile"].includes(key) || (key === "mobileImage" && input !== "")) &&
         !/^(https:\/\/[^\s]+|\/(?!\/)[^\\]*)$/.test(input)
       )
         throw new Error(path + ": use an HTTPS image or an uploaded image.");
@@ -86,7 +97,7 @@ export function validateContent(value) {
     throw new Error(
       "The all-projects label must be different from your categories.",
     );
-  if (value.version !== 1) throw new Error("Unsupported backup version.");
+  if (value.version !== 3) throw new Error("Unsupported backup version.");
   for (const [path, expected] of [
     ["home", defaults.home.order],
     ["about", defaults.about.order],
@@ -121,10 +132,18 @@ export function validateContent(value) {
     throw new Error("Featured project count must be between 1 and 100.");
   if (Math.abs(value.home.marquee.speed) > 500)
     throw new Error("Marquee speed must be between -500 and 500.");
-  for (const p of value.portfolio.projects)
+  for (const p of value.portfolio.projects) {
     if (!p.title.trim() || p.width < 1 || p.height < 1)
       throw new Error("Projects need a title and positive image dimensions.");
+    if (!Number.isInteger(p.mobileWidth) || !Number.isInteger(p.mobileHeight) || p.mobileWidth < 1 || p.mobileHeight < 1)
+      throw new Error("Mobile image dimensions must be positive whole numbers.");
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug) || p.slug.length > 100)
+      throw new Error("Project URL slugs must use lowercase letters, numbers and single hyphens (up to 100 characters).");
+    if (p.story.sections.some(section => !section.title.trim()))
+      throw new Error("Give every story section a heading.");
+  }
   for (const list of [
+    value.portfolio.projects.map((p) => p.slug),
     value.portfolio.projects.map((p) => p.title),
     value.portfolio.categories,
     value.about.skills,
@@ -132,7 +151,7 @@ export function validateContent(value) {
   ])
     if (new Set(list).size !== list.length || list.some((s) => !s.trim()))
       throw new Error(
-        "Project names, categories, skills and link names must be unique and nonempty.",
+        "Project names, URL slugs, categories, skills and link names must be unique and nonempty.",
       );
   try {
     new Intl.DateTimeFormat("en", { timeZone: value.identity.timeZone });

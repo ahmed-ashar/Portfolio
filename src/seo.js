@@ -1,4 +1,5 @@
 import defaults from "./content/defaults.json" with { type: "json" };
+import { projectPath } from "./content/projects.js";
 export const STRUCTURED_DATA_ID = "site-structured-data";
 export function getSeo(content = defaults) {
   const { seo, identity, footer, about, notFound } = content;
@@ -14,6 +15,13 @@ export function getSeo(content = defaults) {
       "/": { path: "/", ...seo.home },
       "/about": { path: "/about", ...seo.about },
       "/projects": { path: "/projects", ...seo.projects },
+      ...Object.fromEntries(content.portfolio.projects.filter(project => project.visible).map(project => [projectPath(project), {
+        path: projectPath(project),
+        title: project.story.seoTitle || `${project.title} | ${identity.siteName}`,
+        description: project.story.seoDescription || project.para,
+        image: absolute(project.image),
+        imageAlt: project.alt,
+      }])),
     },
     NOT_FOUND: {
       path: "/404",

@@ -329,6 +329,7 @@ function Scroll({ data }) {
           <option value="/">Home</option>
           <option value="/about">About</option>
           <option value="/projects">Projects</option>
+          {[...new Set(data.map(row => row.pagePath))].filter(value => value.startsWith("/projects/")).map(value => <option key={value} value={value}>{value}</option>)}
         </select>
       </div>
       {steps.every((row) => row.count === 0) ? (

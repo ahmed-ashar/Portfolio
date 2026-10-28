@@ -22,25 +22,10 @@ test("public interactions and scroll milestones are recorded once and reset on n
       ),
     )
     .toBe(1);
-  await page
-    .locator("[data-analytics-project]")
-    .first()
-    .evaluate((el) => el.setAttribute("target", "_self"));
-  // Prevent navigation after the analytics listener has seen the genuine click.
-  await page.route("https://**", (route) =>
-    route.fulfill({
-      contentType: "text/html",
-      body: "test project destination",
-    }),
-  );
   const project = await page
     .locator("[data-analytics-project]")
     .first()
     .getAttribute("data-analytics-project");
-  await page
-    .locator("[data-analytics-project]")
-    .first()
-    .evaluate((el) => (el.href = "#project-test"));
   await page
     .locator("[data-analytics-project]")
     .first()

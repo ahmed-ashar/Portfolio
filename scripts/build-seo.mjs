@@ -38,7 +38,7 @@ const jsonLdBlock = () =>
   JSON.stringify(structuredData).split("<").join("\\u003c") +
   "</script>";
 
-function headFor({ path, title, description, noindex }) {
+function headFor({ path, title, description, noindex, image = OG_IMAGE, imageAlt = OG_IMAGE_ALT }) {
   const canonical = `${SITE_URL}${path === "/" ? "/" : path}`;
   const robots = noindex
     ? "noindex, follow"
@@ -56,15 +56,13 @@ function headFor({ path, title, description, noindex }) {
     <meta property="og:title" content="${escape(title)}" />
     <meta property="og:description" content="${escape(description)}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${OG_IMAGE}" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="${escape(OG_IMAGE_ALT)}" />
+    <meta property="og:image" content="${escape(image)}" />
+    <meta property="og:image:alt" content="${escape(imageAlt)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escape(title)}" />
     <meta name="twitter:description" content="${escape(description)}" />
-    <meta name="twitter:image" content="${OG_IMAGE}" />
-    <meta name="twitter:image:alt" content="${escape(OG_IMAGE_ALT)}" />${
+    <meta name="twitter:image" content="${escape(image)}" />
+    <meta name="twitter:image:alt" content="${escape(imageAlt)}" />${
     noindex ? "" : `
     ${jsonLdBlock()}`
   }`;
@@ -101,7 +99,8 @@ for (const meta of Object.values(ROUTES)) {
     meta.path === "/"
       ? resolve(dist, "index.html")
       : resolve(dist, meta.path.slice(1), "index.html");
-  const html = render(meta).replace('<div id="root"></div>', `<div id="root">${await renderApp(meta.path)}</div>`);
+  const markup = await renderApp(meta.path);
+  const html = render(meta).replace('<div id="root"></div>', () => `<div id="root">${markup}</div>`);
   await write(out, html);
 }
 await write(resolve(dist, "404.html"), render(NOT_FOUND).replace('<div id="root"></div>', `<div id="root">${await renderApp("/404")}</div>`));

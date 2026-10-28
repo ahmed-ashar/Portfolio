@@ -13,7 +13,7 @@
 
   if (PRODUCTION_HOSTS.indexOf(window.location.hostname) === -1) return;
   if (window.self !== window.top) return;
-  if (["/", "/about", "/projects"].indexOf(window.location.pathname) === -1) return;
+  if (["/", "/about", "/projects"].indexOf(window.location.pathname) === -1 && !/^\/projects\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(window.location.pathname)) return;
   if (navigator.globalPrivacyControl || navigator.doNotTrack === "1") return;
 
   window.dataLayer = window.dataLayer || [];

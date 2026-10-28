@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-const publicPaths = ["/", "/about", "/projects"];
+import { useContent } from "../context/ContentContext";
+import { projectPath } from "../content/projects";
 const measurementId = "G-77MPKKC7BM";
 
 // No IDs, form values, email addresses, query strings or full outbound URLs
 // are added to custom events. Labels come only from authored project metadata.
 export default function AnalyticsTracker() {
   const { pathname } = useLocation();
+  const content = useContent();
   useEffect(() => {
+    const publicPaths = ["/", "/about", "/projects", ...content.portfolio.projects.filter(project => project.visible).map(projectPath)];
     const excluded =
       !publicPaths.includes(pathname) ||
       window.self !== window.top ||
@@ -99,8 +102,8 @@ export default function AnalyticsTracker() {
     window.addEventListener("resize", scroll, { passive: true });
     document.addEventListener("visibilitychange", measure);
     window.addEventListener("portfolio-analytics-ready", measure);
-    document.addEventListener("click", click);
-    document.addEventListener("auxclick", click);
+    document.addEventListener("click", click, true);
+    document.addEventListener("auxclick", click, true);
     return () => {
       clearTimeout(initial);
       clearTimeout(timer);
@@ -108,9 +111,9 @@ export default function AnalyticsTracker() {
       window.removeEventListener("resize", scroll);
       document.removeEventListener("visibilitychange", measure);
       window.removeEventListener("portfolio-analytics-ready", measure);
-      document.removeEventListener("click", click);
-      document.removeEventListener("auxclick", click);
+      document.removeEventListener("click", click, true);
+      document.removeEventListener("auxclick", click, true);
     };
-  }, [pathname]);
+  }, [pathname, content]);
   return null;
 }

@@ -36,7 +36,7 @@ const DockComp = () => {
       label: identity.projectsLabel,
       ariaLabel: "Go to projects page",
       to: "/projects",
-      active: pathname.replace(/\/+$/, "") === "/projects",
+      active: pathname.replace(/\/+$/, "") === "/projects" || pathname.startsWith("/projects/"),
     },
     {
       icon: <FontAwesomeIcon icon={isDarkTheme ? faMoon : faSun} size="sm" />,

@@ -8,13 +8,31 @@ const springValues = {
   mass: 2,
 };
 
+// Forward the actual image ref so SimpleParallax can measure/animate it while
+// the browser selects the right source before hydration, including in previews.
+function ResponsiveImage({ ref, mobileImageSrc, mobileIntrinsicWidth, mobileIntrinsicHeight, ...props }) {
+  const image = <motion.img ref={ref} {...props} />;
+  return mobileImageSrc ? (
+    <picture style={{ display: "block" }}>
+      <source media="(max-width: 639px)" srcSet={mobileImageSrc} width={mobileIntrinsicWidth} height={mobileIntrinsicHeight} />
+      {image}
+    </picture>
+  ) : image;
+}
+
 export default function TiltedCard({
   imageSrc,
   altText,
   captionText,
   imageIntrinsicWidth,
   imageIntrinsicHeight,
+  mobileImageSrc,
+  mobileIntrinsicWidth,
+  mobileIntrinsicHeight,
   eager = false,
+  enableParallax = true,
+  imageFit = "cover",
+  naturalHeight = false,
   containerHeight = "100%",
   containerWidth = "100%",
   imageHeight = "100%",
@@ -42,14 +60,18 @@ export default function TiltedCard({
   const [lastY, setLastY] = useState(0);
 
   const image = (
-    <motion.img
+    <ResponsiveImage
       src={imageSrc}
+      mobileImageSrc={mobileImageSrc}
+      mobileIntrinsicWidth={mobileIntrinsicWidth}
+      mobileIntrinsicHeight={mobileIntrinsicHeight}
       alt={altText}
       width={imageIntrinsicWidth}
       height={imageIntrinsicHeight}
       loading={eager ? "eager" : "lazy"}
       fetchPriority={eager ? "high" : "auto"}
       decoding="async"
+      style={{ objectFit: imageFit, ...(naturalHeight ? { position: "relative", height: "auto" } : {}) }}
       className="absolute top-0 left-0 w-full h-full object-cover rounded-[15px]
       transition-transform duration-500 ease-in-out
         "
@@ -95,7 +117,7 @@ export default function TiltedCard({
       ref={ref}
       className="relative w-full h-full [perspective:800px] flex flex-col items-center justify-center"
       style={{
-        height: containerHeight,
+        height: naturalHeight ? "auto" : containerHeight,
         width: containerWidth,
       }}
       onMouseMove={handleMouse}
@@ -112,7 +134,7 @@ export default function TiltedCard({
         className="relative [transform-style:preserve-3d]"
         style={{
           width: imageWidth,
-          height: imageHeight,
+          height: naturalHeight ? "auto" : imageHeight,
           rotateX,
           rotateY,
           scale,
@@ -120,15 +142,15 @@ export default function TiltedCard({
       >
         <div
           className="relative group rounded-[15px] overflow-hidden"
-          style={{ width: imageWidth, height: imageHeight }}
+          style={{ width: imageWidth, height: naturalHeight ? "auto" : imageHeight }}
         >
-          <SimpleParallax
+          {enableParallax ? <SimpleParallax
             scale={1.2}
             delay={0.1}
             transition="cubic-bezier(0.25, 0.46, 0.45, 0.94)"
           >
             {image}
-          </SimpleParallax>
+          </SimpleParallax> : image}
           <div
             className="absolute top-0 left-0 w-full h-full
        opacity-30 group-hover:opacity-0
@@ -138,7 +160,7 @@ export default function TiltedCard({
         </div>
 
         {displayOverlayContent && overlayContent && (
-          <motion.div className="  text-4xl  will-change-transform [transform:translateZ(30px)]">
+          <motion.div className="tilted-card-overlay text-4xl will-change-transform [transform:translateZ(30px)]">
             {overlayContent}
           </motion.div>
         )}

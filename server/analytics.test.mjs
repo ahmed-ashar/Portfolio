@@ -77,6 +77,18 @@ test("GA4 reports compare full periods, preserve period uniques, fill missing da
   ]);
   assert.equal(calls.length, 3);
 });
+test("publishing a story updates report scope without reusing the old cached report", async () => {
+  const calls = [];
+  const service = createAnalyticsService({ env, now, request: async (body, method) => {
+    calls.push(body);
+    return method === "runReport" ? fixture(body) : { reports: body.requests.map(fixture) };
+  } });
+  await service(7, "example.com");
+  await service(7, "example.com", ["/projects/new-story"]);
+  assert.equal(calls.length, 6);
+  assert.deepEqual(calls[3].requests[0].dimensionFilter.andGroup.expressions[1].filter.inListFilter.values,
+    ["/", "/about", "/projects", "/projects/new-story"]);
+});
 test("concurrent requests share one report and cache expires", async () => {
   let time = now(),
     calls = 0;

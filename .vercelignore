@@ -2,7 +2,17 @@
 artifacts/
 test-results/
 playwright-report/
+blob-report/
 .env*
+
+# Test and development tooling (not needed to build or serve the site)
+tests/
+playwright.config.js
+playwright.dashboard.config.js
+/scripts/visual-review.mjs
+/scripts/dashboard-test-server.mjs
+/docs/
+README.md
 
 # Local assistant notes and tooling
 /PROJECT_STATUS.md
@@ -46,3 +56,15 @@ coverage/
 
 # Local Google Analytics service-account credentials
 /portfolio-analytics-512420-*.json
+
+# Other local credential exports (service accounts, keys, certificates)
+*.pem
+*.key
+*.p12
+*.pfx
+*service-account*.json
+/google-credentials*.json
+
+# Locally exported dashboard backups
+portfolio-backup-*.json
+

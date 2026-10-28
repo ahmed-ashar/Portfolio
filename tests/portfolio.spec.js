@@ -84,6 +84,27 @@ test("filter controls remain accessible and update project results", async ({ pa
   expect(names).toEqual(expect.arrayContaining(["All", "Frontend", "Backend", "MERN Stack"]));
 });
 
+test("Projects heading reflows after resizing without retaining stale animated lines", async ({ page }) => {
+  await page.setViewportSize({ width: 900, height: 900 });
+  await page.goto("/projects");
+  const heading = page.locator("main h1");
+  const lines = heading.locator(".line");
+  await expect(lines.first()).toBeVisible();
+  const narrowCount = await lines.count();
+  await expect.poll(() => lines.first().evaluate(el => Math.abs(new DOMMatrixReadOnly(getComputedStyle(el).transform).m42))).toBeLessThan(1);
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await expect.poll(() => lines.count()).toBeLessThan(narrowCount);
+  const wideCount = await lines.count();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect.poll(() => lines.count()).toBeGreaterThan(wideCount);
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await expect.poll(() => lines.count()).toBe(wideCount);
+  await expect.poll(() => lines.first().evaluate(el => Math.abs(new DOMMatrixReadOnly(getComputedStyle(el).transform).m42))).toBeLessThan(1);
+  expect(await heading.evaluate(el => Math.abs(el.clientWidth - el.parentElement.parentElement.parentElement.clientWidth))).toBeLessThan(2);
+  await page.getByRole("button", { name: "Backend", exact: true }).click();
+  await expect(page.locator("main li.card")).toHaveCount(3);
+});
+
 test("404 transitions keep metadata and structured data in sync", async ({ page }) => {
   await page.goto("/missing-page");
   await expect(page.locator(schema)).toHaveCount(0);

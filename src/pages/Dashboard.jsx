@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useContent } from "../context/ContentContext";
-import { defaults, templates, validateContent } from "../content/schema";
+import { defaults, templateFor, validateContent } from "../content/schema";
+import { createStory, projectPath } from "../content/projects";
 import "./dashboard.css";
 import AnalyticsPanel from "./AnalyticsPanel";
 const sections = [
@@ -68,6 +69,13 @@ const sections = [
     name: "Projects",
     icon: "\u25a4",
     description: "Curate your work. Add projects, images and categories.",
+    route: "/projects",
+  },
+  {
+    id: "stories",
+    name: "Project stories",
+    icon: "\u270e",
+    description: "The thinking behind the work. Write, illustrate and arrange each project's story.",
     route: "/projects",
   },
   {
@@ -145,6 +153,16 @@ const labels = {
   font: "Website font",
   dark: "Dark theme",
   light: "Light theme",
+  story: "Project story",
+  slug: "Page URL slug",
+  sourceUrl: "GitHub repository URL",
+  seoTitle: "Search title (optional)",
+  seoDescription: "Search description (optional)",
+  technologies: "Tools & technologies",
+  showImage: "Show section image",
+  mobileImage: "Mobile image (optional)",
+  mobileWidth: "Mobile image width",
+  mobileHeight: "Mobile image height",
 };
 const titleFor = (key) =>
   labels[key] ||
@@ -178,6 +196,8 @@ function Field({ value, path, onChange, onError, categories = [] }) {
   const label =
     key === "name" && path.startsWith("footer.links.")
       ? "Link name"
+      : key === "image" && /^portfolio\.projects\.\d+\.image$/.test(path) ? "Desktop image"
+      : key === "role" && path.includes(".story.") ? "My role"
       : titleFor(key);
   const id = "field-" + path;
   const [uploading, setUploading] = useState(false);
@@ -196,11 +216,11 @@ function Field({ value, path, onChange, onError, categories = [] }) {
       });
       const result = await request("upload", { data });
       onChange(path, result.url);
-      if (path.startsWith("portfolio.projects.")) {
+      if (/^portfolio\.projects\.\d+\.(image|mobileImage)$/.test(path)) {
         const bitmap = await createImageBitmap(file);
         const parent = path.slice(0, path.lastIndexOf("."));
-        onChange(parent + ".width", bitmap.width);
-        onChange(parent + ".height", bitmap.height);
+        onChange(parent + (key === "mobileImage" ? ".mobileWidth" : ".width"), bitmap.width);
+        onChange(parent + (key === "mobileImage" ? ".mobileHeight" : ".height"), bitmap.height);
         bitmap.close();
       }
     } catch (error) {
@@ -250,15 +270,18 @@ function Field({ value, path, onChange, onError, categories = [] }) {
             <button
               className="small-button"
               type="button"
-              onClick={() =>
-                onChange(path, [
-                  ...value,
-                  clone(
-                    templates[path] ||
-                      (typeof value[0] === "object" ? value[0] : "New item"),
-                  ),
-                ])
-              }
+              onClick={() => {
+                const item = clone(templateFor(path) || (typeof value[0] === "object" ? value[0] : "New item"));
+                if (path === "portfolio.projects") {
+                  let suffix = 1;
+                  while (value.some(project => project.slug === item.slug || project.title === item.title)) {
+                    suffix++;
+                    item.slug = `new-project-${suffix}`;
+                    item.title = `New project ${suffix}`;
+                  }
+                }
+                onChange(path, [...value, item]);
+              }}
             >
               + Add {key === "projects" ? "project" : "item"}
             </button>
@@ -388,7 +411,7 @@ function Field({ value, path, onChange, onError, categories = [] }) {
         <span className="switch" aria-hidden="true" />
       </label>
     );
-  const image = ["image", "profile"].includes(key);
+  const image = ["image", "profile", "mobileImage"].includes(key);
   const color = path.startsWith("appearance.") && key !== "font";
   const multiline =
     [
@@ -404,7 +427,7 @@ function Field({ value, path, onChange, onError, categories = [] }) {
   return (
     <div className={"field" + (image ? " image-field" : "")}>
       <label htmlFor={id}>{label}</label>
-      {image && (
+      {image && value && (
         <img
           src={value}
           alt="Selected image preview"
@@ -475,6 +498,10 @@ function Field({ value, path, onChange, onError, categories = [] }) {
           <small>PNG, JPG, WebP or GIF / up to 3 MB</small>
         </label>
       )}
+      {key === "mobileImage" && <>
+        <small>Optional. Used below 640px on project cards and stories. Leave empty to use the desktop image. Uploads fill dimensions automatically; for a pasted URL, enter its width and height below.</small>
+        {value && <button className="text-button" type="button" onClick={() => onChange(path, "")}>Use desktop image on mobile</button>}
+      </>}
     </div>
   );
 }
@@ -593,11 +620,15 @@ export default function Dashboard() {
     [device, setDevice] = useState("mobile"),
     [confirm, setConfirm] = useState(null),
     [search, setSearch] = useState("");
+  const [storyIndex, setStoryIndex] = useState(0);
   const iframe = useRef(null),
     previewBox = useRef(null),
     [previewWidth, setPreviewWidth] = useState(360);
   const active = sections.find((s) => s.id === selected);
-  const route = active.route || "/";
+  const selectedProject = draft?.portfolio.projects[Math.min(storyIndex, draft.portfolio.projects.length - 1)];
+  const editingPath = selected === "stories" && selectedProject
+    ? `portfolio.projects.${draft.portfolio.projects.indexOf(selectedProject)}.story` : selected;
+  const route = selected === "stories" && selectedProject ? projectPath(selectedProject) : active.route || "/";
   const dirty = Boolean(
     draft && saved && JSON.stringify(draft) !== JSON.stringify(saved.draft),
   );
@@ -956,7 +987,7 @@ export default function Dashboard() {
               </section>
               <section className="stat-grid" aria-label="Portfolio overview">
                 {[
-                  ["Pages", "3", "Home, About & Projects"],
+                  ["Pages", 3 + draft.portfolio.projects.filter(project => project.visible).length, "Main pages & project stories"],
                   [
                     "Projects",
                     draft.portfolio.projects.length,
@@ -1071,12 +1102,13 @@ export default function Dashboard() {
                   </div>
                   <button
                     className="text-button"
+                    disabled={selected === "stories" && !selectedProject}
                     onClick={() =>
                       setConfirm({
                         title: "Reset this section?",
                         text: "The original content will replace this section in your draft. Other sections will stay as they are.",
                         action: () => {
-                          change(selected, clone(get(defaults, selected)));
+                          change(editingPath, selected === "stories" ? createStory(selectedProject) : clone(get(defaults, selected)));
                           setConfirm(null);
                         },
                       })
@@ -1085,13 +1117,22 @@ export default function Dashboard() {
                     Reset
                   </button>
                 </div>
-                <Field
-                  value={get(draft, selected)}
-                  path={selected}
+                {selected === "stories" && <div className="field story-editor-picker">
+                  <label htmlFor="story-project-picker">Choose a project</label>
+                  <select id="story-project-picker" value={selectedProject ? draft.portfolio.projects.indexOf(selectedProject) : ""} onChange={event => setStoryIndex(Number(event.target.value))}>
+                    {!draft.portfolio.projects.length && <option value="">No projects yet</option>}
+                    {draft.portfolio.projects.map((project, index) => <option key={index} value={index}>{project.title}{project.visible ? "" : " (hidden)"}</option>)}
+                  </select>
+                  <p className="empty-field">Write in your own words. Add, remove or reorder sections below. Empty text sections stay hidden. Separate paragraphs with a blank line. Add the GitHub URL to show the source button.</p>
+                  {selectedProject && <Field value={selectedProject.slug} path={editingPath.replace(/\.story$/, ".slug")} onChange={change} onError={setError} />}
+                </div>}
+                {(selected !== "stories" || selectedProject) && <Field
+                  value={get(draft, editingPath)}
+                  path={editingPath}
                   onChange={change}
                   onError={setError}
                   categories={draft.portfolio.categories}
-                />
+                />}
                 <div className="editor-footer">
                   <button
                     className="text-button"

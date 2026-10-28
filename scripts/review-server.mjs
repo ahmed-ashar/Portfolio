@@ -20,7 +20,7 @@ export async function startReviewServer(port = 4173) {
       for (const { key, value } of config.headers[0].headers) res.setHeader(key, value);
       if (/^\/api\/(admin|content|media)$/.test(pathname)) return cms(req,res);
       if (pathname === '/api/page') return pageHandler(req,res);
-      if (['/','/about','/projects','/dashboard','/sitemap.xml','/robots.txt'].includes(pathname)) {
+      if (['/','/about','/projects','/dashboard','/sitemap.xml','/robots.txt'].includes(pathname) || pathname.startsWith('/projects/')) {
         req.query = {route:pathname}; return pageHandler(req,res);
       }
       let file = resolve(root, `.${pathname}`);

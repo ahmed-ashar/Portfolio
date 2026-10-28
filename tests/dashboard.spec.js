@@ -84,17 +84,38 @@ test("admin edits, previews, saves and publishes shared content with secure sess
   await page
     .getByRole("button", { name: "+ Add project", exact: true })
     .click();
-  const newProject = page.locator("details").last();
-  await newProject.locator("summary").click();
+  const newProject = page.locator("details").filter({ has: page.locator("#field-portfolio\\.projects\\.6\\.title") });
+  await newProject.locator("summary").first().click();
   await newProject
-    .getByLabel("Title", { exact: true })
+    .locator('[id="field-portfolio.projects.6.title"]')
     .fill("Dashboard project");
-  await newProject.getByLabel("Image", { exact: true }).fill("/profile.webp");
+  await newProject.locator('[id="field-portfolio.projects.6.image"]').fill("/profile.webp");
+  const mobileField = newProject.locator(".image-field").filter({ has: page.locator('[id="field-portfolio.projects.6.mobileImage"]') });
+  await mobileField.locator('input[type="file"]').setInputFiles("public/profile.webp");
+  const mobileImageInput = newProject.getByLabel("Mobile image (optional)", { exact: true });
+  await expect(mobileImageInput).toHaveValue(/\/api\/media\?id=/);
+  const mobileImageUrl = await mobileImageInput.inputValue();
+  await expect(newProject.getByLabel("Mobile image width", { exact: true })).toHaveValue("400");
+  await expect(newProject.getByLabel("Mobile image height", { exact: true })).toHaveValue("400");
   await page
     .getByRole("button", { name: "Save draft", exact: true })
     .first()
     .click();
   await expect(page.getByRole("status")).toContainText("Draft saved");
+  await test.step("project stories are editable and previewed before publication", async () => {
+    await nav.getByRole("button", { name: "Project stories", exact: true }).click();
+    await page.getByLabel("Choose a project").selectOption("6");
+    await page.getByLabel("Page URL slug").fill("dashboard-project");
+    await page.getByLabel("GitHub repository URL").fill("https://github.com/example/project");
+    const section = page.locator("details").first();
+    await section.locator("summary").click();
+    await page.locator('[id="field-portfolio.projects.6.story.sections.0.body"]').fill("A story written in the dashboard.\n\nThis is the second paragraph.");
+    await expect(page.frameLocator("iframe").locator("main h1")).toHaveText("Dashboard project");
+    await expect(page.frameLocator("iframe").locator("article")).toContainText("A story written in the dashboard.");
+    await page.getByRole("button", { name: "Save draft", exact: true }).first().click();
+    await expect(page.getByRole("status")).toContainText("Draft saved");
+    expect((await request.get("/projects/dashboard-project")).status()).toBe(404);
+  });
   await nav.getByRole("button", { name: "About page", exact: true }).click();
   await page
     .locator("input[type=file]")
@@ -140,6 +161,23 @@ test("admin edits, previews, saves and publishes shared content with secure sess
     .getByRole("button", { name: "Frontend", exact: true })
     .click();
   await expect(publicPage.locator("main li.card")).toHaveCount(6);
+  await publicPage.getByRole("link", { name: "Dashboard project: Read the project story", exact: true }).click();
+  await expect(publicPage).toHaveURL(base + "/projects/dashboard-project");
+  await expect(publicPage.locator("article")).toContainText("A story written in the dashboard.");
+  await expect(publicPage.getByRole("link", { name: /View source on GitHub/ })).toHaveAttribute("href", "https://github.com/example/project");
+  const storyResponse = await request.get("/projects/dashboard-project");
+  expect(storyResponse.status()).toBe(200);
+  expect(await storyResponse.text()).toContain("A story written in the dashboard.");
+  await expect(publicPage.locator(".story-cover img")).toHaveJSProperty("currentSrc", base + "/profile.webp");
+  const mobileVisitor = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
+  try {
+    const mobilePage = await mobileVisitor.newPage();
+    await mobilePage.goto(base + "/projects/dashboard-project");
+    const cover = mobilePage.locator(".story-cover img");
+    await cover.scrollIntoViewIfNeeded();
+    await expect(cover).toHaveJSProperty("currentSrc", base + mobileImageUrl);
+  } finally { await mobileVisitor.close(); }
+  expect(await (await request.get("/sitemap.xml")).text()).toContain("/projects/dashboard-project");
   await visitor.close();
   // No session can read drafts, publish, or upload; cross-site writes are rejected.
   expect((await request.get("/api/admin?action=content")).status()).toBe(401);

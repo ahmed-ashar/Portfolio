@@ -3,7 +3,7 @@ import defaults from "../content/defaults.json" with { type: "json" };
 import { validateContent } from "../content/schema";
 const ContentContext = createContext({ content: defaults, revision: 0 });
 export function ContentProvider({ children, initialContent = defaults }) {
-  const [state, setState] = useState({ content: initialContent, revision: 0 });
+  const [state, setState] = useState(() => ({ content: validateContent(initialContent), revision: 0 }));
   useEffect(() => {
     const preview =
       new URLSearchParams(location.search).has("editor-preview") &&
@@ -11,7 +11,7 @@ export function ContentProvider({ children, initialContent = defaults }) {
     let active = true;
     const apply = (content) => {
       try {
-        validateContent(content);
+        content = validateContent(content);
         if (active)
           setState((old) =>
             JSON.stringify(old.content) === JSON.stringify(content)

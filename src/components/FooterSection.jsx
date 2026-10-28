@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 
-const FooterSection = () => {
+const FooterSection = ({ reveal = true }) => {
   const footer = useContent().footer;
   const links = footer.links;
   return (
-    <footer className=" fixed h-[80vh] bottom-0 top-auto w-full gray-bg  -z-1">
-      <div className="h-[80vh] sm:h-[85vh] w-full overflow-hidden text-off-white relative">
+    <footer className={reveal ? "fixed h-[80vh] bottom-0 top-auto w-full gray-bg -z-1" : "relative w-full gray-bg"}>
+      <div className={reveal ? "h-[80vh] sm:h-[85vh] w-full overflow-hidden text-off-white relative" : "w-full overflow-hidden text-off-white relative pt-6 pb-6 sm:pt-10 sm:pb-8"}>
         <div className="w-[calc(95%-2.1rem)] sm:w-[calc(75%-2.1rem)] md:w-[calc(80%-2.1rem)]  mt-5 sm:mt-10 mx-auto flex flex-col sm:flex-row justify-between items-start  gap-10">
           <div>
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold   ">
@@ -67,7 +67,7 @@ const FooterSection = () => {
 
         <p
           aria-hidden="true"
-          className=" absolute  bottom-0 w-full text-center font-extrabold opacity-10  leading-none text-off-white text-[18vw] "
+          className={(reveal ? "absolute bottom-6 sm:bottom-8 " : "relative mt-8 ") + "w-full text-[18vw] text-center font-extrabold opacity-10 leading-none text-off-white"}
         >
           {footer.watermark}
         </p>

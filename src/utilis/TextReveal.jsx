@@ -12,6 +12,7 @@ export default function TextReveal({
   children,
   animateOnScroll = true,
   delay = 0,
+  responsive = false,
 }) {
   const containerRef = useRef(null);
   const splitRef = useRef([]); 
@@ -36,6 +37,21 @@ export default function TextReveal({
           type: "lines",
           mask: "lines",
           linesClass: "line++",
+          autoSplit: responsive,
+          ...(responsive ? {
+            // SplitText restores the returned tween's progress when fonts or
+            // width change, so a completed reveal stays visible after reflow.
+            onSplit: (self) => gsap.fromTo(self.lines, { y: "100%" }, {
+              y: "0%",
+              duration: 1,
+              stagger: 0.1,
+              ease: "power4.out",
+              delay,
+              ...(animateOnScroll ? {
+                scrollTrigger: { trigger: element, start: "top 75%", once: true },
+              } : {}),
+            }),
+          } : {}),
           // SplitText's default hides line wrappers from assistive technology.
           // Preserve nested controls and any authored group label.
           aria: element.querySelector("a, button, input, select, textarea, [tabindex], [role='button']")
@@ -58,6 +74,7 @@ export default function TextReveal({
         lines.current.push(...split.lines);
       });
 
+      if (!responsive) {
       gsap.set(lines.current, { y: "100%" });
 
       const animateOnProps = {
@@ -80,6 +97,7 @@ export default function TextReveal({
       } else {
         gsap.to(lines.current, animateOnProps);
       }
+      }
 
       return () => {
         splitRef.current.forEach((split) => {
@@ -91,7 +109,7 @@ export default function TextReveal({
     },
     {
       scope: containerRef,
-      dependencies: [animateOnScroll, delay],
+      dependencies: [animateOnScroll, delay, responsive],
       revertOnUpdate: true,
     }
   );

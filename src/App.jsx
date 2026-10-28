@@ -8,6 +8,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Home = lazy(() => import("./pages/Home"));
 const Projects = lazy(() => import("./pages/Projects"));
+const ProjectStory = lazy(() => import("./pages/ProjectStory"));
 const About = lazy(() => import("./pages/About"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -29,6 +30,7 @@ const App = () => {
             <Route caseSensitive path="/" element={<Home />} />
             <Route caseSensitive path="/about" element={<About />} />
             <Route caseSensitive path="/projects" element={<Projects />} />
+            <Route caseSensitive path="/projects/:slug" element={<ProjectStory />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

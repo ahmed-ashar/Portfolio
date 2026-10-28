@@ -1,0 +1,33 @@
+/* Match caption insets across full-width and paired cards at each viewport. */
+:is(.project-listing, .home-featured) .card { container-type: inline-size; }
+.home-featured .card { top: calc(23vh + var(--stack-index) * 18px); }
+.home-featured .project-stack { --stack-padding: 32px; }
+.home-featured .card:last-child {
+  margin-bottom: calc(var(--stack-tail, var(--stack-padding)) - var(--stack-padding));
+}
+@media (min-width: 640px) {
+  .home-featured .card { top: calc(24vh + var(--stack-index) * 24px); }
+  .home-featured .project-stack { --stack-padding: 40px; }
+}
+@media (min-width: 1100px) {
+  .home-featured .card { top: 18vh; }
+}
+:is(.project-listing, .home-featured) .tilted-card-overlay { transform: none; }
+:is(.project-listing, .home-featured) .project-card-caption {
+  bottom: clamp(8px, 2vw, 20px);
+  margin-inline: clamp(8px, 2vw, 20px);
+  padding: clamp(8px, 2vw, 20px);
+  gap: clamp(8px, 2vw, 20px);
+}
+:is(.project-listing, .home-featured) .project-card-caption p.uppercase {
+  font-size: clamp(14px, 4cqw, 24px);
+  line-height: 1.15;
+}
+:is(.project-listing, .home-featured) .project-card-caption p.text-xs {
+  font-size: clamp(9px, 2cqw, 12px);
+  line-height: 1.4;
+}
+:is(.project-listing, .home-featured) .project-card-caption .rounded-full {
+  padding: clamp(6px, 2cqw, 12px);
+}
+:is(.project-listing, .home-featured) .project-card-caption svg { font-size: clamp(12px, 3cqw, 20px); }

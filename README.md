@@ -13,6 +13,7 @@ The public website brings together selected work, professional background and co
 ### Website
 
 - **Project showcase** with Frontend, Backend and MERN Stack filters.
+- **Project stories** at `/projects/:slug`, with editable sections, screenshots, technologies and separate live-site/GitHub links.
 - **Responsive layouts** for desktop, tablet and mobile, with dark and light themes.
 - **Interactive motion** including scroll reveals, animated typography, magnetic buttons and a navigation dock.
 - **About and contact pages** covering skills, education, experience and social profiles.
@@ -22,6 +23,7 @@ The public website brings together selected work, professional background and co
 
 - Edit page sections, navigation, projects, social links, colors and search metadata.
 - Add and reorder content, control section visibility and upload project images.
+- Write case studies in **Project stories**, including the process, challenges, results and lessons learned.
 - Save drafts and preview changes before publishing to the website.
 - Export or import content backups and restore the previous publication as a draft.
 - Manage content through authenticated server endpoints and persistent storage.

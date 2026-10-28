@@ -96,7 +96,7 @@ export function createAnalyticsService({
       );
     }
   }
-  async function load(days, host) {
+  async function load(days, host, projectPaths) {
     const property = env.GA_PROPERTY_ID;
     const missing = [
       "GA_PROPERTY_ID",
@@ -121,7 +121,7 @@ export function createAnalyticsService({
           {
             filter: {
               fieldName: "pagePath",
-              inListFilter: { values: ["/", "/about", "/projects"] },
+              inListFilter: { values: ["/", "/about", "/projects", ...projectPaths] },
             },
           },
         ],
@@ -293,16 +293,16 @@ export function createAnalyticsService({
       },
     };
   }
-  return async function analytics(days, host) {
+  return async function analytics(days, host, projectPaths = []) {
     if (![7, 30, 90].includes(days))
       throw fault(400, "Choose a 7, 30 or 90 day range.");
-    const key = `${days}:${host}`;
+    const key = `${days}:${host}:${JSON.stringify(projectPaths)}`;
     const entry = cache.get(key);
     if (entry && now() - entry.time < 300000) return entry.value;
     if (pending.has(key)) return pending.get(key);
     // Host comes from the validated published website URL, never arbitrary input.
     if (cache.size > 6) cache.clear();
-    const job = load(days, host)
+    const job = load(days, host, projectPaths)
       .then((value) => {
         cache.set(key, { time: now(), value });
         return value;

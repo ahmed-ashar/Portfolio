@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 3,
   "identity": {
     "brand": "Ahmed",
     "name": "Muhammad Ahmed Ashar",
@@ -256,7 +256,75 @@
         ],
         "caption": "Event manager platform",
         "visible": true,
-        "featured": true
+        "featured": true,
+        "slug": "event-central",
+        "story": {
+          "eyebrow": "Behind the build",
+          "role": "",
+          "timeline": "",
+          "technologies": [
+            "MERN Stack",
+            "Frontend",
+            "Backend"
+          ],
+          "sourceUrl": "",
+          "seoTitle": "",
+          "seoDescription": "",
+          "sections": [
+            {
+              "title": "The overview",
+              "body": "Create, update and manage events in one place.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The idea & goals",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "How I built it",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "Challenges & solutions",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The result",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What I learned",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What's next",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            }
+          ]
+        },
+        "mobileImage": "",
+        "mobileWidth": 1582,
+        "mobileHeight": 823
       },
       {
         "title": "FoodSpot Frontend",
@@ -272,7 +340,74 @@
         ],
         "caption": "Food delivery frontend app",
         "visible": true,
-        "featured": true
+        "featured": true,
+        "slug": "foodspot-frontend",
+        "story": {
+          "eyebrow": "Behind the build",
+          "role": "",
+          "timeline": "",
+          "technologies": [
+            "Frontend",
+            "MERN Stack"
+          ],
+          "sourceUrl": "",
+          "seoTitle": "",
+          "seoDescription": "",
+          "sections": [
+            {
+              "title": "The overview",
+              "body": "A food delivery storefront for browsing dishes and menus.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The idea & goals",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "How I built it",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "Challenges & solutions",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The result",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What I learned",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What's next",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            }
+          ]
+        },
+        "mobileImage": "",
+        "mobileWidth": 1579,
+        "mobileHeight": 731
       },
       {
         "title": "FoodSpot Backend",
@@ -288,7 +423,74 @@
         ],
         "caption": "Admin panel for FoodSpot",
         "visible": true,
-        "featured": true
+        "featured": true,
+        "slug": "foodspot-backend",
+        "story": {
+          "eyebrow": "Behind the build",
+          "role": "",
+          "timeline": "",
+          "technologies": [
+            "MERN Stack",
+            "Backend"
+          ],
+          "sourceUrl": "",
+          "seoTitle": "",
+          "seoDescription": "",
+          "sections": [
+            {
+              "title": "The overview",
+              "body": "An admin interface for managing FoodSpot's menu.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The idea & goals",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "How I built it",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "Challenges & solutions",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The result",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What I learned",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What's next",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            }
+          ]
+        },
+        "mobileImage": "",
+        "mobileWidth": 1427,
+        "mobileHeight": 720
       },
       {
         "title": "Homyz Website",
@@ -303,7 +505,73 @@
         ],
         "caption": "Property rental platform",
         "visible": true,
-        "featured": true
+        "featured": true,
+        "slug": "homyz-website",
+        "story": {
+          "eyebrow": "Behind the build",
+          "role": "",
+          "timeline": "",
+          "technologies": [
+            "Frontend"
+          ],
+          "sourceUrl": "",
+          "seoTitle": "",
+          "seoDescription": "",
+          "sections": [
+            {
+              "title": "The overview",
+              "body": "Property listings with search and filtering.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The idea & goals",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "How I built it",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "Challenges & solutions",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The result",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What I learned",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What's next",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            }
+          ]
+        },
+        "mobileImage": "",
+        "mobileWidth": 1582,
+        "mobileHeight": 870
       },
       {
         "title": "Resume Builder",
@@ -320,7 +588,75 @@
         ],
         "caption": "Dynamic resume creator",
         "visible": true,
-        "featured": true
+        "featured": true,
+        "slug": "resume-builder",
+        "story": {
+          "eyebrow": "Behind the build",
+          "role": "",
+          "timeline": "",
+          "technologies": [
+            "MERN Stack",
+            "Backend",
+            "Frontend"
+          ],
+          "sourceUrl": "",
+          "seoTitle": "",
+          "seoDescription": "",
+          "sections": [
+            {
+              "title": "The overview",
+              "body": "Create, edit and export a resume.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The idea & goals",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "How I built it",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "Challenges & solutions",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The result",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What I learned",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What's next",
+              "body": "",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            }
+          ]
+        },
+        "mobileImage": "",
+        "mobileWidth": 1600,
+        "mobileHeight": 777
       },
       {
         "title": "Ahmed Ashar Portfolio (This Site)",
@@ -335,7 +671,79 @@
         ],
         "caption": "My personal portfolio site",
         "visible": true,
-        "featured": true
+        "featured": true,
+        "slug": "ahmed-ashar-portfolio",
+        "story": {
+          "eyebrow": "Behind the build",
+          "role": "Design & development",
+          "timeline": "",
+          "technologies": [
+            "React 19",
+            "Vite",
+            "Tailwind CSS",
+            "GSAP",
+            "Framer Motion",
+            "Node.js",
+            "Vercel Blob"
+          ],
+          "sourceUrl": "https://github.com/ahmed-ashar/Portfolio",
+          "seoTitle": "",
+          "seoDescription": "",
+          "sections": [
+            {
+              "title": "The overview",
+              "body": "A portfolio should explain the work and feel considered in its own right. This website brings selected projects, my background and a custom content studio into one place. Bold type, a warm palette and scroll-driven interactions give it its visual identity.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The idea & goals",
+              "body": "The goal was to bring design and development together: present the work clearly, make the website comfortable to explore on different screens, and let content evolve without editing React components for every update.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "How I built it",
+              "body": "The interface is built with React and Tailwind CSS. GSAP handles text and scroll reveals, Framer Motion powers interactive elements, and Lenis coordinates smooth scrolling. Shared theme tokens keep the public pages and dashboard connected.\n\nA Node.js backend separates saved drafts from published content. The dashboard validates edits, previews them in a same-origin iframe and publishes to shared storage. Public pages render on the server before the browser hydrates them.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "Challenges & solutions",
+              "body": "Animated text and interactive controls need clear ownership of the DOM. Wrapping the project filters in SplitText interfered with React interaction; keeping the controls outside that wrapper restored reliable mouse, keyboard and touch filtering.\n\nRoute changes introduced another subtle problem: offscreen reveals could run before the scroll position reset. Resetting Lenis in a layout effect before incoming page animations initialize fixed the revisit behavior. The dashboard uses native scrolling so forms and nested panels remain usable.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "The result",
+              "body": "The repository now contains a responsive portfolio, editable page content, project filters, dark and light themes, and a password-protected content studio. Publishing, image uploads, server rendering and metadata share the same content model. Browser tests cover public navigation and the isolated dashboard workflow.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What I learned",
+              "body": "Small interaction details need the same attention as the layout. Testing real clicks, keyboard input, route revisits and server-rendered pages helps catch problems that a static screenshot cannot show. Keeping content validation shared between browser and server also makes the editing workflow easier to maintain.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            },
+            {
+              "title": "What's next",
+              "body": "The next step is to document the thinking behind each project and keep those stories editable from the studio. Analytics reporting is implemented; its live account connection still needs verification.",
+              "image": "/profile.webp",
+              "alt": "",
+              "showImage": false
+            }
+          ]
+        },
+        "mobileImage": "",
+        "mobileWidth": 1599,
+        "mobileHeight": 735
       }
     ]
   },

@@ -26,6 +26,7 @@ function RouteExperience() {
       options={{
         duration: 1.5,
         smoothWheel: true,
+        syncTouch: true,
         easing: (t) => 1 - Math.pow(1 - t, 3),
         lerp: 0.02,
       }}

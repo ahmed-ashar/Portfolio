@@ -8,10 +8,11 @@
     "build": "vite build && vite build --config vite.ssr.config.js && node scripts/build-seo.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check": "npm run lint && npm run test:analytics && npm run build && npm test",
+    "check": "npm run lint && npm run test:analytics && npm run test:content && npm run build && npm test",
     "test": "playwright test",
     "test:visual": "node scripts/visual-review.mjs",
-    "test:analytics": "node --test server/analytics.test.mjs"
+    "test:analytics": "node --test server/analytics.test.mjs",
+    "test:content": "node --test server/content.test.mjs"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
