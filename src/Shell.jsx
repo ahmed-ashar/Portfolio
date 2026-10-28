@@ -5,6 +5,7 @@ import { BrowserRouter, useLocation } from "react-router-dom";
 import { ContentProvider } from "./context/ContentContext";
 import App from "./App.jsx";
 import ScrollToTop from "./utilis/ScrollToTop.jsx";
+import ScrollBoundsSync from "./utilis/ScrollBoundsSync.jsx";
 import GsapScrollSync from "./utilis/GsapScrollSync.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 
@@ -32,6 +33,7 @@ function RouteExperience() {
       }}
     >
       <GsapScrollSync />
+      <ScrollBoundsSync />
       <ScrollToTop />
       <App />
     </ReactLenis>

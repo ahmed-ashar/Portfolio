@@ -97,6 +97,106 @@
   transition: all 0.5s ease-in-out;
 }
 
+/* Shared button hover: a circle grows from wherever the pointer entered.
+   Pair with startRipple from src/utilis/ripple.js for the origin, then set
+   --ripple-fill / --ripple-text per variant. */
+.ripple {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  --ripple-x: 50%;
+  --ripple-y: 50%;
+  transition: color 0.9s ease, background-color 0.5s ease, border-color 0.7s ease;
+}
+
+.ripple::before {
+  content: "";
+  position: absolute;
+  left: var(--ripple-x);
+  top: var(--ripple-y);
+  width: 220%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--ripple-fill, var(--orange));
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ripple:hover::before,
+.ripple:focus-visible::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.ripple:hover,
+.ripple:focus-visible {
+  color: var(--ripple-text, var(--black));
+}
+
+/* Only one circle animates at a time: the cursor blob steps aside on buttons. */
+.blob-cursor {
+  transition: opacity 0.25s ease;
+}
+
+body.ripple-hover .blob-cursor {
+  opacity: 0;
+}
+
+/* One button for the whole site: same shape, spacing, colours and hover circle.
+   Every button renders through src/components/Button.jsx; variants only change
+   the resting fill. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 10px 26px;
+  border: 1px solid var(--text-off);
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--black);
+  background: var(--text-off);
+  --ripple-fill: var(--orange);
+  --ripple-text: var(--black);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  border-color: var(--orange);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: color-mix(in srgb, var(--text-off) 30%, transparent);
+  color: var(--text-off);
+  --ripple-fill: var(--text-off);
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  border-color: var(--text-off);
+}
+
+.btn-accent {
+  background: var(--orange);
+  border-color: var(--orange);
+  --ripple-fill: var(--text-off);
+}
+
+.btn-icon {
+  font-size: 13px;
+  transform: rotate(45deg);
+  transition: transform 0.5s ease;
+}
+
+.btn:hover .btn-icon,
+.btn:focus-visible .btn-icon {
+  transform: rotate(90deg);
+}
+
 .black-text {
   color: var(--black);
 }

@@ -80,7 +80,7 @@ export default function BlobCursor({
     <div
       ref={containerRef}
       aria-hidden="true"
-      className="fixed top-0 left-0 w-full h-full pointer-events-none"
+      className="blob-cursor fixed top-0 left-0 w-full h-full pointer-events-none"
       style={{ zIndex }}
     >
       {useFilter && (

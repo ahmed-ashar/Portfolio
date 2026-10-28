@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { projectPath } from "../content/projects";
 import TiltedCard from "../utilis/TiltedCard";
 import Magnet from "../utilis/Magnet";
+import Button from "./Button";
 import { useContent } from "../context/ContentContext";
 import ProjectCard from "./ProjectCard";
 import TextReveal from "../utilis/TextReveal";
@@ -39,23 +40,19 @@ const ProjectPage = () => {
           <div
             role="group"
             aria-label="Filter projects by type"
-            className="flex my-10 justify-center items-center text-xl flex-wrap"
+            className="flex my-10 justify-center items-center gap-3 flex-wrap"
           >
             {filterOptions.map((option) => (
-              <button
+              <Button
                 key={option}
+                variant={filter === option ? "accent" : "outline"}
+                arrow={false}
                 data-analytics-filter={option}
-                type="button"
                 onClick={() => setFilter(option)}
                 aria-pressed={filter === option}
-                className={`relative px-4 py-2 mx-1 rounded-md orange-bg-hover ${
-                  filter === option
-                    ? "orange-bg black-text"
-                    : "bg-transparent text-off-white"
-                } transition-all duration-300`}
               >
                 {option}
-              </button>
+              </Button>
             ))}
           </div>
         </div>

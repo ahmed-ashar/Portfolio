@@ -401,6 +401,12 @@ test("dashboard supports wheel, keyboard and touch scrolling without blocking th
     .frames()
     .find((frame) => frame.url().includes("editor-preview"));
   await expect.poll(() => preview?.locator("main").count() ?? 0).toBe(1);
+  // The preview frame arrives with server-rendered markup and replaces it with
+  // the lazy route after hydration, so wait until the page is tall enough to
+  // scroll before sending the wheel.
+  await expect
+    .poll(() => preview.evaluate(() => document.documentElement.scrollHeight))
+    .toBeGreaterThan(2000);
   const bounds = await page.locator(".preview-screen").boundingBox();
   await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + 250);
   await page.mouse.wheel(0, 1000);

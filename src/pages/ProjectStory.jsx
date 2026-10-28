@@ -3,6 +3,8 @@ import { useContent } from "../context/ContentContext";
 import { projectPath } from "../content/projects";
 import SiteLayout from "../components/SiteLayout";
 import TiltedCard from "../utilis/TiltedCard";
+import TextReveal from "../utilis/TextReveal";
+import Button from "../components/Button";
 import NotFound from "./NotFound";
 import "./project-story.css";
 
@@ -22,12 +24,16 @@ export default function ProjectStory() {
         <header className="story-header">
           <Link className="story-back" to="/projects"><span aria-hidden="true">↖</span> All projects</Link>
           <div className="story-kicker"><span>{story.eyebrow}</span><span>PROJECT {String(projects.indexOf(project) + 1).padStart(2, "0")}</span></div>
-          <h1>{project.title}</h1>
+          <TextReveal delay={0.1} responsive>
+            <h1>{project.title}</h1>
+          </TextReveal>
           <div className="story-introduction">
-            <p>{project.para}</p>
+            <TextReveal delay={0.25}>
+              <p>{project.para}</p>
+            </TextReveal>
             <div className="story-actions">
-              <a className="story-button story-primary" href={project.link} target="_blank" rel="noopener noreferrer">Visit live site <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
-              {story.sourceUrl && <a className="story-button" href={story.sourceUrl} target="_blank" rel="noopener noreferrer">View source on GitHub <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>}
+              <Button href={project.link}>Visit live site</Button>
+              {story.sourceUrl && <Button variant="outline" href={story.sourceUrl}>View source on GitHub</Button>}
             </div>
           </div>
           <dl className="story-facts">
@@ -57,8 +63,10 @@ export default function ProjectStory() {
           <article className="story-article" aria-label={`${project.title} project story`}>
             {sections.map((section, index) => <section id={`story-section-${index}`} className="story-section" key={index}>
               <span className="story-section-number" aria-hidden="true">/ {String(index + 1).padStart(2, "0")}</span>
-              <h2>{section.title}</h2>
-              {section.body.split(/\n\s*\n/).filter(paragraph => paragraph.trim()).map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+              <TextReveal delay={0.05}>
+                <h2>{section.title}</h2>
+                {section.body.split(/\n\s*\n/).filter(paragraph => paragraph.trim()).map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+              </TextReveal>
               {section.showImage && <figure className="story-section-figure">
                 <div className="story-media story-section-media">
                   <TiltedCard imageSrc={section.image} altText={section.alt} captionText={section.alt} />
@@ -70,7 +78,12 @@ export default function ProjectStory() {
         </div>
         <div className="story-end"><span aria-hidden="true">✳</span><p>Thanks for reading.</p><Link to="/projects">Explore all projects ↗</Link></div>
         {next && <Link className="story-next" to={projectPath(next)}>
-          <div><span className="story-label">Next project</span><h2>{next.title}</h2><p>{next.para}</p><span className="story-next-cta">Read the story ↗</span></div>
+          <div><span className="story-label">Next project</span>
+            <TextReveal>
+              <h2>{next.title}</h2>
+              <p>{next.para}</p>
+            </TextReveal>
+            <span className="story-next-cta">Read the story ↗</span></div>
           <div className="story-media story-next-media">
             <TiltedCard imageSrc={next.image} altText={next.alt} captionText={next.caption}
               mobileImageSrc={next.mobileImage} mobileIntrinsicWidth={next.mobileWidth} mobileIntrinsicHeight={next.mobileHeight}

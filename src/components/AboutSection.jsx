@@ -33,7 +33,9 @@ const AboutSection = () => {
           </Magnet>
         </div>
         <div className="text-center ml-3 mt-10 z-55">
-          <Button text={section.buttonText} to={section.buttonLink} />
+          <Magnet padding={10} disabled={false} magnetStrength={20}>
+            <Button to={section.buttonLink}>{section.buttonText}</Button>
+          </Magnet>
         </div>
       </div>
     </section>

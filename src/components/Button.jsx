@@ -1,24 +1,49 @@
-import Magnet from "../utilis/Magnet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { startRipple } from "../utilis/ripple";
 
-// Renders a real <a href>, not a button+navigate(): crawlers can follow it,
-// and middle-click / "open in new tab" work like anywhere else on the web.
-const Button = ({ text, to }) => (
-  <Magnet padding={10} disabled={false} magnetStrength={20}>
-    <Link
-      to={to}
-      className="px-4 w-auto group text-3xl text-off-white font-extrabold transition-all duration-500 ease-in-out flex items-center justify-center gap-2 orange-bg-hover "
-    >
-      {text}
-      <FontAwesomeIcon
-        icon={faArrowUp}
-        aria-hidden="true"
-        className="text-xl transform transition-transform duration-500 rotate-50 group-hover:rotate-90"
-      />
-    </Link>
-  </Magnet>
-);
+/**
+ * The only button component on the site. Internal links, external links and
+ * plain buttons all render the same shape, spacing, colours and hover circle,
+ * so section CTAs, story actions and project filters stay identical.
+ *
+ * variant: "solid" (surface fill, default), "outline" (secondary), "accent".
+ * Pass arrow={false} for controls such as the project filter row.
+ */
+export default function Button({
+  children,
+  to,
+  href,
+  onClick,
+  variant = "solid",
+  arrow = true,
+  className = "",
+  ...rest
+}) {
+  const classes = ["ripple", "btn", variant !== "solid" && `btn-${variant}`, className]
+    .filter(Boolean)
+    .join(" ");
+  const content = (
+    <>
+      <span>{children}</span>
+      {arrow && <FontAwesomeIcon icon={faArrowUp} aria-hidden="true" className="btn-icon" />}
+      {href && <span className="sr-only"> (opens in a new tab)</span>}
+    </>
+  );
+  const shared = { className: classes, onPointerEnter: startRipple, ...rest };
 
-export default Button;
+  if (to) return <Link to={to} {...shared}>{content}</Link>;
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" {...shared}>
+        {content}
+      </a>
+    );
+  }
+  return (
+    <button type="button" onClick={onClick} {...shared}>
+      {content}
+    </button>
+  );
+}

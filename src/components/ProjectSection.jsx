@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { projectPath } from "../content/projects";
 import TiltedCard from "../utilis/TiltedCard";
+import Magnet from "../utilis/Magnet";
 import Button from "./Button";
 import TextReveal from "../utilis/TextReveal";
 import { useContent } from "../context/ContentContext";
@@ -76,7 +77,9 @@ const ProjectSection = () => {
       </ul>
 
       <div className="text-center ml-3 mt-10 relative z-55">
-        <Button text={section.buttonText} to={section.buttonLink} />
+        <Magnet padding={10} disabled={false} magnetStrength={20}>
+          <Button to={section.buttonLink}>{section.buttonText}</Button>
+        </Magnet>
       </div>
     </section>
   );

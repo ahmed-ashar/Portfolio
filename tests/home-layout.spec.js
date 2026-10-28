@@ -48,8 +48,10 @@ test("featured cards stagger below 1100px and share a sticky position above it w
       Math.abs(card.getBoundingClientRect().top - parseFloat(getComputedStyle(card).top)),
     )))).toBeLessThan(2);
     const positions = await cards.evaluateAll(cards => cards.map(card => ({ top: card.getBoundingClientRect().top, opacity: getComputedStyle(card).opacity })));
+    // Sticky tops land on fractional scroll positions, so allow a 1px rounding margin.
+    const stagger = width >= 1100 ? 0 : width < 640 ? 18 : 24;
     for (let index = 1; index < positions.length; index++) {
-      expect(positions[index].top - positions[index - 1].top).toBeCloseTo(width >= 1100 ? 0 : width < 640 ? 18 : 24, 0);
+      expect(Math.abs(positions[index].top - positions[index - 1].top - stagger)).toBeLessThanOrEqual(1);
       expect(positions[index].opacity).toBe("1");
     }
   }
