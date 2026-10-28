@@ -22,8 +22,8 @@ for (const width of [390, 1440]) {
     await card.locator("img").evaluate(image => image.decode());
     expect(await card.evaluate(card => Math.abs(card.clientHeight - card.querySelector("img").clientHeight))).toBeLessThanOrEqual(1);
     await page.getByRole("link", { name: "Go to projects page" }).click();
-    await expect(page.locator("footer")).toHaveCSS("position", "fixed");
-    await page.getByRole("link", { name: "Go to home page" }).click();
+    await expect(page.locator("footer")).toHaveCSS("position", "relative");
+    await expect(page.locator("body")).toHaveCSS("margin-bottom", "0px");    await page.getByRole("link", { name: "Go to home page" }).click();
     await expect(page.locator("body")).toHaveCSS("margin-bottom", "0px");
     await expect(page.locator("footer")).toHaveCSS("position", "relative");
   });

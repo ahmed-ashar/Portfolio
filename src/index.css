@@ -114,8 +114,9 @@ html {
   background-color: var(--black);
 }
 
+/* The footer follows the page content, so no screen is reserved for a reveal. */
 body {
-  margin-bottom: 79vh;
+  margin-bottom: 0;
 }
 
 .aladin {

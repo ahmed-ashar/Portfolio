@@ -1,2 +1,0 @@
-/* The homepage footer follows its content; there is no reserved reveal screen. */
-body:has(.home-page) { margin-bottom: 0; }

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useContent } from "../context/ContentContext";
 import Navbar from "./Navbar";
 import BlobCursor from "../utilis/BlobCursor";
@@ -7,17 +6,15 @@ import BackToTop from "./BackToTop";
 import DockComp from "./DockComp";
 import FooterSection from "./FooterSection";
 
-// Keep the footer outside the framed content: the body margin reveals it on scroll.
-// Individual pages own their main landmark and page-specific overflow behavior.
+// Keep the footer outside the framed content. It follows the content on every
+// page, so every route shows the same footer spacing.
 export default function SiteLayout({
   children,
   frameClassName = "",
   contentClassName = "h-[100%]",
   showUtilities = true,
-  footerReveal = true,
 }) {
   const {identity,footer}=useContent();
-  useEffect(()=>{document.body.style.marginBottom=footer.enabled && footerReveal ? "79vh" : "0";return ()=>{document.body.style.marginBottom="";};},[footer.enabled,footerReveal]);
   return (
     <div>
       <div className={`p-[0.55rem] gray-bg ${frameClassName}`}>
@@ -34,7 +31,7 @@ export default function SiteLayout({
           {identity.showDock && <DockComp />}
         </div>
       </div>
-      {footer.enabled && <FooterSection reveal={footerReveal} />}
+      {footer.enabled && <FooterSection />}
     </div>
   );
 }
