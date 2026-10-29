@@ -12,7 +12,7 @@
 .story-facts dt { opacity: .65; margin-bottom: 9px; }
 .story-facts dd { font-size: 13px; }
 .story-cover { margin-block: 58px 95px; }
-.story-media { width: 100%; min-width: 0; overflow: hidden; border-radius: 15px; background: transparent; }
+.story-media { width: 100%; min-width: 0;  border-radius: 15px; background: transparent; }
 .story-cover-media { max-height: 760px; aspect-ratio: var(--story-cover-ratio); }
 .story-section-media { aspect-ratio: 16 / 10; }
 .story-next-media { aspect-ratio: 1.7; }
