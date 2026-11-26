@@ -403,7 +403,7 @@ cloud is `Boolean(process.env.VERCEL)`, not NODE_ENV. A local production build/r
 - Credentials come from env; production does not create a cloud credentials.json.
 - Images use `portfolio/media/<uuid>.<extension>`.
 - Record reads use get(..., {access:'private', useCache:false}), parse response stream JSON and retain the Blob ETag.
-- Record writes use put with application/json, no random suffix, allowOverwrite only if an ETag exists, and ifMatch for existing records. Concurrent creation or stale replacement should fail instead of overwriting silently.
+- Record writes use put with application/json and no random suffix. The conditional ETag is resolved with head() immediately before writing, because get() exposes the private download response's ETag, which can be empty or not match the store's canonical ETag; using it directly made every publish after the first one fail as a false 409 ("Another request updated this record"). Existing records are written with allowOverwrite + ifMatch, missing records with allowOverwrite:false. If the store still rejects the ETag while the canonical ETag has not moved, the write retries once without the condition; a moved ETag remains a real conflict. Concurrent creation or stale replacement should fail instead of overwriting silently.
 - Blob precondition/already-exists errors are converted to 409. Client edits remain available; user retries/reloads as appropriate.
 - There is no MongoDB, Firebase, Supabase or separate database server to provision for this implementation.
 - Preview and production must use separate stores if preview edits should not change live content. Storage survives redeployment; local files do not transfer automatically.
