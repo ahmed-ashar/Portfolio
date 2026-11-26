@@ -1,5 +1,10 @@
 import { loadEnv } from "vite";
-import cms from "./cms.mjs";
+import cms, { publishedContent } from "./cms.mjs";
+
+// JSON is embedded in HTML script elements: escape the character that can end them.
+const serializeJsonForHtml = (value) =>
+  JSON.stringify(value).replace(/</g, "\\u003c");
+
 export default function cmsPlugin() {
   return {
     name: "portfolio-cms",
@@ -14,6 +19,22 @@ export default function cmsPlugin() {
           return cms(req, res);
         next();
       });
+    },
+    async transformIndexHtml(html, ctx) {
+      if (!ctx?.server) return html;
+      try {
+        const content = await publishedContent();
+        const state =
+          '<script id="portfolio-content" type="application/json">' +
+          serializeJsonForHtml(content) +
+          "</script>";
+        return html.replace(
+          '<div id="root"></div>',
+          () => '<div id="root"></div>' + state,
+        );
+      } catch {
+        return html;
+      }
     },
   };
 }
