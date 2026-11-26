@@ -49,5 +49,8 @@
   "description": "Personal portfolio of Muhammad Ahmed Ashar, a web developer based in Karachi.",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
+  },
+  "overrides": {
+    "zod": "^4.6.6"
   }
 }
